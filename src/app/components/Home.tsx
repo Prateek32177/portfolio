@@ -16,7 +16,7 @@ import {
   Twitter,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -27,8 +27,6 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 export function HomeComponent() {
-  const [activeProject, setActiveProject] = useState(null);
-
   // Simplified cursor
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -129,8 +127,7 @@ export function HomeComponent() {
             <span className="absolute inset-0 overflow-hidden rounded-full">
               <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] transition-opacity duration-500 opacity-100" />
             </span>
-
-            {navItems.map((navItem: any, idx: number) => (
+            {navItems.map((navItem, idx: number) => (
               <Link
                 key={`link=${idx}`}
                 href={navItem.link}
@@ -172,7 +169,7 @@ export function HomeComponent() {
                     </span>
                   </div>
                   <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight">
-                    Hi, I'm Prateek
+                    Hi, I&apos;m Prateek
                     <span className="text-emerald-500">.</span>
                   </h1>
 
@@ -355,7 +352,6 @@ export function HomeComponent() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       className="group cursor-pointer"
-                      onClick={() => setActiveProject(project)}
                     >
                       <div className="relative h-full p-4 md:p-6 bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-800/50 overflow-hidden transition-colors hover:bg-zinc-800/50">
                         <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -444,7 +440,7 @@ export function HomeComponent() {
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="space-y-4 md:space-y-6">
                 <h2 className="text-2xl md:text-4xl font-bold tracking-tighter">
-                  Let's create something
+                  Let&apos;s create something
                   <span className="text-emerald-500"> extraordinary</span>
                 </h2>
                 <p className="text-zinc-400 max-w-md text-sm md:text-base">
