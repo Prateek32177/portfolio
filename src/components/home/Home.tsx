@@ -17,7 +17,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { portfolioData, navItems } from "@/config";
+import { portfolioData, navItems, featuredBlog } from "@/config";
 import type { PortfolioConfig } from "@/types";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -30,12 +30,23 @@ export function HomeComponent({
 }) {
   const [emailCopied, setEmailCopied] = useState(false);
   const featuredProject = data.projects[0];
-  const featuredBlog = {
-    title: "The Future of Web Development",
-    description:
-      "Exploring the latest trends and technologies shaping the web.",
-    link: "https://medium.com/@yourusername/the-future-of-web-development",
+
+  const handleScrollToSection = (event: React.MouseEvent, link: string) => {
+    event.preventDefault();
+
+    // Check if the link is a hash (section on the same page)
+    if (link.startsWith("#")) {
+      const element = document.getElementById(link.slice(1));
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
   };
+
   const copyEmail = () => {
     navigator.clipboard.writeText(data.personalInfo.email);
     setEmailCopied(true);
@@ -59,7 +70,12 @@ export function HomeComponent({
           {navItems.map((navItem, idx: number) => (
             <Link
               key={`link=${idx}`}
-              href={navItem.link}
+              href={navItem.link || ""}
+              onClick={(e) =>
+                navItem.link?.startsWith("#")
+                  ? handleScrollToSection(e, navItem.link)
+                  : undefined
+              }
               className="relative  text-sm text-zinc-400 hover:text-white transition-colors"
             >
               <span className="text-xs md:text-sm">{navItem.name}</span>
@@ -87,7 +103,7 @@ export function HomeComponent({
                   width={200}
                   height={200}
                   alt={`${data.personalInfo.name}'s portrait`}
-                  className="relative w-40 h-40 md:w-60 md:h-60 rounded-full object-top object-cover border-2 border-zinc-800 p-4"
+                  className="relative w-40 h-40 md:w-60 md:h-60 rounded-full object-top object-cover border-2 border-zinc-800 p-3"
                 />
               </div>
               <div className="text-center md:text-left space-y-4">
@@ -103,11 +119,11 @@ export function HomeComponent({
                     <span className="text-emerald-500">.</span>
                   </h1>
 
-                  <p className="text-lg md:text-xl lg:text-2xl text-zinc-400 font-light">
+                  {/* <p className="text-lg md:text-xl lg:text-2xl text-zinc-400 font-light">
                     {data.personalInfo.tagline}
-                  </p>
+                  </p> */}
                 </div>
-                <p className="max-w-2xl text-zinc-400 text-sm md:text-base">
+                <p className="max-w-md text-zinc-400 text-sm md:text-base">
                   {data.personalInfo.bio}
                 </p>
                 {/* Location and Status */}
@@ -117,9 +133,9 @@ export function HomeComponent({
                     {data.personalInfo.location}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2 md:h-3 md:w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500/50 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 md:h-3 md:w-3 bg-emerald-500"></span>
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
                     <span className="text-zinc-400">
                       Available for opportunities
@@ -133,7 +149,9 @@ export function HomeComponent({
                     className="bg-emerald-500 text-black hover:bg-emerald-600"
                     size={"sm"}
                   >
-                    <Link href="#contact">Get in Touch</Link>
+                    <Link href="mailTo:prateek32177@gmail.com">
+                      Get in Touch
+                    </Link>
                   </Button>
                   <Link
                     href={data.personalInfo.social.github || ""}
@@ -333,7 +351,7 @@ export function HomeComponent({
                   className="relative grid md:grid-cols-[1fr,3fr] gap-8 pl-8"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-0 top-0 w-4 h-4 bg-emerald-500 rounded-full transform -translate-x-1/2 mt-1.5" />
+                  <div className="absolute left-0 top-0 w-4 h-4 bg-emerald-500 rounded-full transform -translate-x-[7px] mt-1.5" />
 
                   <div className="bg-zinc-900/50 backdrop-blur-sm rounded-lg p-6 border border-zinc-800/50">
                     <Building className="w-8 h-8 text-emerald-500 mb-4" />
@@ -409,7 +427,7 @@ export function HomeComponent({
                             variant="secondary"
                             className="bg-zinc-800 text-zinc-300 text-xs"
                           >
-                            {project.tech[0]}
+                            {project.period}
                           </Badge>
                         </div>
                         <div>
@@ -421,7 +439,7 @@ export function HomeComponent({
                           </p>
                         </div>
                         <div className="flex flex-wrap gap-1">
-                          {project.tech.slice(1, 4).map((tech) => (
+                          {project.tech.map((tech) => (
                             <Badge
                               key={tech}
                               variant="secondary"
@@ -430,26 +448,18 @@ export function HomeComponent({
                               {tech}
                             </Badge>
                           ))}
-                          {project.tech.length > 4 && (
-                            <Badge
-                              variant="secondary"
-                              className="bg-zinc-800/50 text-zinc-300 text-xs"
-                            >
-                              +{project.tech.length - 4}
-                            </Badge>
-                          )}
                         </div>
                         <div className="flex items-center gap-4 pt-3 border-t border-zinc-800">
                           <Link
                             href={project.link || ""}
-                            className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-sm"
+                            className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-sm cursor-pointer"
                           >
                             <Globe className="w-4 h-4" />
-                            Demo
+                            Live Demo
                           </Link>
                           <Link
                             href={project.github || ""}
-                            className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm"
+                            className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm cursor-pointer"
                           >
                             <Github className="w-4 h-4" />
                             Source

@@ -19,6 +19,7 @@ export interface Project {
   tech: string[];
   link?: string;
   github?: string;
+  period:string;
 }
 
 export interface Achievement {
@@ -49,5 +50,4 @@ export interface PortfolioConfig {
     category: string;
     items: string[];
   }[];
-  achievements: Achievement[];
 }

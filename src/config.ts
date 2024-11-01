@@ -5,16 +5,16 @@ export const portfolioData: PortfolioConfig = {
     name: "Prateek",
     title: "SENIOR WEB ENGINEER",
     tagline: "Building the future, one commit at a time",
-    bio: "Experienced Full-stack developer with 3.5 years of experience building high-performance web applications for leading retail giant. An avid problem solver with strong passion of addressing user needs and developing products from concept to launch.",
+    bio: "Experienced Full-stack developer with 4 years of experience building high-performance web applications for leading retail giants. An avid problem solver with strong passion of addressing user needs and developing products from concept to launch.",
     location: "Indore, India",
     email: "prateek32177@gmail.com",
     availability: true,
     profileImage: "/profile_pic.png",
     social: {
       github: "https://github.com/Prateek32177",
-      twitter: "#",
+      twitter: "https://x.com/Prateek53788134",
       linkedin: "https://www.linkedin.com/in/prateek-jain-031106131/",
-      medium: "https://www.linkedin.com/in/prateek-jain-031106131/",
+      medium: "https://medium.com/@prateekJain11",
     },
   },
   experience: [
@@ -60,9 +60,10 @@ export const portfolioData: PortfolioConfig = {
         "Dynamic QR Management Saas Web App, having one of a kind Time expiring dynamic QR.",
       longDescription:
         "A comprehensive QR management solution with time-based expiration features.",
-      tech: ["Next.js", "ShadcnUI", "Supabase", "PostgreSQL"],
-      link: "https://deazyqr.com",
-      github: "#",
+      tech: ["Next.js", "ShadcnUI", "Supabase Auth", "Supabase Postgres DB"],
+      link: "https://deazyqr.vercel.app/",
+      github: "https://github.com/Prateek32177/deazyqr/tree/test-env",
+      period: "Dec 2023",
     },
     {
       title: "TextlyAI",
@@ -70,9 +71,21 @@ export const portfolioData: PortfolioConfig = {
         "AI-Based Text Classification and Categorization Utility App",
       longDescription:
         "App that employs OpenAI Api to classify and structure disorganized text, outputting organized data in JSON, tabular, or plain text format.",
-      tech: ["React.js", "OpenAI", "Firebase", "Material UI"],
-      link: "https://textlyai.com",
-      github: "#",
+      tech: ["React.js", "OpenAI API", "Firebase", "Material UI"],
+      link: "https://flowaii.web.app/",
+      github: "https://github.com/Prateek32177/TextlyAI",
+      period: "July 2023",
+    },
+    {
+      title: "DineEazy",
+      description: "In-Restaurant food ordering app",
+      longDescription:
+        "An innovative in-restaurant food ordering app that transforms dining by offering a pay once, reorder multiple times feature. Customers can easily track their food’s progress in real time and make convenienttable-side payments using QR codes, enhancing their overall dinning experience.",
+      tech: ["React.js", "Redux", "Firebase", "Material UI", "Custom Css"],
+      link: "https://deazy-52098.web.app/",
+      github:
+        "https://github.com/Prateek32177/DineEazy/tree/master/dinningsolution",
+      period: "Dec 2022",
     },
     {
       title: "CheckTrack",
@@ -82,13 +95,15 @@ export const portfolioData: PortfolioConfig = {
       tech: [
         "React.js",
         "Redux",
-        "Firebase",
+        "Firebase Hoisting & DB",
         "Chart.js",
         "Material UI",
+        "oAuth [Google Provider]",
         "Service Workers",
       ],
-      link: "https://checktrack.app",
-      github: "#",
+      link: "https://authapp-f5a50.web.app/dashboard",
+      github: "https://github.com/Prateek32177/CheckTrack/tree/InterviewTrack",
+      period: "Mar 2021",
     },
   ],
   skills: [
@@ -116,23 +131,6 @@ export const portfolioData: PortfolioConfig = {
       items: ["PostgreSQL", "Firebase", "Supabase"],
     },
   ],
-  achievements: [
-    {
-      title:
-        "Successfully registered a process improvement initiative, achieving $40,000 in cost savings through dynamic A/B testing",
-    },
-    {
-      title: "Reached Pre-elimination round of Codechef Snackdown 2021",
-      link: "https://codechef.com/snackdown2021",
-    },
-    {
-      title: "Hackerrank HackFest 2020 Bronze medal",
-      link: "https://hackerrank.com/hackfest2020",
-    },
-    {
-      title: "TCS Apple Tribe Java Hackathon ranked under 100 out of 4000",
-    },
-  ],
 };
 
 export const navItems = [
@@ -141,3 +139,10 @@ export const navItems = [
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
 ];
+
+export const featuredBlog = {
+  title: "#55 to 95: Performance Journey of Brokersify",
+  description:
+    "Boosting Brokersify! How We Consistently Hitting 95+ Performance Score for Brokersify.",
+  link: "https://medium.com/@prateekJain11/boosting-brokersify-how-we-consistently-hitting-95-performance-for-brokersify-c7ae61a1ca0a",
+};
