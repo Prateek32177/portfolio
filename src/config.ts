@@ -22,7 +22,7 @@ export const portfolioData: PortfolioConfig = {
       role: "Software Engineer",
       company: "Tata Consultancy Services",
       location: "Indore, India",
-      period: "Feb 2021 – current",
+      period: "Feb 2021 – Oct 2024",
       projects: [
         {
           title: "BestBuy",
@@ -45,7 +45,7 @@ export const portfolioData: PortfolioConfig = {
           ],
         },
         {
-          title: "Walmart",
+          title: "Fortune 5 Consumer Retail Enterprise",
           role: "Frontend Engineer",
           description: [
             "Developed the UI for Work Allocation and Transition (WAT) system, transforming the markup/markdown module into a next-gen interface featuring real-time charts leveraging Chart.js..",

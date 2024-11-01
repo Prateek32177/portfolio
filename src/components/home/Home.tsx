@@ -319,10 +319,7 @@ export function HomeComponent({
                     I specialize in building performant web applications from
                     zero to launch, developing responsive PWAs, implementing
                     microfrontend architectures, and optimizing application
-                    performance. I excel at automating workflows with JavaScript
-                    zx and GitHub Actions, and creating robust authorization
-                    systems with a strong focus on user experience and business
-                    objectives.
+                    performance.
                   </p>
                 </div>
               </div>
