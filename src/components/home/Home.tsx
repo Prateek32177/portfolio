@@ -13,7 +13,6 @@ import {
   Building,
   Check,
 } from "lucide-react";
-import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -68,7 +67,7 @@ export function HomeComponent({
             <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] transition-opacity duration-500 opacity-70" />
           </span>
           {navItems.map((navItem, idx: number) => (
-            <Link
+            <a
               key={`link=${idx}`}
               href={navItem.link || ""}
               onClick={(e) =>
@@ -79,7 +78,7 @@ export function HomeComponent({
               className="relative  text-sm text-zinc-200 hover:text-white transition-colors"
             >
               <span className="text-xs md:text-sm">{navItem.name}</span>
-            </Link>
+            </a>
           ))}
           <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
           <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
@@ -138,43 +137,41 @@ export function HomeComponent({
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
                     <span className="text-zinc-400">
-                      Available for opportunities
+                      Available for Opportunities
                     </span>
                   </div>
                 </div>
-                {/* Social Link */}
+                {/* Social a */}
                 <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm justify-center md:justify-start">
                   <Button
                     asChild
                     className="bg-emerald-500 text-black hover:bg-emerald-600"
                     size={"sm"}
                   >
-                    <Link href="mailTo:prateek32177@gmail.com">
-                      Get in Touch
-                    </Link>
+                    <a href="mailTo:prateek32177@gmail.com">Get in Touch</a>
                   </Button>
-                  <Link
+                  <a
                     href={data.personalInfo.social.github || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
                     <Github className="w-5 h-5" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={data.personalInfo.social.twitter || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
                     <Twitter className="w-5 h-5" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={data.personalInfo.social.linkedin || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
                     <Linkedin className="w-5 h-5" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={data.personalInfo.social.medium || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
@@ -186,7 +183,7 @@ export function HomeComponent({
                       <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66  0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
                     </svg>
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -223,20 +220,20 @@ export function HomeComponent({
                       {featuredProject.description}
                     </p>
                     <div className="flex gap-4">
-                      <Link
+                      <a
                         href={featuredProject.link || ""}
                         className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
                       >
                         <Globe className="w-4 h-4" />
                         View Project
-                      </Link>
-                      <Link
+                      </a>
+                      <a
                         href={featuredProject.github || ""}
                         className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
                       >
                         <Github className="w-4 h-4" />
                         Source Code
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </motion.div>
@@ -272,13 +269,13 @@ export function HomeComponent({
                   <p className="text-zinc-300 text-sm mb-4 max-w-md">
                     {featuredBlog.description}
                   </p>
-                  <Link
+                  <a
                     href={featuredBlog.link}
                     className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
                   >
                     <ExternalLink className="w-4 h-4" />
                     Read Article
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             </div>
@@ -465,20 +462,20 @@ export function HomeComponent({
                         </div>
                       </div>
                       <div className="flex items-center gap-4 pt-3 mt-auto border-t border-zinc-800">
-                        <Link
+                        <a
                           href={project.link || ""}
                           className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-sm cursor-pointer"
                         >
                           <Globe className="w-4 h-4" />
                           Live Demo
-                        </Link>
-                        <Link
+                        </a>
+                        <a
                           href={project.github || ""}
                           className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm cursor-pointer"
                         >
                           <Github className="w-4 h-4" />
                           Source
-                        </Link>
+                        </a>
                       </div>
                     </CardContent>
                   </Card>
@@ -493,7 +490,7 @@ export function HomeComponent({
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4 md:space-y-6">
-                <h2 className="text-2xl md:text-4xl font-bold tracking-tighter">
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
                   Let&apos;s create something
                   <span className="text-emerald-500"> extraordinary</span>
                 </h2>
@@ -502,28 +499,28 @@ export function HomeComponent({
                   opportunities.
                 </p>
                 <div className="flex items-center gap-4">
-                  <Link
+                  <a
                     href={data.personalInfo.social.github || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
                     <Github className="w-5 h-5" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={data.personalInfo.social.twitter || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
                     <Twitter className="w-5 h-5" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={data.personalInfo.social.linkedin || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
                     <Linkedin className="w-5 h-5" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={data.personalInfo.social.medium || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
                   >
@@ -535,7 +532,7 @@ export function HomeComponent({
                       <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
                     </svg>
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
+                  </a>
                 </div>
               </div>
               <div className="space-y-4 text-right">
