@@ -156,3 +156,22 @@ export const featuredBlog = {
     "Boosting Brokersify! How We Consistently Hitting 95+ Performance Score for Brokersify.",
   link: "https://medium.com/@prateekJain11/boosting-brokersify-how-we-consistently-hitting-95-performance-for-brokersify-c7ae61a1ca0a",
 };
+
+export const featuredProject = {
+  title: "Brokersify | Real Estate Agent Matching Platform",
+  description:
+    "Brokersify is a comprehensive real estate platform connecting users with top-rated local agents and providing brokers a CRM tool to manage leads effectively. The application streamlines property transactions by matching clients with professional real estate representatives.",
+  longDescription:
+    "A comprehensive Real Estate Broker Matching and CRM Platform.",
+  tech: [
+    "Next.js",
+    "ShadcnUI",
+    "Supabase Auth",
+    "Supabase Postgres DB",
+    "Google Analytics",
+    "Resend",
+    "PWA",
+  ],
+  link: "https://brokersify.in/",
+  period: "Oct 2024",
+};

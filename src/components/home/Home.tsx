@@ -16,7 +16,12 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { portfolioData, navItems, featuredBlog } from "@/config";
+import {
+  portfolioData,
+  navItems,
+  featuredBlog,
+  featuredProject,
+} from "@/config";
 import type { PortfolioConfig } from "@/types";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -28,7 +33,6 @@ export function HomeComponent({
   data?: PortfolioConfig;
 }) {
   const [emailCopied, setEmailCopied] = useState(false);
-  const featuredProject = data.projects[0];
 
   const handleScrollToSection = (event: React.MouseEvent, link: string) => {
     event.preventDefault();
@@ -225,14 +229,7 @@ export function HomeComponent({
                         className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
                       >
                         <Globe className="w-4 h-4" />
-                        View Project
-                      </a>
-                      <a
-                        href={featuredProject.github || ""}
-                        className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
-                      >
-                        <Github className="w-4 h-4" />
-                        Source Code
+                        View Live Platform
                       </a>
                     </div>
                   </div>
@@ -319,11 +316,13 @@ export function HomeComponent({
                     </div>
                   ))}
                   <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                    I specialize in cloud-native architectures and have
-                    extensive experience with microservices, serverless
-                    computing, and DevOps practices. My approach combines
-                    technical excellence with a strong focus on user experience
-                    and business objectives.
+                    I specialize in building performant web applications from
+                    zero to launch, developing responsive PWAs, implementing
+                    microfrontend architectures, and optimizing application
+                    performance. I excel at automating workflows with JavaScript
+                    zx and GitHub Actions, and creating robust authorization
+                    systems with a strong focus on user experience and business
+                    objectives.
                   </p>
                 </div>
               </div>
