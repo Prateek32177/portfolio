@@ -76,7 +76,7 @@ export function HomeComponent({
                   ? handleScrollToSection(e, navItem.link)
                   : undefined
               }
-              className="relative  text-sm text-zinc-400 hover:text-white transition-colors"
+              className="relative  text-sm text-zinc-200 hover:text-white transition-colors"
             >
               <span className="text-xs md:text-sm">{navItem.name}</span>
             </Link>
@@ -216,10 +216,10 @@ export function HomeComponent({
                         Featured Project
                       </Badge>
                     </div>
-                    <h4 className="text-xl font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300">
+                    <h4 className="text-xl font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300 max-w-sm">
                       {featuredProject.title}
                     </h4>
-                    <p className="text-zinc-300 text-sm mb-4">
+                    <p className="text-zinc-300 text-sm mb-4 max-w-md">
                       {featuredProject.description}
                     </p>
                     <div className="flex gap-4">
@@ -269,7 +269,7 @@ export function HomeComponent({
                   <h4 className="text-xl font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300">
                     {featuredBlog.title}
                   </h4>
-                  <p className="text-zinc-300 text-sm mb-4">
+                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
                     {featuredBlog.description}
                   </p>
                   <Link
@@ -293,7 +293,9 @@ export function HomeComponent({
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-emerald-500/10 opacity-50" />
               <div className="relative bg-zinc-900/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-4">
                 <h2 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                  <Terminal className="w-4 h-4 md:w-5 md:h-5 text-emerald-500" />
+                  <div className="p-2 bg-zinc-800 rounded-lg">
+                    <Terminal className="w-4 h-4 text-emerald-500" />
+                  </div>
                   Technical Expertise
                 </h2>
                 <div className="space-y-4">
@@ -356,6 +358,7 @@ export function HomeComponent({
                   <div className="bg-zinc-900/50 backdrop-blur-sm rounded-lg p-6 border border-zinc-800/50">
                     <Building className="w-8 h-8 text-emerald-500 mb-4" />
                     <h3 className="text-xl font-bold">{exp.company}</h3>
+
                     <p className="text-emerald-500">{exp.role}</p>
                     <p className="text-zinc-400 text-sm">{exp.period}</p>
                   </div>
@@ -366,9 +369,18 @@ export function HomeComponent({
                         className="bg-zinc-900/50 border-zinc-800/50 group hover:border-emerald-500/50 transition-colors duration-300"
                       >
                         <CardContent className="p-6">
-                          <h4 className="text-lg font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300">
-                            {project.title}
-                          </h4>
+                          <div className="flex flex-col items-start">
+                            <h4 className="text-lg font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300">
+                              {project.title}
+                            </h4>
+                            <Badge
+                              variant="secondary"
+                              className="bg-emerald-500/10 text-emerald-500"
+                            >
+                              {project.role}
+                            </Badge>
+                          </div>
+                          =
                           <ul className="list-disc list-inside space-y-2 text-zinc-400 text-sm mb-4">
                             {project.description.map((desc, i) => (
                               <li key={i}>{desc}</li>
@@ -415,56 +427,58 @@ export function HomeComponent({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card className="bg-zinc-900/50 border-zinc-800/50 overflow-hidden group h-full backdrop-blur-sm transition-colors hover:bg-zinc-800/50 ">
-                    <CardContent className="p-4">
-                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-start">
-                          <div className="p-2 bg-zinc-800 rounded-lg">
-                            <Terminal className="w-4 h-4 text-emerald-500" />
-                          </div>
-                          <Badge
-                            variant="secondary"
-                            className="bg-zinc-800 text-zinc-300 text-xs"
-                          >
-                            {project.period}
-                          </Badge>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-emerald-500 mb-1 transition-colors">
-                            {project.title}
-                          </h3>
-                          <p className="text-zinc-400 text-sm line-clamp-2">
-                            {project.description}
-                          </p>
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          {project.tech.map((tech) => (
+                  <Card className="bg-zinc-900/50 border-zinc-800/50 overflow-hidden group h-full backdrop-blur-sm transition-colors hover:bg-zinc-800/50">
+                    <CardContent className="p-4 flex flex-col h-full">
+                      <div className="relative flex-grow">
+                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-start">
+                            <div className="p-2 bg-zinc-800 rounded-lg">
+                              <Terminal className="w-4 h-4 text-emerald-500" />
+                            </div>
                             <Badge
-                              key={tech}
                               variant="secondary"
-                              className="bg-zinc-800/50 text-zinc-300 text-xs"
+                              className="bg-zinc-800 text-zinc-300 text-xs"
                             >
-                              {tech}
+                              {project.period}
                             </Badge>
-                          ))}
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-emerald-500 mb-1 transition-colors">
+                              {project.title}
+                            </h3>
+                            <p className="text-zinc-400 text-sm line-clamp-2">
+                              {project.description}
+                            </p>
+                          </div>
+                          <div className="flex flex-wrap gap-1 py-2">
+                            {project.tech.map((tech) => (
+                              <Badge
+                                key={tech}
+                                variant="secondary"
+                                className="bg-zinc-800/50 text-zinc-300 text-xs"
+                              >
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-4 pt-3 border-t border-zinc-800">
-                          <Link
-                            href={project.link || ""}
-                            className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-sm cursor-pointer"
-                          >
-                            <Globe className="w-4 h-4" />
-                            Live Demo
-                          </Link>
-                          <Link
-                            href={project.github || ""}
-                            className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm cursor-pointer"
-                          >
-                            <Github className="w-4 h-4" />
-                            Source
-                          </Link>
-                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 pt-3 mt-auto border-t border-zinc-800">
+                        <Link
+                          href={project.link || ""}
+                          className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-sm cursor-pointer"
+                        >
+                          <Globe className="w-4 h-4" />
+                          Live Demo
+                        </Link>
+                        <Link
+                          href={project.github || ""}
+                          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm cursor-pointer"
+                        >
+                          <Github className="w-4 h-4" />
+                          Source
+                        </Link>
                       </div>
                     </CardContent>
                   </Card>

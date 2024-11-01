@@ -8,6 +8,7 @@ export interface Experience {
 
 export interface CompanyProject {
   title: string;
+  role: string;
   description: string[];
   technologies: string[];
 }
@@ -19,7 +20,7 @@ export interface Project {
   tech: string[];
   link?: string;
   github?: string;
-  period:string;
+  period: string;
 }
 
 export interface Achievement {

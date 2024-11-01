@@ -26,6 +26,7 @@ export const portfolioData: PortfolioConfig = {
       projects: [
         {
           title: "BestBuy",
+          role: "Web & Performance Engineer",
           description: [
             "Spearheaded UI performance optimization initiatives that enhanced Core Web Vitals, achieving 30% improvement in Cumulative Layout Shift (CLS), 20% enhancement in Largest Contentful Paint (LCP), and 15% reduction in Total Blocking Time (TBT).",
             "Contributed to the development of a secure role-based access authentication application using Node.js and Passport.",
@@ -34,20 +35,29 @@ export const portfolioData: PortfolioConfig = {
             "Reduced manual efforts by 80% by automating performance metrics aggregation from SpeedCurve.",
           ],
           technologies: [
-            "Node.js",
+            "React.js",
             "TypeScript",
-            "React",
+            "Node.js",
             "GitHub Actions",
+            "Monorepo",
+            "SpeedCurve",
             "Passport",
           ],
         },
         {
           title: "Walmart",
+          role: "Frontend Engineer",
           description: [
-            "Spearheaded UI performance optimization initiatives that enhanced Core Web Vitals, achieving 30% improvement in Cumulative Layout Shift (CLS), 20% enhancement in Largest Contentful Paint (LCP), and 15% reduction in Total Blocking Time (TBT).",
-            "Contributed to the development of a secure role-based access authentication application using Node.js and Passport.",
+            "Developed the UI for Work Allocation and Transition (WAT) system, transforming the markup/markdown module into a next-gen interface featuring real-time charts leveraging Chart.js..",
+            "Implemented optimization techniques like debouncing and throttling to efficiently retrieve user roles from a dataset with hundred thousand users, significantly enhancing response time and overall application performance.",
           ],
-          technologies: ["Node.js", "TypeScript", "React"],
+          technologies: [
+            "React.js",
+            "JavaScript",
+            "Material UI",
+            "Chart.js",
+            "AG Grid",
+          ],
         },
       ],
     },
@@ -98,7 +108,7 @@ export const portfolioData: PortfolioConfig = {
         "Firebase Hoisting & DB",
         "Chart.js",
         "Material UI",
-        "oAuth [Google Provider]",
+        "OAuth [Google Provider]",
         "Service Workers",
       ],
       link: "https://authapp-f5a50.web.app/dashboard",
@@ -134,7 +144,7 @@ export const portfolioData: PortfolioConfig = {
 };
 
 export const navItems = [
-  { name: "Intro", link: "#about" },
+  { name: "About", link: "#about" },
   { name: "Experience", link: "#experience" },
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
