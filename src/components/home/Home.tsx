@@ -24,7 +24,7 @@ import {
 } from "@/config";
 import type { PortfolioConfig } from "@/types";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export function HomeComponent({
@@ -37,7 +37,6 @@ export function HomeComponent({
   const handleScrollToSection = (event: React.MouseEvent, link: string) => {
     event.preventDefault();
 
-    // Check if the link is a hash (section on the same page)
     if (link.startsWith("#")) {
       const element = document.getElementById(link.slice(1));
 
@@ -57,19 +56,20 @@ export function HomeComponent({
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-200  selection:bg-emerald-500/30 px-4 sm:px-6 md:px-8">
-      {/* Background Elements */}
-      <div className="fixed inset-0 overflow-hidden ">
+    <div className="min-h-screen bg-[#09090b] text-zinc-200 selection:bg-emerald-500/30 px-4 sm:px-6 md:px-8">
+      <div className="fixed inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#18181b_1px,transparent_1px),linear-gradient(to_bottom,#18181b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-45" />
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-emerald-500/10 via-zinc-900/50 to-transparent" />
       </div>
 
       {/* Floating Island Navbar */}
       <div className="relative w-full">
-        <motion.div className="border bg-black/45 border-white/10 flex  max-w-fit top-4 md:top-10 inset-x-0 mx-auto backdrop-blur-md   text-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-full fixed">
-          <span className="absolute inset-0 overflow-hidden rounded-full">
-            <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] transition-opacity duration-500 opacity-70" />
-          </span>
+        <motion.nav
+          className="border bg-zinc-900/75 border-zinc-800/50 flex max-w-fit top-4 md:top-10 inset-x-0 mx-auto backdrop-blur-md text-zinc-200 shadow-lg z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-full fixed"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 100 }}
+        >
           {navItems.map((navItem, idx: number) => (
             <a
               key={`link=${idx}`}
@@ -79,17 +79,17 @@ export function HomeComponent({
                   ? handleScrollToSection(e, navItem.link)
                   : undefined
               }
-              className="relative  text-sm text-zinc-200 hover:text-white transition-colors"
+              className="relative text-sm text-zinc-300 hover:text-emerald-400 transition-colors"
             >
               <span className="text-xs md:text-sm">{navItem.name}</span>
             </a>
           ))}
           <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
           <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
-        </motion.div>
+        </motion.nav>
       </div>
 
-      <main className="relative pt-16">
+      <main className="relative pt-24">
         {/* Hero Section */}
         <section id="about" className="flex items-center justify-center">
           <div className="max-w-7xl w-full space-y-8 md:space-y-16">
@@ -100,13 +100,13 @@ export function HomeComponent({
               className="flex flex-col md:flex-row items-center gap-8 justify-center min-h-[calc(100vh-4rem)]"
             >
               <div className="relative group">
-                <div className="absolute -inset-1 rounded-full blur opacity-50 group-hover:opacity-75 transition" />
+                <div className="absolute -inset-1 rounded-full blur opacity-50 group-hover:opacity-75 transition " />
                 <Image
                   src={data.personalInfo.profileImage}
                   width={200}
                   height={200}
                   alt={`${data.personalInfo.name}'s portrait`}
-                  className="relative w-40 h-40 md:w-60 md:h-60 rounded-full object-top object-cover border-2 border-zinc-800 p-3"
+                  className="relative w-40 h-40 md:w-60 md:h-60 rounded-full object-top object-cover border-[1px] border-zinc-500  p-2"
                 />
               </div>
               <div className="text-center md:text-left space-y-4">
@@ -121,19 +121,18 @@ export function HomeComponent({
                     Hi, I&apos;m {data.personalInfo.name}
                     <span className="text-emerald-500">.</span>
                   </h1>
-
-                  {/* <p className="text-lg md:text-xl lg:text-2xl text-zinc-400 font-light">
-                    {data.personalInfo.tagline}
-                  </p> */}
                 </div>
                 <p className="max-w-md text-zinc-400 text-sm md:text-base">
                   {data.personalInfo.bio}
                 </p>
                 {/* Location and Status */}
                 <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm justify-center md:justify-start">
-                  <div className="flex items-center gap-2 text-zinc-400 bg-zinc-900/50 px-3 py-1.5 rounded-full">
-                    <MapPin className="w-3 h-3 md:w-4 md:h-4" />
-                    {data.personalInfo.location}
+                  <div className="flex items-center gap-2 text-zinc-400 bg-zinc-800/50 px-3 py-1.5 rounded-full">
+                    <MapPin
+                      className="w-3 h-3 md:w-4 md:h-4"
+                      aria-hidden="true"
+                    />
+                    <span>{data.personalInfo.location}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="relative flex h-3 w-3">
@@ -145,39 +144,44 @@ export function HomeComponent({
                     </span>
                   </div>
                 </div>
-                {/* Social a */}
                 <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm justify-center md:justify-start">
                   <Button
                     asChild
-                    className="bg-emerald-500 text-black hover:bg-emerald-600"
+                    className="bg-emerald-500 text-zinc-900 hover:bg-emerald-600"
                     size={"sm"}
                   >
-                    <a href="mailTo:prateek32177@gmail.com">Get in Touch</a>
+                    <a href={`mailto:${data.personalInfo.email}`}>
+                      Get in Touch
+                    </a>
                   </Button>
                   <a
-                    href={data.personalInfo.social.github || ""}
+                    href={data.personalInfo.social.github}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="GitHub Profile"
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-5 h-5" aria-hidden="true" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                   <a
-                    href={data.personalInfo.social.twitter || ""}
+                    href={data.personalInfo.social.twitter}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="Twitter Profile"
                   >
-                    <Twitter className="w-5 h-5" />
+                    <Twitter className="w-5  h-5" aria-hidden="true" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                   <a
-                    href={data.personalInfo.social.linkedin || ""}
+                    href={data.personalInfo.social.linkedin}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="LinkedIn Profile"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Linkedin className="w-5 h-5" aria-hidden="true" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                   <a
                     href={data.personalInfo.social.medium || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="Medium Profile"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -194,49 +198,43 @@ export function HomeComponent({
 
             {/* Featured Content */}
             <div className="grid sm:grid-cols-2 gap-4 mt-8">
-              {/* Featured Project Preview */}
-              {featuredProject && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="relative overflow-hidden rounded-lg group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="rounded-lg relative bg-zinc-900/50 backdrop-blur-sm p-6 h-full border border-zinc-800/50 group-hover:border-emerald-500/50 transition-colors duration-300">
-                    <div className="flex items-center justify-between mb-4">
-                      <span
-                        className={"font-extrabold text-emerald-500 text-lg"}
-                      >
-                        B.
-                      </span>
-                      <Badge
-                        variant="secondary"
-                        className="bg-emerald-500/10 text-emerald-500"
-                      >
-                        Featured Project
-                      </Badge>
-                    </div>
-                    <h4 className="text-xl font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300 max-w-sm">
-                      {featuredProject.title}
-                    </h4>
-                    <p className="text-zinc-300 text-sm mb-4 max-w-md">
-                      {featuredProject.description}
-                    </p>
-                    <div className="flex gap-4">
-                      <a
-                        href={featuredProject.link || ""}
-                        className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
-                      >
-                        <Globe className="w-4 h-4" />
-                        View Live Platform
-                      </a>
-                    </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="relative overflow-hidden rounded-lg group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="rounded-lg relative bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-emerald-500/50 transition-colors duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-extrabold text-emerald-500 text-lg">
+                      B.
+                    </span>
+                    <Badge
+                      variant="secondary"
+                      className="bg-emerald-500/10 text-emerald-400"
+                    >
+                      Featured Project
+                    </Badge>
                   </div>
-                </motion.div>
-              )}
+                  <h4 className="text-xl font-bold mb-2 text-emerald-400 group-hover:text-emerald-300 transition-colors duration-300 max-w-sm">
+                    {featuredProject.title}
+                  </h4>
+                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
+                    {featuredProject.description}
+                  </p>
+                  <div className="flex gap-4">
+                    <a
+                      href={featuredProject.link}
+                      className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
+                    >
+                      <Globe className="w-4 h-4" aria-hidden="true" />
+                      View Live Project
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
 
-              {/* Featured Blog Post */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -244,18 +242,19 @@ export function HomeComponent({
                 className="relative overflow-hidden rounded-lg group"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative rounded-lg bg-zinc-900/50 backdrop-blur-sm p-6 h-full border border-zinc-800/50 group-hover:border-emerald-500/50 transition-colors duration-300">
+                <div className="relative rounded-lg bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-emerald-500/50 transition-colors duration-300">
                   <div className="flex items-center justify-between mb-4">
                     <svg
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       className="w-6 h-6 text-emerald-500"
+                      aria-hidden="true"
                     >
                       <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
                     </svg>
                     <Badge
                       variant="secondary"
-                      className="bg-emerald-500/10 text-emerald-500"
+                      className="bg-emerald-500/10 text-emerald-400"
                     >
                       Featured Blog
                     </Badge>
@@ -270,7 +269,7 @@ export function HomeComponent({
                     href={featuredBlog.link}
                     className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 text-sm transition-colors duration-300"
                   >
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     Read Article
                   </a>
                 </div>
@@ -285,21 +284,24 @@ export function HomeComponent({
               className="relative"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-emerald-500/10 opacity-50" />
-              <div className="relative bg-zinc-900/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-4">
+              <div className="relative bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-4">
                 <h2 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                  <div className="p-2 bg-zinc-800 rounded-lg">
-                    <Terminal className="w-4 h-4 text-emerald-500" />
+                  <div className="p-2 bg-zinc-700 rounded-lg">
+                    <Terminal
+                      className="w-4 h-4 text-emerald-500"
+                      aria-hidden="true"
+                    />
                   </div>
                   Technical Expertise
                 </h2>
                 <div className="space-y-4">
                   <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
                     My core expertise lies in modern web development, with a
-                    focus on building scalable applications using
+                    focus on building scalable applications using:
                   </p>
                   {data.skills.map((skillCategory, index) => (
                     <div key={index} className="space-y-2">
-                      <h3 className="text-sm font-medium text-zinc-400">
+                      <h3 className="text-sm font-medium text-zinc-300">
                         {skillCategory.category}
                       </h3>
                       <div className="flex flex-wrap gap-2">
@@ -307,7 +309,7 @@ export function HomeComponent({
                           <Badge
                             key={skill}
                             variant="secondary"
-                            className="bg-zinc-800/50 hover:bg-zinc-800 transition-colors text-white/85 text-xs md:text-sm"
+                            className="bg-zinc-700/50 hover:bg-zinc-700 transition-colors text-zinc-200 text-xs md:text-sm"
                           >
                             {skill}
                           </Badge>
@@ -334,8 +336,10 @@ export function HomeComponent({
               Experience
             </h2>
             <div className="relative space-y-12">
-              {/* Timeline line */}
-              <div className="absolute left-0 top-0 w-0.5 h-full bg-gradient-to-b from-emerald-500 via-emerald-500/50 to-transparent" />
+              <div
+                className="absolute left-0 top-0 w-0.5 h-full bg-gradient-to-b from-emerald-500 via-emerald-500/50 to-transparent"
+                aria-hidden="true"
+              />
 
               {data.experience.map((exp, index) => (
                 <motion.div
@@ -345,21 +349,25 @@ export function HomeComponent({
                   transition={{ delay: index * 0.1 }}
                   className="relative grid md:grid-cols-[1fr,3fr] gap-8 pl-8"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 top-0 w-4 h-4 bg-emerald-500 rounded-full transform -translate-x-[7px] mt-1.5" />
+                  <div
+                    className="absolute left-0 top-0 w-4 h-4 bg-emerald-500 rounded-full transform -translate-x-[7px] mt-1.5"
+                    aria-hidden="true"
+                  />
 
-                  <div className="bg-zinc-900/50 backdrop-blur-sm rounded-lg p-6 border border-zinc-800/50">
-                    <Building className="w-8 h-8 text-emerald-500 mb-4" />
+                  <div className="bg-zinc-800/50 backdrop-blur-sm rounded-lg p-6 border border-zinc-700/50">
+                    <Building
+                      className="w-8 h-8 text-emerald-500 mb-4"
+                      aria-hidden="true"
+                    />
                     <h3 className="text-xl font-bold">{exp.company}</h3>
-
-                    <p className="text-emerald-500">{exp.role}</p>
+                    <p className="text-emerald-400">{exp.role}</p>
                     <p className="text-zinc-400 text-sm">{exp.period}</p>
                   </div>
                   <div className="space-y-6">
                     {exp.projects.map((project, projectIndex) => (
                       <Card
                         key={projectIndex}
-                        className="bg-zinc-900/50 border-zinc-800/50 group hover:border-emerald-500/50 transition-colors duration-300"
+                        className="bg-zinc-800/50 border-zinc-700/50 group hover:border-emerald-500/50 transition-colors duration-300"
                       >
                         <CardContent className="p-6">
                           <div className="flex flex-col items-start">
@@ -368,23 +376,22 @@ export function HomeComponent({
                             </h4>
                             <Badge
                               variant="secondary"
-                              className="bg-emerald-500/10 text-emerald-500"
+                              className="bg-emerald-500/10 text-emerald-400 mb-4"
                             >
                               {project.role}
                             </Badge>
                           </div>
-                          =
-                          <ul className="list-disc list-inside space-y-2 text-zinc-400 text-sm mb-4">
+                          <ul className="list-disc list-inside space-y-2 text-zinc-300 text-sm mb-4 ">
                             {project.description.map((desc, i) => (
                               <li key={i}>{desc}</li>
                             ))}
                           </ul>
                           <div className="flex flex-wrap gap-2">
-                            {project?.technologies.map((tech) => (
+                            {project.technologies.map((tech) => (
                               <Badge
                                 key={tech}
                                 variant="secondary"
-                                className="bg-zinc-800/50 text-zinc-300 text-xs"
+                                className="bg-zinc-700/50 text-zinc-300 text-xs"
                               >
                                 {tech}
                               </Badge>
@@ -402,7 +409,7 @@ export function HomeComponent({
 
         {/* Projects Section */}
         <section id="projects" className="py-20">
-          <div className="max-w-6xl  mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl font-bold text-center">
                 Passion Projects
@@ -420,27 +427,30 @@ export function HomeComponent({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card className="bg-zinc-900/50 border-zinc-800/50 overflow-hidden group h-full backdrop-blur-sm transition-colors hover:bg-zinc-800/50">
+                  <Card className="bg-zinc-800/50 border-zinc-700/50 overflow-hidden group h-full backdrop-blur-sm transition-colors hover:bg-zinc-700/50">
                     <CardContent className="p-4 flex flex-col h-full">
                       <div className="relative flex-grow">
                         <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="space-y-3">
                           <div className="flex justify-between items-start">
-                            <div className="p-2 bg-zinc-800 rounded-lg">
-                              <Terminal className="w-4 h-4 text-emerald-500" />
+                            <div className="p-2 bg-zinc-700 rounded-lg">
+                              <Terminal
+                                className="w-4 h-4 text-emerald-500"
+                                aria-hidden="true"
+                              />
                             </div>
                             <Badge
                               variant="secondary"
-                              className="bg-zinc-800 text-zinc-300 text-xs"
+                              className="bg-zinc-700 text-zinc-300 text-xs"
                             >
                               {project.period}
                             </Badge>
                           </div>
                           <div>
-                            <h3 className="text-lg font-bold text-emerald-500 mb-1 transition-colors">
+                            <h3 className="text-lg font-bold text-emerald-400 mb-1 transition-colors">
                               {project.title}
                             </h3>
-                            <p className="text-zinc-400 text-sm line-clamp-2">
+                            <p className="text-zinc-300 text-sm line-clamp-2">
                               {project.description}
                             </p>
                           </div>
@@ -449,7 +459,7 @@ export function HomeComponent({
                               <Badge
                                 key={tech}
                                 variant="secondary"
-                                className="bg-zinc-800/50 text-zinc-300 text-xs"
+                                className="bg-zinc-700/50 text-zinc-300 text-xs"
                               >
                                 {tech}
                               </Badge>
@@ -457,19 +467,19 @@ export function HomeComponent({
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-4 pt-3 mt-auto border-t border-zinc-800">
+                      <div className="flex items-center gap-4 pt-3 mt-auto border-t border-zinc-700">
                         <a
-                          href={project.link || ""}
-                          className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 text-sm cursor-pointer"
+                          href={project.link}
+                          className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 text-sm cursor-pointer"
                         >
-                          <Globe className="w-4 h-4" />
+                          <Globe className="w-4 h-4" aria-hidden="true" />
                           Live Demo
                         </a>
                         <a
-                          href={project.github || ""}
+                          href={project.github}
                           className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm cursor-pointer"
                         >
-                          <Github className="w-4 h-4" />
+                          <Github className="w-4 h-4" aria-hidden="true" />
                           Source
                         </a>
                       </div>
@@ -480,9 +490,8 @@ export function HomeComponent({
             </div>
           </div>
         </section>
-
         {/* Contact Section */}
-        <footer id="contact" className="py-20 px-4 bg-zinc-900/30 rounded-md">
+        <footer id="contact" className="py-20 px-4 bg-zinc-800/30 rounded-md">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4 md:space-y-6">
@@ -496,29 +505,33 @@ export function HomeComponent({
                 </p>
                 <div className="flex items-center gap-4">
                   <a
-                    href={data.personalInfo.social.github || ""}
+                    href={data.personalInfo.social.github}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="GitHub Profile"
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-5 h-5" aria-hidden="true" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                   <a
-                    href={data.personalInfo.social.twitter || ""}
+                    href={data.personalInfo.social.twitter}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="Twitter Profile"
                   >
-                    <Twitter className="w-5 h-5" />
+                    <Twitter className="w-5 h-5" aria-hidden="true" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                   <a
-                    href={data.personalInfo.social.linkedin || ""}
+                    href={data.personalInfo.social.linkedin}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="LinkedIn Profile"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Linkedin className="w-5 h-5" aria-hidden="true" />
                     <span className="absolute -inset-2 rounded-full bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                   <a
                     href={data.personalInfo.social.medium || ""}
                     className="text-zinc-400 hover:text-emerald-400 transition-colors duration-300 relative group"
+                    aria-label="Medium Profile"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -534,7 +547,7 @@ export function HomeComponent({
               <div className="space-y-4 text-right">
                 <div>
                   <div className="text-xs md:text-sm text-zinc-400">Email</div>
-                  <div className="text-sm flex items-center gap-1 justify-end flex-">
+                  <div className="text-sm flex items-center gap-1 justify-end flex-wrap">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -546,6 +559,9 @@ export function HomeComponent({
                       ) : (
                         <Copy className="h-4 w-4" />
                       )}
+                      <span className="sr-only">
+                        {emailCopied ? "Email copied" : "Copy email"}
+                      </span>
                     </Button>
                     {data.personalInfo.email}
                   </div>
@@ -560,33 +576,13 @@ export function HomeComponent({
                 </div>
               </div>
             </div>
-            <Separator className="my-8 md:my-12 bg-zinc-800" />
+            <Separator className="my-8 md:my-12 bg-zinc-700" />
             <div className="text-center text-xs md:text-sm text-zinc-400">
-              © 2024 Prateek Jain. All rights reserved.
+              © 2024 {data.personalInfo.name}. All rights reserved.
             </div>
           </div>
         </footer>
       </main>
-      <style>
-        {`
-          @keyframes gradient {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
-          
-          .animate-gradient {
-            animation: gradient 3s ease infinite;
-            background-size: 200% 200%;
-          }
-        `}
-      </style>
     </div>
   );
 }
