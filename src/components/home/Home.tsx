@@ -56,16 +56,36 @@ export function HomeComponent({
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-200 selection:bg-emerald-500/30 px-4 sm:px-6 md:px-8">
+    <div className="min-h-screen bg-[#010106] text-zinc-200 selection:bg-emerald-500/30 px-4 sm:px-6 md:px-8">
       <div className="fixed inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#18181b_1px,transparent_1px),linear-gradient(to_bottom,#18181b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-45" />
+        {/* Refined noise texture overlay */}
+        <div
+          className="absolute inset-0 opacity-20 mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.975' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "256px 256px",
+          }}
+        />
+
+        {/* Ultra fine noise layer for added texture */}
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-soft-light"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='microNoiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23microNoiseFilter)'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "128px 128px",
+          }}
+        />
+
+        {/* Gradient overlay at the top */}
         <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-emerald-500/10 via-zinc-900/50 to-transparent" />
       </div>
 
       {/* Floating Island Navbar */}
       <div className="relative w-full">
         <motion.nav
-          className="border bg-zinc-900/75 border-zinc-800/50 flex max-w-fit top-4 md:top-10 inset-x-0 mx-auto backdrop-blur-md text-zinc-200 shadow-lg z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-full fixed"
+          className=" border-[0.5px] border-emerald-500/30 flex max-w-fit top-4 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200   z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-lg fixed"
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
@@ -84,15 +104,13 @@ export function HomeComponent({
               <span className="text-xs md:text-sm">{navItem.name}</span>
             </a>
           ))}
-          <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
-          <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
         </motion.nav>
       </div>
 
       <main className="relative pt-24">
         {/* Hero Section */}
         <section id="about" className="flex items-center justify-center">
-          <div className="max-w-7xl w-full space-y-8 md:space-y-16">
+          <div className="max-w-6xl w-full space-y-8 md:space-y-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
