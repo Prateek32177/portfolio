@@ -27,12 +27,12 @@ const config: Config = {
     // Dynamic gradients for colors
     {
       pattern:
-        /bg-gradient-to-br from-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500) via-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
+        /hover:bg-gradient-to-br from-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500) via-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
     },
     // Dynamic borders for colors
     {
       pattern:
-        /border-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
+        /hover:border-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
     },
   ],
   theme: {
