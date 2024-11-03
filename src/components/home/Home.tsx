@@ -92,14 +92,7 @@ export function HomeComponent({
             backgroundSize: "128px 128px",
           }}
         />
-        <div
-          className="absolute inset-0 opacity-15 mix-blend-soft-light"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='microNoiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23microNoiseFilter)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "128px 128px",
-          }}
-        />
+
         <div className="absolute top-0 left-0 w-full to-transparent h-full">
           <div
             className={`absolute inset-0 bg-gradient-to-b ${gradientClasses[theme].strong} to-transparent`}
@@ -391,11 +384,12 @@ export function HomeComponent({
               transition={{ duration: 0.5, delay: 0.4 }}
               className="relative"
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-r from-${themes[theme].primary}-500/10 via-transparent to-${themes[theme].primary}-500/10 opacity-50`}
-              />
-              <div className="relative bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-4">
-                <h2 className="text-lg md:text-xl font-semibold flex items-center gap-2">
+              <Card
+                className={`relative bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-4 hover:border-${themes[theme].primary}-500/50 bg-zinc-800/50 border-zinc-700/50 group hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
+              >
+                <h2
+                  className={`text-lg md:text-xl font-semibold flex items-center gap-2  text-${themes[theme].primary}-500`}
+                >
                   <div className="p-2  rounded-lg backdrop-brightness-50">
                     <Terminal
                       className={`w-4 h-4 text-${themes[theme].primary}-500`}
@@ -432,7 +426,7 @@ export function HomeComponent({
                     {data.technicalExpertise.longDescription}
                   </p>
                 </div>
-              </div>
+              </Card>
             </motion.div>
           </div>
         </section>

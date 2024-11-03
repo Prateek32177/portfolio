@@ -11,25 +11,45 @@ const config: Config = {
     // Theme backgrounds
     {
       pattern:
-        /(bg|from|via|to)-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)/,
+        /(bg|from|via|to)-(emerald|yellow|rose|pink|blue|orange|green)-(100|200|300|400|500|600)/,
       variants: ["hover"],
     },
     // Theme opacities
     {
       pattern:
-        /(bg|from|via|to)-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
+        /(bg|from|via|to)-(emerald|yellow|rose|pink|blue|orange|green)-(100|200|300|400|500|600)\/[0-9]+/,
     },
     // Text colors
     {
       pattern:
-        /text-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600|900|950)/,
+        /text-(emerald|yellow|rose|pink|blue|orange|green)-(100|200|300|400|500|600|900|950)/,
+		variants:["hover"]
     },
+    // Base gradients
+    "bg-gradient-to-br",
+
+    // From colors with opacity
     {
       pattern:
-        /bg-gradient-to-br from-(emerald|sky|yellow|rose|pink)-\d{3}\/\d{2} to-(emerald|sky|yellow|rose|pink)-\d{3}\/\d{2}/,
+        /from-(emerald|yellow|rose|pink|blue|orange|green|blue)-[0-9]{3}\/[0-9]{2}/,
     },
+
+    // To colors with opacity
     {
-      pattern: /hover:border-(emerald|sky|yellow|rose|pink)-\d{3}\/\d{2}/,
+      pattern:
+        /to-(emerald|yellow|rose|pink|blue|orange|green|blue)-[0-9]{3}\/[0-9]{2}/,
+    },
+
+    // Border patterns with variants
+    {
+      pattern: /border-(emerald|sky|yellow|rose|pink|blue)-[0-9]{3}\/[0-9]{2}/,
+      variants: ["hover"],
+    },
+
+    // If you're also using base borders without opacity
+    {
+      pattern: /border-(emerald|sky|yellow|rose|pink|blue)-[0-9]{3}/,
+      variants: ["hover"],
     },
   ],
   theme: {

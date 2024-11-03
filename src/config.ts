@@ -189,13 +189,14 @@ export const themes: Themes = {
     primary: "emerald",
     secondary: "blue",
   },
+
   yellow: {
     primary: "yellow",
     secondary: "orange",
   },
   pink: {
-    primary: "pink",
-    secondary: "rose",
+    primary: "rose",
+    secondary: "emerald",
   },
 };
 
