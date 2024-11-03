@@ -36,7 +36,7 @@ export function HomeComponent({
   defaultTheme = "emerald",
 }: {
   data?: PortfolioConfig;
-  defaultTheme: DefaultTheme;
+  defaultTheme?: DefaultTheme;
 }) {
   const [emailCopied, setEmailCopied] = useState(false);
   const [theme, setTheme] = useState<DefaultTheme>(defaultTheme);
