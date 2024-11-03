@@ -1,4 +1,4 @@
-import { PortfolioConfig } from "./types";
+import { PortfolioConfig, Themes, GradientClasses } from "./types";
 
 export const portfolioData: PortfolioConfig = {
   personalInfo: {
@@ -116,31 +116,39 @@ export const portfolioData: PortfolioConfig = {
       period: "Mar 2021",
     },
   ],
-  skills: [
-    {
-      category: "Frontend",
-      items: [
-        "React.js",
-        "Next.js",
-        "TypeScript",
-        "Redux",
-        "Material UI",
-        "Tailwind CSS",
-      ],
-    },
-    {
-      category: "Backend",
-      items: ["Node.js", "Core Java", "REST APIs"],
-    },
-    {
-      category: "Tools & Testing",
-      items: ["Git", "GitHub Actions", "Jest", "RTL", "Lighthouse"],
-    },
-    {
-      category: "Database & Cloud",
-      items: ["PostgreSQL", "Firebase", "Supabase"],
-    },
-  ],
+
+  technicalExpertise: {
+    shortDescription:
+      "My core expertise lies in modern web development, with a focus on building scalable applications using:",
+    longDescription:
+      " I specialize in building performant web applications from zero to launch, developing responsive PWAs, implementing microfrontend architectures, and optimizing application performance.",
+
+    skills: [
+      {
+        category: "Frontend",
+        items: [
+          "React.js",
+          "Next.js",
+          "TypeScript",
+          "Redux",
+          "Material UI",
+          "Tailwind CSS",
+        ],
+      },
+      {
+        category: "Backend",
+        items: ["Node.js", "Core Java", "REST APIs"],
+      },
+      {
+        category: "Tools & Testing",
+        items: ["Git", "GitHub Actions", "Jest", "RTL", "Lighthouse"],
+      },
+      {
+        category: "Database & Cloud",
+        items: ["PostgreSQL", "Firebase", "Supabase"],
+      },
+    ],
+  },
 };
 
 export const navItems = [
@@ -174,4 +182,37 @@ export const featuredProject = {
   ],
   link: "https://brokersify.in/",
   period: "Oct 2024",
+};
+
+export const themes: Themes = {
+  emerald: {
+    primary: "emerald",
+    secondary: "blue",
+  },
+  yellow: {
+    primary: "yellow",
+    secondary: "orange",
+  },
+  pink: {
+    primary: "pink",
+    secondary: "rose",
+  },
+};
+
+export const gradientClasses: GradientClasses = {
+  emerald: {
+    light: "from-emerald-500/10 via-emerald-500/5",
+    medium: "from-emerald-400/15 via-emerald-500/10",
+    strong: "from-emerald-300/20 via-emerald-500/15",
+  },
+  yellow: {
+    light: "from-yellow-500/10 via-yellow-500/5",
+    medium: "from-yellow-400/15 via-yellow-500/10",
+    strong: "from-yellow-300/20 via-yellow-500/15",
+  },
+  pink: {
+    light: "from-pink-500/10 via-pink-500/5",
+    medium: "from-pink-400/15 via-pink-500/10",
+    strong: "from-pink-300/20 via-pink-500/15",
+  },
 };

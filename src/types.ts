@@ -47,8 +47,33 @@ export interface PortfolioConfig {
   };
   experience: Experience[];
   projects: Project[];
-  skills: {
-    category: string;
-    items: string[];
-  }[];
+  technicalExpertise: {
+    shortDescription: string;
+    longDescription: string;
+    skills: {
+      category: string;
+      items: string[];
+    }[];
+  };
 }
+
+export interface Theme {
+  primary: string;
+  secondary: string;
+}
+
+export interface GradientStrength {
+  light: string;
+  medium: string;
+  strong: string;
+}
+
+export type Themes = {
+  [key: string]: Theme;
+};
+
+export type GradientClasses = {
+  [key: string]: GradientStrength;
+};
+
+export type DefaultTheme = "emerald" | "pink" | "yellow";
