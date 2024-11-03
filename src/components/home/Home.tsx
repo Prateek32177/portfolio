@@ -18,7 +18,6 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  portfolioData,
   navItems,
   featuredBlog,
   featuredProject,
@@ -32,11 +31,11 @@ import { useState, useEffect } from "react";
 import { getButtonClasses } from "@/lib/utils";
 
 export function HomeComponent({
-  data = portfolioData,
+  data,
   defaultTheme = "emerald",
 }: {
-  data?: PortfolioConfig;
-  defaultTheme?: DefaultTheme;
+  data: PortfolioConfig;
+  defaultTheme: DefaultTheme;
 }) {
   const [emailCopied, setEmailCopied] = useState(false);
   const [theme, setTheme] = useState<DefaultTheme>(defaultTheme);
