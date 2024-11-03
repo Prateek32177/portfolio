@@ -11,18 +11,23 @@ const config: Config = {
     // Theme backgrounds
     {
       pattern:
-        /(bg|from|via|to)-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)/,
+        /(bg|bg-gradient-to-br|from|via|to)-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)/,
       variants: ["hover"],
     },
     // Theme opacities
     {
       pattern:
-        /(bg|from|via|to)-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
+        /(bg|bg-gradient-to-br|from|via|to)-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
     },
     // Text colors
     {
       pattern:
         /text-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600|900|950)/,
+    },
+    // Borders
+    {
+      pattern:
+        /border-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600|900|950)/,
     },
   ],
   theme: {
