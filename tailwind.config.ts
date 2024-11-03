@@ -24,15 +24,12 @@ const config: Config = {
       pattern:
         /text-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600|900|950)/,
     },
-    // Dynamic gradients for colors
     {
       pattern:
-        /hover:bg-gradient-to-br from-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500) via-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
+        /bg-gradient-to-br from-(emerald|sky|yellow|rose|pink)-\d{3}\/\d{2} to-(emerald|sky|yellow|rose|pink)-\d{3}\/\d{2}/,
     },
-    // Dynamic borders for colors
     {
-      pattern:
-        /hover:border-(emerald|sky|yellow|rose|pink)-(100|200|300|400|500|600)\/[0-9]+/,
+      pattern: /hover:border-(emerald|sky|yellow|rose|pink)-\d{3}\/\d{2}/,
     },
   ],
   theme: {
