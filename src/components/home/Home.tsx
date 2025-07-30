@@ -13,6 +13,7 @@ import {
   Building,
   Check,
   Sun,
+  GithubIcon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -243,7 +244,7 @@ export function HomeComponent({
                       className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                     />
                   </a>
-                  <a
+                  {/* <a
                     href={data.personalInfo.social.twitter}
                     className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
                     aria-label="Twitter Profile"
@@ -252,7 +253,7 @@ export function HomeComponent({
                     <span
                       className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                     />
-                  </a>
+                  </a> */}
                   <a
                     href={data.personalInfo.social.linkedin}
                     className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
@@ -373,6 +374,107 @@ export function HomeComponent({
                     <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     Read Article
                   </a>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="relative overflow-hidden rounded-lg group"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br from-${themes[theme].primary}-500/20 to-${themes[theme].secondary}-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
+                <div
+                  className={`relative rounded-lg bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <GithubIcon
+                      className={`w-6 h-6 text-${themes[theme].primary}-500`}
+                    />
+                    <Badge
+                      variant="secondary"
+                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit`}
+                    >
+                      Open Source Contribution
+                    </Badge>
+                  </div>
+                  <h4
+                    className={`text-xl font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
+                  >
+                    GitHub Action for Smart Alerts
+                  </h4>
+                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
+                    hookflo-notify-action, a GitHub Action for sending event
+                    alerts with secret-based auth. Supports multi-channel
+                    routing (Slack, email, Discord) and channel toggling for
+                    flexible alerting based on event criticality.
+                  </p>
+                  <a
+                    href={"https://github.com/Hookflo/notify-action"}
+                    className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                  >
+                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                    Repo
+                  </a>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="relative overflow-hidden rounded-lg group"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br from-${themes[theme].primary}-500/20 to-${themes[theme].secondary}-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
+                <div
+                  className={`relative rounded-lg bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 640 640"
+                      fill="currentColor"
+                      className={`w-10 h-10 text-${themes[theme].primary}-500`}
+                      aria-hidden="true"
+                    >
+                      <path d="M320 352L288 352L288 288L320 288L320 352zM608 224L608 416L320 416L320 448L192 448L192 416L32 416L32 224L608 224zM192 256L64 256L64 384L128 384L128 288L160 288L160 384L192 384L192 256zM352 256L224 256L224 416L288 416L288 384L352 384L352 256zM576 256L384 256L384 384L448 384L448 288L480 288L480 384L512 384L512 288L544 288L544 384L576 384L576 256z" />
+                    </svg>
+                    <Badge
+                      variant="secondary"
+                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit`}
+                    >
+                      Npm library
+                    </Badge>
+                  </div>
+                  <h4
+                    className={`text-xl font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
+                  >
+                    Noise Gradient Background Component
+                  </h4>
+                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
+                    Add's a dynamic, modern flair to your UI with noise-textured
+                    gradient backgrounds. Lightweight, customizable, and perfect
+                    for hero sections or landing pages.
+                  </p>
+                  <div className="flex gap-4">
+                    <a
+                      href={"https://www.npmjs.com/package/noise-gradient-bg"}
+                      className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                    >
+                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                      Npm Library
+                    </a>
+                    <a
+                      href={"https://www.hookflo.com/gradient-showcase"}
+                      className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                    >
+                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                      Gradient Showcase
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </div>

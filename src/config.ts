@@ -5,7 +5,7 @@ export const portfolioData: PortfolioConfig = {
     name: "Prateek",
     title: "SENIOR WEB ENGINEER",
     tagline: "Building the future, one commit at a time",
-    bio: "Experienced Full-stack developer with 4 years of experience building high-performance web applications for leading retail giants. An avid problem solver with strong passion of addressing user needs and developing products from concept to launch.",
+    bio: "Experienced Full-stack developer with 4.5 years of experience building high-performance web applications for leading retail giants. An avid problem solver with strong passion of addressing user needs and developing products from concept to launch.",
     location: "Indore, India",
     email: "prateek32177@gmail.com",
     availability: true,
