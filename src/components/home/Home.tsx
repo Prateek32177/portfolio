@@ -455,7 +455,7 @@ export function HomeComponent({
                     Noise Gradient Background Component
                   </h4>
                   <p className="text-zinc-300 text-sm mb-4 max-w-md">
-                    Add's a dynamic, modern flair to your UI with noise-textured
+                    Add a dynamic, modern flair to your UI with noise-textured
                     gradient backgrounds. Lightweight, customizable, and perfect
                     for hero sections or landing pages.
                   </p>
