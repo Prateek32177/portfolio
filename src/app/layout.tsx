@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Ubuntu } from "next/font/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+});
+
+const manrope = Ubuntu({
+  subsets: ["latin"],
+  variable: "--font-",
+  weight: ["400", "700"],
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${manrope.className} ${geistMono.variable} antialiased bg-black`}
       >
         {children}
       </body>

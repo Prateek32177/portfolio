@@ -4,8 +4,8 @@ export const portfolioData: PortfolioConfig = {
   personalInfo: {
     name: "Prateek",
     title: "SENIOR WEB ENGINEER",
-    tagline: "Building the future, one commit at a time",
-    bio: "Experienced Full-stack developer with 4.5 years of experience building high-performance web applications for leading retail giants. An avid problem solver with strong passion of addressing user needs and developing products from concept to launch.",
+    tagline: "Building the future, one commit at a time.",
+    bio: "Full-stack developer with 4.5+ years of experience building high-performance, design-forward web applications for leading retail giants. An avid problem solver with strong passion of addressing user needs, and taking products from concept to launch.",
     location: "Indore, India",
     email: "prateek32177@gmail.com",
     availability: true,
@@ -19,6 +19,34 @@ export const portfolioData: PortfolioConfig = {
   },
   experience: [
     {
+      role: "Senior Frontend Engineer",
+      company: "Accenture",
+      location: "Indore, India",
+      period: "Dec 2024 – Present",
+      projects: [
+        {
+          title: "Process Visualization Tool",
+          role: "Lead Frontend Engineer",
+          description: [
+            "Contributing in library of reusable, visually rich UI components for high-impact organizational process visualization Platform",
+            "Implemented UI performance techniques to consistently achieve First Contentful Paint (FCP) under 2.5s and Largest Contentful Paint (LCP) under 3s on production-scale data.",
+
+            "Notable contribution in implementing priority loading strategies for LCP elements, resulting in a 28% improvement in Lighthouse performance scores.",
+            "Cross-team Collaboration with CMS, backend and design teams to align on business logic, API requirements, and UI/UX consistency, ensuring smooth cross-team delivery.",
+          ],
+          technologies: [
+            "React.js",
+            "TypeScript",
+            "React Flow",
+            "Framer Motion",
+            "Tailwind CSS",
+            "Figma",
+            "Lighthouse",
+          ],
+        },
+      ],
+    },
+    {
       role: "Software Engineer",
       company: "Tata Consultancy Services",
       location: "Indore, India",
@@ -28,9 +56,9 @@ export const portfolioData: PortfolioConfig = {
           title: "BestBuy",
           role: "Web & Performance Engineer",
           description: [
-            "Spearheaded UI performance optimization initiatives that enhanced Core Web Vitals, achieving 30% improvement in Cumulative Layout Shift (CLS), 20% enhancement in Largest Contentful Paint (LCP), and 15% reduction in Total Blocking Time (TBT).",
+            "Drove UI performance optimization initiatives that enhanced Core Web Vitals, achieving 30% improvement in Cumulative Layout Shift (CLS), 20% enhancement in Largest Contentful Paint (LCP), and 15% reduction in Total Blocking Time (TBT).",
             "Contributed to the development of a secure role-based access authentication application using Node.js and Passport.",
-            "Developed and transitioned reusable components for the Global home page, enabling seamless integration across the global view platform and boosting user engagement by 25%.",
+            "Transitioned reusable components for the Global home page, enabling seamless integration across the global view platform and boosting user engagement by 25%.",
             "Engineered a flexible A/B/n testing framework that accommodates product variations without recurring code changes.",
             "Reduced manual efforts by 80% by automating performance metrics aggregation from SpeedCurve.",
           ],
@@ -48,8 +76,8 @@ export const portfolioData: PortfolioConfig = {
           title: "Fortune 5 Consumer Retail Enterprise",
           role: "Frontend Engineer",
           description: [
-            "Developed the UI for Work Allocation and Transition (WAT) system, transforming the markup/markdown module into a next-gen interface featuring real-time charts leveraging Chart.js..",
-            "Implemented optimization techniques like debouncing and throttling to efficiently retrieve user roles from a dataset with hundred thousand users, significantly enhancing response time and overall application performance.",
+            "Developed UI for Work Allocation and Transition (WAT) system, including real-time charts with Chart.js.",
+            "Optimized user role retrieval with debouncing/throttling, improving performance for large datasets.",
           ],
           technologies: [
             "React.js",
@@ -62,14 +90,13 @@ export const portfolioData: PortfolioConfig = {
       ],
     },
   ],
-
   projects: [
     {
       title: "DeazyQR",
       description:
-        "Dynamic QR Management Saas Web App, having one of a kind Time expiring dynamic QR.",
+        "Dynamic QR management SaaS web app with time-expiring dynamic QR codes.",
       longDescription:
-        "A comprehensive QR management solution with time-based expiration features.",
+        "Comprehensive QR management solution featuring time-based expiration.",
       tech: ["Next.js", "ShadcnUI", "Supabase Auth", "Supabase Postgres DB"],
       link: "https://deazyqr.vercel.app/",
       github: "https://github.com/Prateek32177/deazyqr/tree/test-env",
@@ -77,10 +104,9 @@ export const portfolioData: PortfolioConfig = {
     },
     {
       title: "TextlyAI",
-      description:
-        "AI-Based Text Classification and Categorization Utility App",
+      description: "AI-based text classification and categorization utility.",
       longDescription:
-        "App that employs OpenAI Api to classify and structure disorganized text, outputting organized data in JSON, tabular, or plain text format.",
+        "Uses OpenAI API to classify and structure disorganized text, outputting organized data in JSON, table, or plain text.",
       tech: ["React.js", "OpenAI API", "Firebase", "Material UI"],
       link: "https://flowaii.web.app/",
       github: "https://github.com/Prateek32177/TextlyAI",
@@ -88,10 +114,10 @@ export const portfolioData: PortfolioConfig = {
     },
     {
       title: "DineEazy",
-      description: "In-Restaurant food ordering app",
+      description: "In-restaurant food ordering app.",
       longDescription:
-        "An innovative in-restaurant food ordering app that transforms dining by offering a pay once, reorder multiple times feature. Customers can easily track their food’s progress in real time and make convenienttable-side payments using QR codes, enhancing their overall dinning experience.",
-      tech: ["React.js", "Redux", "Firebase", "Material UI", "Custom Css"],
+        "Transforms dining with pay-once, reorder-multiple-times feature, real-time order tracking, and QR-based table payments.",
+      tech: ["React.js", "Redux", "Firebase", "Material UI", "Custom CSS"],
       link: "https://deazy-52098.web.app/",
       github:
         "https://github.com/Prateek32177/DineEazy/tree/master/dinningsolution",
@@ -99,16 +125,16 @@ export const portfolioData: PortfolioConfig = {
     },
     {
       title: "CheckTrack",
-      description: "One Stop Solution for Interview Tracking",
+      description: "Interview tracking PWA.",
       longDescription:
-        "Progressive Web App for managing and tracking interview processes.",
+        "Progressive web app for managing and tracking interview processes.",
       tech: [
         "React.js",
         "Redux",
-        "Firebase Hoisting & DB",
+        "Firebase Hosting & DB",
         "Chart.js",
         "Material UI",
-        "OAuth [Google Provider]",
+        "OAuth (Google)",
         "Service Workers",
       ],
       link: "https://authapp-f5a50.web.app/dashboard",
@@ -116,13 +142,11 @@ export const portfolioData: PortfolioConfig = {
       period: "Mar 2021",
     },
   ],
-
   technicalExpertise: {
     shortDescription:
-      "My core expertise lies in modern web development, with a focus on building scalable applications using:",
+      "Core expertise in modern web development, building scalable applications using:",
     longDescription:
-      " I specialize in building performant web applications from zero to launch, developing responsive PWAs, implementing microfrontend architectures, and optimizing application performance.",
-
+      "Specialized in performant web apps, responsive PWAs, microfrontend architectures, and performance optimization.",
     skills: [
       {
         category: "Frontend",
@@ -133,6 +157,7 @@ export const portfolioData: PortfolioConfig = {
           "Redux",
           "Material UI",
           "Tailwind CSS",
+          "ShadcnUI",
         ],
       },
       {
@@ -141,11 +166,33 @@ export const portfolioData: PortfolioConfig = {
       },
       {
         category: "Tools & Testing",
-        items: ["Git", "GitHub Actions", "Jest", "RTL", "Lighthouse"],
+        items: [
+          "Git",
+          "GitHub Actions",
+          "Jest",
+          "RTL",
+          "Lighthouse",
+          "Framer Motion",
+        ],
       },
       {
         category: "Database & Cloud",
         items: ["PostgreSQL", "Firebase", "Supabase"],
+      },
+      {
+        category: "AI & Context Enginnering",
+        items: [
+          "Beginner with building RAG models",
+          "Pinecone/pgvector",
+          "Semantic search",
+        ],
+      },
+      {
+        category: "Cross-team Collaboration",
+        items: [
+          "Working with CMS backend teams for business logic and API requirements",
+          "Collaborating with design teams for UI/UX and Figma handoff",
+        ],
       },
     ],
   },
@@ -212,8 +259,8 @@ export const gradientClasses: GradientClasses = {
     strong: "from-yellow-300/20 via-yellow-500/15",
   },
   pink: {
-    light: "from-pink-500/10 via-pink-500/5",
-    medium: "from-pink-400/15 via-pink-500/10",
-    strong: "from-pink-300/20 via-pink-500/15",
+    light: "from-gray-500/10 via-gray-500/5",
+    medium: "from-gray-400/15 via-gray-500/10",
+    strong: "from-gray-300/20 via-gray-500/15",
   },
 };

@@ -13,7 +13,7 @@ export const getButtonClasses = (theme: keyof typeof themes) => {
   const themeClasses = {
     emerald: "bg-emerald-500 hover:bg-emerald-600",
     yellow: "bg-yellow-500 hover:bg-yellow-600",
-    pink: "bg-pink-500 hover:bg-pink-600",
+    pink: "bg-rose-500 hover:bg-rose-600",
   }[theme];
 
   return `${baseClasses} ${themeClasses}`;

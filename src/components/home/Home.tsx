@@ -5,7 +5,7 @@ import {
   Github,
   Globe,
   MapPin,
-  Terminal,
+  AppWindow,
   Twitter,
   ExternalLink,
   Linkedin,
@@ -138,7 +138,7 @@ export function HomeComponent({
       {/* Navbar */}
       <div className="relative w-full">
         <motion.nav
-          className={`border-[0.5px] border-${themes[theme].primary}-500/30 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-lg fixed`}
+          className={`border-[0.5px] border-white/40 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-lg fixed`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
@@ -493,7 +493,7 @@ export function HomeComponent({
                   className={`text-lg md:text-xl font-semibold flex items-center gap-2  text-${themes[theme].primary}-500`}
                 >
                   <div className="p-2  rounded-lg backdrop-brightness-50">
-                    <Terminal
+                    <AppWindow
                       className={`w-4 h-4 text-${themes[theme].primary}-500`}
                       aria-hidden="true"
                     />
@@ -643,7 +643,7 @@ export function HomeComponent({
                         <div className="space-y-3">
                           <div className="flex justify-between items-start">
                             <div className="p-2 backdrop-brightness-50 rounded-lg">
-                              <Terminal
+                              <AppWindow
                                 className={`w-4 h-4 text-${themes[theme].primary}-500`}
                                 aria-hidden="true"
                               />
