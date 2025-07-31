@@ -3,12 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Ubuntu } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
 const manrope = Ubuntu({
   subsets: ["latin"],
   variable: "--font-",
