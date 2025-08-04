@@ -138,7 +138,7 @@ export function HomeComponent({
       {/* Navbar */}
       <div className="relative w-full">
         <motion.nav
-          className={`border-[0.5px] border-white/40 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-2 md:gap-4 items-center justify-center rounded-lg fixed`}
+          className={`border-[0.5px] border-white/40 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-4 md:gap-4 items-center justify-center rounded-lg fixed`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
