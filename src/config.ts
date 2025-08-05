@@ -144,9 +144,10 @@ export const portfolioData: PortfolioConfig = {
   ],
   technicalExpertise: {
     shortDescription:
-      "Core expertise in modern web development, building scalable applications using:",
+      "Core expertise in modern web development, with a focus on building scalable applications using:",
     longDescription:
-      "Specialized in performant web apps, responsive PWAs, microfrontend architectures, and performance optimization.",
+      "Specialized in building performant web apps, responsive PWAs, micro-frontend architectures and optimizing web performance.",
+
     skills: [
       {
         category: "Frontend",
@@ -185,13 +186,6 @@ export const portfolioData: PortfolioConfig = {
           "Beginner with building RAG models",
           "Pinecone/pgvector",
           "Semantic search",
-        ],
-      },
-      {
-        category: "Cross-team Collaboration",
-        items: [
-          "Working with CMS backend teams for business logic and API requirements",
-          "Collaborating with design teams for UI/UX and Figma handoff",
         ],
       },
     ],

@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion} from "framer-motion";
 import {
   Github,
   Globe,
   MapPin,
   AppWindow,
   Twitter,
-  ExternalLink,
+  ArrowUpRight,
   Linkedin,
   Copy,
   Building,
@@ -136,31 +136,29 @@ export function HomeComponent({
       </div>
 
       {/* Navbar */}
-      <div className="relative w-full">
-        <motion.nav
-          className={`border-[0.5px] border-white/40 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-4 md:gap-4 items-center justify-center rounded-lg fixed`}
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ type: "spring", stiffness: 100 }}
-        >
-          {navItems.map((navItem, idx: number) => (
-            <a
-              key={`link=${idx}`}
-              href={navItem.link || ""}
-              onClick={(e) =>
-                navItem.link?.startsWith("#")
-                  ? handleScrollToSection(e, navItem.link)
-                  : undefined
-              }
-              className={`relative text-sm text-zinc-300 hover:text-${themes[theme].primary}-400 transition-colors`}
-            >
-              <span className="text-xs md:text-sm">{navItem.name}</span>
-            </a>
-          ))}
-        </motion.nav>
-      </div>
+      <motion.nav
+        className={`border-[0.5px] border-white/40 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-4 md:gap-4 items-center justify-center rounded-lg fixed`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 100 }}
+      >
+        {navItems.map((navItem, idx: number) => (
+          <a
+            key={`link=${idx}`}
+            href={navItem.link || ""}
+            onClick={(e) =>
+              navItem.link?.startsWith("#")
+                ? handleScrollToSection(e, navItem.link)
+                : undefined
+            }
+            className={`relative text-sm text-zinc-300 hover:text-${themes[theme].primary}-400 transition-colors`}
+          >
+            <span className="text-xs md:text-sm">{navItem.name}</span>
+          </a>
+        ))}
+      </motion.nav>
 
-      <main className="relative pt-24">
+      <main className="relative pt-24 max-w-6xl mx-auto py-2 px-8">
         <section id="about" className="flex items-center justify-center">
           <div className="max-w-6xl w-full space-y-8 md:space-y-16">
             <motion.div
@@ -191,7 +189,7 @@ export function HomeComponent({
                       {data.personalInfo.title}
                     </span>
                   </div>
-                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight">
+                  <h1 className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold">
                     Hi, I&apos;m {data.personalInfo.name}
                     <span className={`text-${themes[theme].primary}-500`}>
                       .
@@ -306,13 +304,13 @@ export function HomeComponent({
                     </span>
                     <Badge
                       variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit`}
+                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
                     >
                       Featured Project
                     </Badge>
                   </div>
                   <h4
-                    className={`text-xl font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300 max-w-sm`}
+                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300 max-w-sm`}
                   >
                     {featuredProject.title}
                   </h4>
@@ -354,13 +352,13 @@ export function HomeComponent({
                     </svg>
                     <Badge
                       variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit`}
+                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
                     >
                       Featured Blog
                     </Badge>
                   </div>
                   <h4
-                    className={`text-xl font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
+                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
                   >
                     {featuredBlog.title}
                   </h4>
@@ -369,10 +367,10 @@ export function HomeComponent({
                   </p>
                   <a
                     href={featuredBlog.link}
-                    className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                    className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
                   >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     Read Article
+                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
                   </a>
                 </div>
               </motion.div>
@@ -395,13 +393,13 @@ export function HomeComponent({
                     />
                     <Badge
                       variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit`}
+                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
                     >
                       Open Source Contribution
                     </Badge>
                   </div>
                   <h4
-                    className={`text-xl font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
+                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
                   >
                     GitHub Action for Smart Alerts
                   </h4>
@@ -413,10 +411,10 @@ export function HomeComponent({
                   </p>
                   <a
                     href={"https://github.com/Hookflo/notify-action"}
-                    className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                    className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
                   >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
                     Repo
+                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
                   </a>
                 </div>
               </motion.div>
@@ -444,13 +442,13 @@ export function HomeComponent({
                     </svg>
                     <Badge
                       variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit`}
+                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
                     >
                       Npm library
                     </Badge>
                   </div>
                   <h4
-                    className={`text-xl font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
+                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
                   >
                     Noise Gradient Background Component
                   </h4>
@@ -462,17 +460,17 @@ export function HomeComponent({
                   <div className="flex gap-4">
                     <a
                       href={"https://www.npmjs.com/package/noise-gradient-bg"}
-                      className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                      className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
                     >
-                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
                       Npm Library
+                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
                     </a>
                     <a
                       href={"https://www.hookflo.com/gradient-showcase"}
-                      className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
+                      className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
                     >
-                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
                       Gradient Showcase
+                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
                     </a>
                   </div>
                 </div>
@@ -487,46 +485,50 @@ export function HomeComponent({
               className="relative"
             >
               <Card
-                className={`relative bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-8 space-y-4 hover:border-${themes[theme].primary}-500/50 bg-zinc-800/50 border-zinc-700/50 group hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
+                className={`relative bg-zinc-900/30 backdrop-blur-md border border-zinc-800/50 hover:border-${themes[theme].primary}-500/50 transition-colors duration-300 rounded-xl p-6 md:p-8 flex flex-col space-y-6`}
               >
-                <h2
-                  className={`text-lg md:text-xl font-semibold flex items-center gap-2  text-${themes[theme].primary}-500`}
-                >
-                  <div className="p-2  rounded-lg backdrop-brightness-50">
+                {/* Header */}
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-zinc-800/40">
                     <AppWindow
                       className={`w-4 h-4 text-${themes[theme].primary}-500`}
                       aria-hidden="true"
                     />
                   </div>
-                  Technical Expertise
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                    {data.technicalExpertise.shortDescription}
+                  <h2
+                    className={`text-xl font-medium text-${themes[theme].primary}-400`}
+                  >
+                    Technical Expertise
+                  </h2>
+                </div>
+
+                {/* Long Description */}
+                <>
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+                    {data.technicalExpertise.longDescription}
                   </p>
+                </>
+                {/* Skill Categories */}
+                <div className="space-y-6">
                   {data.technicalExpertise.skills.map(
                     (skillCategory, index) => (
-                      <div key={index} className="space-y-2">
-                        <h3 className="text-sm font-medium text-zinc-300">
+                      <div key={index} className="space-y-3">
+                        <h3 className="text-sm font-semibold text-zinc-300 tracking-wide">
                           {skillCategory.category}
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           {skillCategory.items.map((skill) => (
-                            <Badge
+                            <span
                               key={skill}
-                              variant="secondary"
-                              className="bg-zinc-700/50 hover:bg-zinc-700 transition-colors text-zinc-200 text-xs md:text-sm"
+                              className="text-xs md:text-sm text-zinc-300 bg-zinc-800/60 px-2.5 py-1 rounded-md hover:bg-zinc-700 transition-colors"
                             >
                               {skill}
-                            </Badge>
+                            </span>
                           ))}
                         </div>
                       </div>
                     )
                   )}
-                  <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
-                    {data.technicalExpertise.longDescription}
-                  </p>
                 </div>
               </Card>
             </motion.div>
@@ -536,7 +538,7 @@ export function HomeComponent({
         {/* Experience Section */}
         <section id="experience" className="py-20">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl tracking-tight text-center mb-8 md:mb-16">
               Experience
             </h2>
             <div className="relative space-y-12">
@@ -563,7 +565,7 @@ export function HomeComponent({
                       className={`w-8 h-8 text-${themes[theme].primary}-500 mb-4`}
                       aria-hidden="true"
                     />
-                    <h3 className="text-xl font-bold">{exp.company}</h3>
+                    <h3 className="text-xl">{exp.company}</h3>
                     <p className={`text-${themes[theme].primary}-400`}>
                       {exp.role}
                     </p>
@@ -578,13 +580,13 @@ export function HomeComponent({
                         <CardContent className="p-6">
                           <div className="flex flex-col items-start">
                             <h4
-                              className={`text-lg font-bold mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
+                              className={`text-lg  mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
                             >
                               {project.title}
                             </h4>
                             <Badge
                               variant="secondary"
-                              className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 mb-4 hover:bg-inherit`}
+                              className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 mb-4 hover:bg-inherit font-light`}
                             >
                               {project.role}
                             </Badge>
@@ -599,7 +601,7 @@ export function HomeComponent({
                               <Badge
                                 key={tech}
                                 variant="secondary"
-                                className="bg-zinc-700/50 text-zinc-300 text-xs hover:bg-inherit"
+                                className="bg-zinc-700/50 text-zinc-300 text-xs hover:bg-inherit font-light"
                               >
                                 {tech}
                               </Badge>
@@ -616,18 +618,19 @@ export function HomeComponent({
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl font-bold text-center">
+        <section id="projects" className="py-24 px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="text-4xl font-semibold tracking-tight">
                 Passion Projects
               </h2>
-              <p className="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base">
-                A selection of my most impactful work, showcasing
-                problem-solving abilities and technical expertise
+              <p className="text-zinc-400 max-w-lg mx-auto text-sm leading-relaxed">
+                Showcasing thoughtful design, clean code, and impactful
+                solutions.
               </p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {data.projects.map((project, index) => (
                 <motion.div
                   key={project.title}
@@ -635,78 +638,76 @@ export function HomeComponent({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card
-                    className={`bg-zinc-800/50 border-zinc-700/50 overflow-hidden group h-full backdrop-blur-sm transition-colors hover:bg-zinc-800/80 hover:border-${themes[theme].primary}-500/50`}
-                  >
-                    <CardContent className="p-4 flex flex-col h-full">
-                      <div className="relative flex-grow">
-                        <div className="space-y-3">
-                          <div className="flex justify-between items-start">
-                            <div className="p-2 backdrop-brightness-50 rounded-lg">
-                              <AppWindow
-                                className={`w-4 h-4 text-${themes[theme].primary}-500`}
-                                aria-hidden="true"
-                              />
-                            </div>
-                            <Badge
-                              variant="secondary"
-                              className="bg-zinc-700 text-zinc-300 text-xs hover:bg-inherit"
-                            >
-                              {project.period}
-                            </Badge>
-                          </div>
-                          <div>
-                            <h3
-                              className={`text-lg font-bold text-${themes[theme].primary}-400 mb-1 transition-colors`}
-                            >
-                              {project.title}
-                            </h3>
-                            <p className="text-zinc-300 text-sm line-clamp-2">
-                              {project.description}
-                            </p>
-                          </div>
-                          <div className="flex flex-wrap gap-1 py-2">
-                            {project.tech.map((tech) => (
-                              <Badge
-                                key={tech}
-                                variant="secondary"
-                                className="bg-zinc-700/50 text-zinc-300 text-xs hover:bg-inherit"
-                              >
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
+                  <div className="group relative h-full bg-zinc-900/30 border border-zinc-700/70 hover:border-zinc-700 transition-colors duration-300 p-5 rounded-xl backdrop-blur-md flex flex-col justify-between">
+                    <>
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="p-1.5 rounded-md bg-zinc-800/40">
+                          <AppWindow
+                            className={`w-4 h-4 text-${themes[theme].primary}-400`}
+                          />
                         </div>
+                        <span className="text-xs text-zinc-400">
+                          {project.period}
+                        </span>
                       </div>
-                      <div className="flex items-center gap-4 pt-3 mt-auto border-t border-zinc-700">
+
+                      <div className="space-y-2">
+                        <h3
+                          className={`text-lg font-medium text-${themes[theme].primary}-300`}
+                        >
+                          {project.title}
+                        </h3>
+                        <p className="text-zinc-400 text-sm leading-relaxed line-clamp-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {project.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-xs text-zinc-400 bg-zinc-800/50 px-2 py-0.5 rounded-md"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                    <div className="flex gap-4 items-center mt-6 pt-4 border-t border-zinc-800 text-sm">
+                      {project.link && (
                         <a
                           href={project.link}
-                          className={`flex items-center gap-2 text-${themes[theme].primary}-400 hover:text-${themes[theme].primary}-300 text-sm cursor-pointer`}
+                          target="_blank"
+                          className={`flex items-center gap-2 text-${themes[theme].primary}-400 hover:text-${themes[theme].primary}-300 transition`}
                         >
-                          <Globe className="w-4 h-4" aria-hidden="true" />
-                          Live Demo
+                          <Globe className="w-4 h-4" />
+                          Live
                         </a>
+                      )}
+                      {project.github && (
                         <a
                           href={project.github}
-                          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 text-sm cursor-pointer"
+                          target="_blank"
+                          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 transition"
                         >
-                          <Github className="w-4 h-4" aria-hidden="true" />
-                          Source
+                          <Github className="w-4 h-4" />
+                          Code
                         </a>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      )}
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
+
         {/* Contact Section */}
-        <footer id="contact" className="py-20 px-4 bg-zinc-800/30 rounded-md">
+        <footer id="contact" className="py-20 px-8 bg-zinc-800/30 rounded-md">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4 md:space-y-6">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                <h2 className="text-3xl md:text-4xl tracking-tighter">
                   Let&apos;s create something
                   <span className={`text-${themes[theme].primary}-500`}>
                     {" "}
@@ -800,7 +801,7 @@ export function HomeComponent({
             </div>
             <Separator className="my-8 md:my-12 bg-zinc-700" />
             <div className="text-center text-xs md:text-sm text-zinc-400">
-              © 2024 {data.personalInfo.name}. All rights reserved.
+              © 2025 {data.personalInfo.name}. All rights reserved.
             </div>
           </div>
         </footer>
