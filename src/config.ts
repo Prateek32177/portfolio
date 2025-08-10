@@ -12,7 +12,7 @@ export const portfolioData: PortfolioConfig = {
     profileImage: "/profile_pic.png",
     social: {
       github: "https://github.com/Prateek32177",
-      twitter: "https://x.com/Prateek53788134",
+      twitter: "https://x.com/impratj",
       linkedin: "https://www.linkedin.com/in/prateek-jain-031106131/",
       medium: "https://medium.com/@prateekJain11",
     },
