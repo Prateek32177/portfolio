@@ -1,0 +1,95 @@
+{
+  "personalInfo": {
+    "name": "Prateek Jain",
+    "title": "Senior Web Engineer",
+    "tagline": "Designs. Code. Performance. Art.",
+    "bio": "Hi there, I'm Prateek, a full-stack developer who loves to design and build digital experiences. I specialize in creating scalable web applications with modern technologies and intuitive user interfaces.",
+    "location": "Indore, India",
+    "email": "prateek32177@gmail.com",
+    "availability": true,
+    "social": {
+      "github": "https://github.com/Prateek32177",
+      "twitter": "https://x.com/impratj",
+      "linkedin": "https://www.linkedin.com/in/prateek-jain-031106131/",
+      "medium": "https://medium.com/@prateekJain11",
+      "art": "https://nimbleink.vercel.app"
+    }
+  },
+  "featuredProjects": [
+    {
+      "title": "Brokersify",
+      "description": "Comprehensive real estate platform connecting users with top-rated local agents and providing brokers a CRM tool to manage leads effectively.",
+      "tech": ["Next.js", "ShadcnUI", "Supabase Auth", "Supabase Postgres DB", "Google Analytics", "Resend", "PWA"],
+      "link": "https://brokersify.in/",
+      "github": null,
+      "image": "brokersify",
+      "period": "Oct 2024"
+    },
+    {
+      "title": "HookFlo",
+      "description": "Modern workflow automation platform that streamlines business processes with intelligent task management and real-time collaboration features.",
+      "tech": ["React", "Node.js", "PostgreSQL", "WebSocket", "Redis"],
+      "link": "https://hookflo.com",
+      "github": "https://github.com/Hookflo",
+      "image": "hookflo",
+      "period": "Sep 2024"
+    }
+  ],
+  "otherProjects": [
+    {
+      "title": "DeazyQR",
+      "description": "Dynamic QR management SaaS web app with time-expiring dynamic QR codes and comprehensive analytics dashboard.",
+      "link": "https://deazyqr.vercel.app/",
+      "github": "https://github.com/Prateek32177/deazyqr/tree/test-env"
+    },
+    {
+      "title": "TextlyAI",
+      "description": "AI-based text classification and categorization utility using OpenAI API for structured data output.",
+      "link": "https://flowaii.web.app/",
+      "github": "https://github.com/Prateek32177/TextlyAI"
+    },
+    {
+      "title": "NimbleInk Art Platform",
+      "description": "Creative digital art platform showcasing interactive designs and visual experiments with modern web technologies.",
+      "link": "https://nimbleink.vercel.app",
+      "github": null
+    },
+    {
+      "title": "Portfolio v2",
+      "description": "Previous iteration of personal portfolio built with React and featuring advanced animations and micro-interactions.",
+      "link": null,
+      "github": "https://github.com/Prateek32177/portfolio-v2"
+    }
+  ],
+  "technologies": {
+    "frontend": ["React, Next.js, TypeScript", "Tailwind CSS, ShadcnUI", "Framer Motion, Three.js"],
+    "backend": ["Node.js, Core Java", "PostgreSQL, Supabase", "REST APIs, WebSocket"],
+    "tools": ["Git, GitHub Actions", "Vercel, Firebase", "Jest, Lighthouse, PWA"]
+  },
+  "featuredBlog": {
+    "title": "#55 to 95: Performance Journey of Brokersify",
+    "description": "Boosting Brokersify! How We Consistently Hitting 95+ Performance Score for Brokersify.",
+    "link": "https://medium.com/@prateekJain11/boosting-brokersify-how-we-consistently-hitting-95-performance-for-brokersify-c7ae61a1ca0a",
+    "date": "Dec 2024"
+  },
+  "articles": [
+    {
+      "title": "Building Scalable React Applications with TypeScript",
+      "description": "A comprehensive guide to structuring large React applications with TypeScript, covering best practices for component architecture, state management, and testing.",
+      "date": "Jan 2025",
+      "link": "#"
+    },
+    {
+      "title": "The Future of Web Development: AI-Powered Tools",
+      "description": "Exploring how AI is transforming the way we build web applications, from code generation to automated testing and deployment.",
+      "date": "Dec 2024",
+      "link": "#"
+    },
+    {
+      "title": "Optimizing Next.js Performance for Production",
+      "description": "Deep dive into Next.js performance optimization techniques, including image optimization, code splitting, and caching strategies.",
+      "date": "Nov 2024",
+      "link": "#"
+    }
+  ]
+}

@@ -1,821 +1,495 @@
 "use client";
-
-import { motion} from "framer-motion";
 import {
   Github,
-  Globe,
-  MapPin,
-  AppWindow,
-  Twitter,
-  ArrowUpRight,
+  Mail,
   Linkedin,
-  Copy,
-  Building,
-  Check,
-  Sun,
-  GithubIcon,
+  Twitter,
+  FileText,
+  Calendar,
+  ArrowRight,
+  ArrowUpRight,
+  Palette,
 } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  navItems,
-  featuredBlog,
-  featuredProject,
-  themes,
-  gradientClasses,
-} from "@/config";
-import type { PortfolioConfig, DefaultTheme } from "@/types";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
-import { getButtonClasses } from "@/lib/utils";
+import { Orb, emeraldPreset } from "react-ai-orb";
+import config from "../../config.json";
 
-export function HomeComponent({
-  data,
-  defaultTheme = "emerald",
-}: {
-  data: PortfolioConfig;
-  defaultTheme: DefaultTheme;
-}) {
-  const [emailCopied, setEmailCopied] = useState(false);
-  const [theme, setTheme] = useState<DefaultTheme>(defaultTheme);
+export const HomeComponent = () => {
+  const {
+    personalInfo,
+    featuredProjects,
+    otherProjects,
+    technologies,
+    featuredBlog,
+    articles,
+  } = config;
 
-  useEffect(() => {
-    document.body.className = `theme-${theme}`;
-  }, [theme]);
-
-  const handleScrollToSection = (event: React.MouseEvent, link: string) => {
-    event.preventDefault();
-
-    if (link.startsWith("#")) {
-      const element = document.getElementById(link.slice(1));
-
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }
-  };
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText(data.personalInfo.email);
-    setEmailCopied(true);
-    setTimeout(() => setEmailCopied(false), 2000);
-  };
-
-  const cycleTheme = () => {
-    const themeKeys: DefaultTheme[] = Object.keys(themes) as DefaultTheme[];
-    const currentIndex = themeKeys.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themeKeys.length;
-    setTheme(themeKeys[nextIndex]);
-  };
   return (
-    <div
-      className={`min-h-screen bg-[#010106] text-zinc-200 selection:bg-${themes[theme].primary}-500/30 px-4 sm:px-6 md:px-8`}
-    >
-      <div className="fixed inset-0 overflow-hidden" aria-hidden="true">
-        <div
-          className="absolute inset-0 opacity-20 mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.975' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "256px 256px",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-10 mix-blend-soft-light"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='microNoiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23microNoiseFilter)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "128px 128px",
-          }}
-        />
-
-        <div className="absolute top-0 left-0 w-full to-transparent h-full">
-          <div
-            className={`absolute inset-0 bg-gradient-to-b ${gradientClasses[theme].strong} to-transparent`}
-            style={{
-              filter: "blur(80px)",
+    <div className="min-h-screen ">
+      {/* Main Content */}
+      <main className="max-w-2xl mx-auto px-8 py-8 pb-0 z-10  relative">
+        {/* Enhanced Hero */}
+        <nav className="flex justify-between items-center pb-6 max-w-5xl mx-auto">
+          {/* Enhanced logo with hover animation */}
+          <Orb
+            {...emeraldPreset}
+            animationSpeedBase={0.4}
+            size={0.4}
+            palette={{
+              mainBgStart: "#2db69d",
+              mainBgEnd: "#81d5c4",
+              shadowColor1: "#699a90",
+              shadowColor2: "#1f6f5f",
+              shadowColor3: "#1b5f52",
+              shadowColor4: "#174f44",
+              shapeAStart: "#37c3a8",
+              shapeAEnd: "#2db69d",
+              shapeBStart: "#8adacc",
+              shapeBMiddle: "#81d5c4",
+              shapeBEnd: "#77cdbc",
+              shapeCStart: "#2db69d",
+              shapeCMiddle: "#28a890",
+              shapeCEnd: "#239c86",
+              shapeDStart: "#92e0d2",
+              shapeDMiddle: "#88d8c8",
+              shapeDEnd: "#7dd0be",
             }}
           />
 
-          <div
-            className={`absolute inset-0 bg-gradient-to-b ${gradientClasses[theme].medium} to-transparent`}
-            style={{
-              filter: "blur(60px)",
-            }}
-          />
+          <div className="flex gap-8 text-sm text-gray-500">
+            <a
+              href="/thoughts"
+              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
+            >
+              thoughts
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
+            >
+              prateek://contact
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </div>
+        </nav>
+
+        <div className="mb-16 animate-fade-in-up" id="about">
+          <h1 className="text-4xl  text-[#2db69d] mb-2 font-serif  transition-colors duration-500 cursor-default tracking-tighter">
+            {personalInfo.name}
+          </h1>
+          <p
+            className="text-base font-semibold text-gray-500 mb-4 max-w-2xl animate-fade-in-up"
+            style={{ animationDelay: "0.1s" }}
+          >
+            <span className="text-sm font-normal">Obsessed with</span>{" "}
+            {personalInfo.tagline}
+          </p>
 
           <div
-            className={`absolute inset-0 bg-gradient-to-b ${gradientClasses[theme].light} to-transparent`}
-            style={{
-              filter: "blur(40px)",
-            }}
-          />
+            className="mb-6 max-w-3xl animate-fade-in-up text-[14px] sm:text-sm"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <p className="text-gray-700 leading-relaxed mb-6 tracking-tight">
+              {personalInfo.bio}
+            </p>
+          </div>
 
+          {/* Enhanced Social Links */}
           <div
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(
-                  80% 100% at 50% 0%,
-                  transparent 30%,
-                  rgba(24, 24, 27, 0.4) 50%,
-                  rgba(24, 24, 27, 0.8) 100%
-                )
-              `,
-            }}
-          />
+            className="flex flex-wrap gap-6 text-sm text-gray-600 animate-fade-in-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <a
+              href="/resume.pdf"
+              className="flex items-center gap-2 hover:text-gray-900 transition-all duration-300 hover:scale-110 group tracking-tighter"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FileText
+                size={16}
+                className="group-hover:rotate-12 transition-transform duration-300"
+              />
+              <span className="hidden sm:inline">resume</span>
+            </a>
+            <a
+              href={personalInfo.social.twitter}
+              className="flex items-center gap-2 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Twitter
+                size={16}
+                className="group-hover:rotate-12 transition-transform duration-300"
+              />
+              <span className="hidden sm:inline">twitter</span>
+            </a>
+            <a
+              href={personalInfo.social.github}
+              className="flex items-center gap-2 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github
+                size={16}
+                className="group-hover:rotate-12 transition-transform duration-300"
+              />
+              <span className="hidden sm:inline">github</span>
+            </a>
+            <a
+              href={personalInfo.social.linkedin}
+              className="flex items-center gap-2 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin
+                size={16}
+                className="group-hover:rotate-12 transition-transform duration-300"
+              />
+              <span className="hidden sm:inline">linkedin</span>
+            </a>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="flex items-center gap-2 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+            >
+              <Mail
+                size={16}
+                className="group-hover:rotate-12 transition-transform duration-300"
+              />
+              <span className="hidden sm:inline">email</span>
+            </a>
+            <a
+              href={personalInfo.social.art}
+              className="flex items-center gap-2 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Palette
+                size={16}
+                className="group-hover:rotate-12 transition-transform duration-300"
+              />
+              <span className="hidden sm:inline">art</span>
+            </a>
+          </div>
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/0 via-zinc-900/10 to-zinc-900/30" />
-      </div>
+        {/* Featured Projects */}
+        <section className="mb-20 animate-fade-in-up" id="work">
+          <h2 className="text-lg font-light text-gray-900 mb-8 font-serif hover:text-teal-700 transition-colors duration-300 cursor-default">
+            Featured Work
+          </h2>
 
-      {/* Navbar */}
-      <motion.nav
-        className={`border-[0.5px] border-white/40 flex max-w-fit top-8 md:top-10 inset-x-0 mx-auto backdrop-blur-sm shadow-xl text-zinc-200 z-[5000] py-2 md:py-4 px-4 md:px-10 gap-4 md:gap-4 items-center justify-center rounded-lg fixed`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100 }}
-      >
-        {navItems.map((navItem, idx: number) => (
-          <a
-            key={`link=${idx}`}
-            href={navItem.link || ""}
-            onClick={(e) =>
-              navItem.link?.startsWith("#")
-                ? handleScrollToSection(e, navItem.link)
-                : undefined
-            }
-            className={`relative text-sm text-zinc-300 hover:text-${themes[theme].primary}-400 transition-colors`}
-          >
-            <span className="text-xs md:text-sm">{navItem.name}</span>
-          </a>
-        ))}
-      </motion.nav>
-
-      <main className="relative pt-24 max-w-6xl mx-auto py-2 px-8">
-        <section id="about" className="flex items-center justify-center">
-          <div className="max-w-6xl w-full space-y-8 md:space-y-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col md:flex-row items-center gap-8 justify-center min-h-[calc(100vh-8rem)]"
-            >
-              <div className="relative group">
-                <div className="absolute -inset-1 rounded-full blur opacity-50 group-hover:opacity-75 transition " />
-                <Image
-                  src={data.personalInfo.profileImage}
-                  width={200}
-                  height={200}
-                  alt={`${data.personalInfo.name}'s portrait`}
-                  className="relative w-40 h-40 md:w-60 md:h-60 rounded-full object-top object-cover border-[1px] border-zinc-500  p-2"
-                />
-              </div>
-              <div className="text-center md:text-left space-y-4">
-                <div className="space-y-2">
-                  <div
-                    className={`flex items-center gap-2 text-${themes[theme].primary}-500 justify-center md:justify-start`}
-                  >
-                    <span
-                      className={`h-px w-8 bg-${themes[theme].primary}-500`}
-                    />
-                    <span className="text-sm tracking-wider">
-                      {data.personalInfo.title}
-                    </span>
-                  </div>
-                  <h1 className="text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold">
-                    Hi, I&apos;m {data.personalInfo.name}
-                    <span className={`text-${themes[theme].primary}-500`}>
-                      .
-                    </span>
-                  </h1>
-                </div>
-                <p className="max-w-md text-zinc-400 text-sm md:text-base">
-                  {data.personalInfo.bio}
-                </p>
-                {/* Location and Status */}
-                <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm justify-center md:justify-start">
-                  <div className="flex items-center gap-2 text-zinc-400 bg-zinc-800/50 px-3 py-1.5 rounded-full">
-                    <MapPin
-                      className="w-3 h-3 md:w-4 md:h-4"
-                      aria-hidden="true"
-                    />
-                    <span>{data.personalInfo.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-3 w-3">
-                      <span
-                        className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-${themes[theme].primary}-400 opacity-75`}
-                      ></span>
-                      <span
-                        className={`relative inline-flex rounded-full h-3 w-3 bg-${themes[theme].primary}-500`}
-                      ></span>
-                    </span>
-                    <span className="text-zinc-400">
-                      Available for Opportunities
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm justify-center md:justify-start">
-                  <Button
-                    asChild
-                    className={getButtonClasses(theme)}
-                    size={"sm"}
-                  >
-                    <a href={`mailto:${data.personalInfo.email}`}>
-                      Get in Touch
-                    </a>
-                  </Button>
-                  <a
-                    href={data.personalInfo.social.github}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="GitHub Profile"
-                  >
-                    <Github className="w-5 h-5" aria-hidden="true" />
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                  {/* <a
-                    href={data.personalInfo.social.twitter}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="Twitter Profile"
-                  >
-                    <Twitter className="w-5  h-5" aria-hidden="true" />
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a> */}
-                  <a
-                    href={data.personalInfo.social.linkedin}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="LinkedIn Profile"
-                  >
-                    <Linkedin className="w-5 h-5" aria-hidden="true" />
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                  <a
-                    href={data.personalInfo.social.medium || ""}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="Medium Profile"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66  0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-                    </svg>
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Featured Content */}
-            <div className="grid sm:grid-cols-2 gap-4 mt-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="relative overflow-hidden rounded-lg group"
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br from-${themes[theme].primary}-500/20 to-${themes[theme].secondary}-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                />
-                <div
-                  className={`rounded-lg relative bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <span
-                      className={`font-extrabold text-${themes[theme].primary}-500 text-lg`}
-                    >
-                      B.
-                    </span>
-                    <Badge
-                      variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
-                    >
-                      Featured Project
-                    </Badge>
-                  </div>
-                  <h4
-                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300 max-w-sm`}
-                  >
-                    {featuredProject.title}
-                  </h4>
-                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
-                    {featuredProject.description}
-                  </p>
-                  <div className="flex gap-4">
-                    <a
-                      href={featuredProject.link}
-                      className={`flex items-center gap-2 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors  duration-300`}
-                    >
-                      <Globe className="w-4 h-4" aria-hidden="true" />
-                      View Live Project
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="relative overflow-hidden rounded-lg group"
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br from-${themes[theme].primary}-500/20 to-${themes[theme].secondary}-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                />
-                <div
-                  className={`relative rounded-lg bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className={`w-6 h-6 text-${themes[theme].primary}-500`}
-                      aria-hidden="true"
-                    >
-                      <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-                    </svg>
-                    <Badge
-                      variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
-                    >
-                      Featured Blog
-                    </Badge>
-                  </div>
-                  <h4
-                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
-                  >
-                    {featuredBlog.title}
-                  </h4>
-                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
-                    {featuredBlog.description}
-                  </p>
-                  <a
-                    href={featuredBlog.link}
-                    className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
-                  >
-                    Read Article
-                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="relative overflow-hidden rounded-lg group"
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br from-${themes[theme].primary}-500/20 to-${themes[theme].secondary}-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                />
-                <div
-                  className={`relative rounded-lg bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <GithubIcon
-                      className={`w-6 h-6 text-${themes[theme].primary}-500`}
-                    />
-                    <Badge
-                      variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
-                    >
-                      Open Source Contribution
-                    </Badge>
-                  </div>
-                  <h4
-                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
-                  >
-                    GitHub Action for Smart Alerts
-                  </h4>
-                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
-                    hookflo-notify-action, a GitHub Action for sending event
-                    alerts with secret-based auth. Supports multi-channel
-                    routing (Slack, email, Discord) and channel toggling for
-                    flexible alerting based on event criticality.
-                  </p>
-                  <a
-                    href={"https://github.com/Hookflo/notify-action"}
-                    className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
-                  >
-                    Repo
-                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                  </a>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="relative overflow-hidden rounded-lg group"
-              >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br from-${themes[theme].primary}-500/20 to-${themes[theme].secondary}-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                />
-                <div
-                  className={`relative rounded-lg bg-zinc-800/50 backdrop-blur-sm p-6 h-full border border-zinc-700/50 group-hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 640 640"
-                      fill="currentColor"
-                      className={`w-10 h-10 text-${themes[theme].primary}-500`}
-                      aria-hidden="true"
-                    >
-                      <path d="M320 352L288 352L288 288L320 288L320 352zM608 224L608 416L320 416L320 448L192 448L192 416L32 416L32 224L608 224zM192 256L64 256L64 384L128 384L128 288L160 288L160 384L192 384L192 256zM352 256L224 256L224 416L288 416L288 384L352 384L352 256zM576 256L384 256L384 384L448 384L448 288L480 288L480 384L512 384L512 288L544 288L544 384L576 384L576 256z" />
-                    </svg>
-                    <Badge
-                      variant="secondary"
-                      className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 hover:bg-inherit font-light`}
-                    >
-                      Npm library
-                    </Badge>
-                  </div>
-                  <h4
-                    className={`text-xl mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
-                  >
-                    Noise Gradient Background Component
-                  </h4>
-                  <p className="text-zinc-300 text-sm mb-4 max-w-md">
-                    Add a dynamic, modern flair to your UI with noise-textured
-                    gradient backgrounds. Lightweight, customizable, and perfect
-                    for hero sections or landing pages.
-                  </p>
-                  <div className="flex gap-4">
-                    <a
-                      href={"https://www.npmjs.com/package/noise-gradient-bg"}
-                      className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
-                    >
-                      Npm Library
-                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                    </a>
-                    <a
-                      href={"https://www.hookflo.com/gradient-showcase"}
-                      className={`flex items-center gap-1 text-zinc-400 hover:text-${themes[theme].primary}-400 text-sm transition-colors duration-300`}
-                    >
-                      Gradient Showcase
-                      <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Skills Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="relative"
-            >
-              <Card
-                className={`relative bg-zinc-900/30 backdrop-blur-md border border-zinc-800/50 hover:border-${themes[theme].primary}-500/50 transition-colors duration-300 rounded-xl p-6 md:p-8 flex flex-col space-y-6`}
-              >
-                {/* Header */}
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-zinc-800/40">
-                    <AppWindow
-                      className={`w-4 h-4 text-${themes[theme].primary}-500`}
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <h2
-                    className={`text-xl font-medium text-${themes[theme].primary}-400`}
-                  >
-                    Technical Expertise
-                  </h2>
-                </div>
-
-                {/* Long Description */}
-                <>
-                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-                    {data.technicalExpertise.longDescription}
-                  </p>
-                </>
-                {/* Skill Categories */}
-                <div className="space-y-6">
-                  {data.technicalExpertise.skills.map(
-                    (skillCategory, index) => (
-                      <div key={index} className="space-y-3">
-                        <h3 className="text-sm font-semibold text-zinc-300 tracking-wide">
-                          {skillCategory.category}
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {skillCategory.items.map((skill) => (
-                            <span
-                              key={skill}
-                              className="text-xs md:text-sm text-zinc-300 bg-zinc-800/60 px-2.5 py-1 rounded-md hover:bg-zinc-700 transition-colors"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )
-                  )}
-                </div>
-              </Card>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Experience Section */}
-        <section id="experience" className="py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl tracking-tight text-center mb-8 md:mb-16">
-              Experience
-            </h2>
-            <div className="relative space-y-12">
+          <div className="space-y-8 md:space-y-12">
+            {featuredProjects.map((project, index) => (
               <div
-                className={`absolute left-0 top-0 w-0.5 h-full bg-gradient-to-b from-${themes[theme].primary}-500 via-${themes[theme].primary}-500/50 to-transparent`}
-                aria-hidden="true"
-              />
-
-              {data.experience.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative grid md:grid-cols-[1fr,3fr] gap-8 pl-8"
-                >
-                  <div
-                    className={`absolute left-0 top-0 w-4 h-4 bg-${themes[theme].primary}-500 rounded-full transform -translate-x-[7px] mt-1.5`}
-                    aria-hidden="true"
-                  />
-
-                  <div className="bg-zinc-800/50 backdrop-blur-sm rounded-lg p-6 border border-zinc-700/50">
-                    <Building
-                      className={`w-8 h-8 text-${themes[theme].primary}-500 mb-4`}
-                      aria-hidden="true"
-                    />
-                    <h3 className="text-xl">{exp.company}</h3>
-                    <p className={`text-${themes[theme].primary}-400`}>
-                      {exp.role}
-                    </p>
-                    <p className="text-zinc-400 text-sm">{exp.period}</p>
-                  </div>
-                  <div className="space-y-6">
-                    {exp.projects.map((project, projectIndex) => (
-                      <Card
-                        key={projectIndex}
-                        className={`bg-zinc-800/50 border-zinc-700/50 group hover:border-${themes[theme].primary}-500/50 transition-colors duration-300`}
-                      >
-                        <CardContent className="p-6">
-                          <div className="flex flex-col items-start">
-                            <h4
-                              className={`text-lg  mb-2 text-${themes[theme].primary}-400 group-hover:text-${themes[theme].primary}-300 transition-colors duration-300`}
-                            >
-                              {project.title}
-                            </h4>
-                            <Badge
-                              variant="secondary"
-                              className={`bg-${themes[theme].primary}-500/10 text-${themes[theme].primary}-400 mb-4 hover:bg-inherit font-light`}
-                            >
-                              {project.role}
-                            </Badge>
+                key={index}
+                className="group hover:transform hover:scale-[1.01] transition-all duration-300"
+              >
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                  <div className="md:w-2/5">
+                    <div className="aspect-video md:aspect-video aspect-[16/10] rounded-lg flex items-center justify-center group-hover:shadow-md transition-all duration-300 overflow-hidden relative">
+                      {project.image === "brokersify" ? (
+                        <img
+                          src="/Brokersify.jpg"
+                          alt="Brokersify Platform"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      ) : project.image === "hookflo" ? (
+                        <img
+                          src="/hookflo-banneer.jpeg"
+                          alt="HookFlo Platform"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      ) : (
+                        <div className="aspect-video bg-gradient-to-br from-emerald-50 to-teal-100 rounded-lg flex items-center justify-center">
+                          <div className="text-teal-400 text-sm">
+                            {project.title}
                           </div>
-                          <ul className="list-disc list-inside space-y-2 text-zinc-300 text-sm mb-4 ">
-                            {project.description.map((desc, i) => (
-                              <li key={i}>{desc}</li>
-                            ))}
-                          </ul>
-                          <div className="flex flex-wrap gap-2">
-                            {project.technologies.map((tech) => (
-                              <Badge
-                                key={tech}
-                                variant="secondary"
-                                className="bg-zinc-700/50 text-zinc-300 text-xs hover:bg-inherit font-light"
-                              >
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Projects Section */}
-        <section id="projects" className="py-24 px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl font-semibold tracking-tight">
-                Passion Projects
-              </h2>
-              <p className="text-zinc-400 max-w-lg mx-auto text-sm leading-relaxed">
-                Showcasing thoughtful design, clean code, and impactful
-                solutions.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {data.projects.map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="group relative h-full bg-zinc-900/30 border border-zinc-700/70 hover:border-zinc-700 transition-colors duration-300 p-5 rounded-xl backdrop-blur-md flex flex-col justify-between">
-                    <>
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="p-1.5 rounded-md bg-zinc-800/40">
-                          <AppWindow
-                            className={`w-4 h-4 text-${themes[theme].primary}-400`}
-                          />
                         </div>
-                        <span className="text-xs text-zinc-400">
-                          {project.period}
-                        </span>
-                      </div>
-
-                      <div className="space-y-2">
-                        <h3
-                          className={`text-lg font-medium text-${themes[theme].primary}-300`}
-                        >
-                          {project.title}
-                        </h3>
-                        <p className="text-zinc-400 text-sm leading-relaxed line-clamp-3">
-                          {project.description}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {project.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-xs text-zinc-400 bg-zinc-800/50 px-2 py-0.5 rounded-md"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </>
-                    <div className="flex gap-4 items-center mt-6 pt-4 border-t border-zinc-800 text-sm">
-                      {project.link && (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          className={`flex items-center gap-2 text-${themes[theme].primary}-400 hover:text-${themes[theme].primary}-300 transition`}
-                        >
-                          <Globe className="w-4 h-4" />
-                          Live
-                        </a>
                       )}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    </div>
+                  </div>
+                  <div className="md:w-3/5">
+                    <h3 className="text-base md:text-lg font-medium text-gray-900 mb-2 group-hover:text-teal-700 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 mb-3 leading-relaxed text-sm">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3 md:mb-4">
+                      {project.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-2 py-0.5 md:py-1 bg-gray-100 text-gray-600 text-xs rounded hover:bg-teal-100 hover:text-teal-700 transition-colors cursor-default"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-3 md:gap-4 text-sm">
+                      <a
+                        href={project.link}
+                        className="flex items-center gap-1 text-teal-600 hover:text-teal-700 hover:scale-105 transition-all duration-300 group/link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ArrowUpRight
+                          size={14}
+                          className="group-hover/link:rotate-12 transition-transform"
+                        />
+                        Live Demo
+                      </a>
                       {project.github && (
                         <a
                           href={project.github}
+                          className="flex items-center gap-1 text-gray-600 hover:text-gray-700 hover:scale-110 transition-all duration-300 group/link"
                           target="_blank"
-                          className="flex items-center gap-2 text-zinc-400 hover:text-zinc-300 transition"
+                          rel="noopener noreferrer"
                         >
-                          <Github className="w-4 h-4" />
-                          Code
+                          <Github
+                            size={14}
+                            className="group-hover/link:rotate-12 transition-transform"
+                          />
+                          Source
                         </a>
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* More Projects */}
+          <div className="mt-12 md:mt-16">
+            <h3 className="text-lg font-light text-gray-900 mb-6 font-serif">
+              Other Projects
+            </h3>
+            <div className="space-y-2 md:space-y-3">
+              {otherProjects.map((project, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-start hover:bg-gray-50 p-3 md:p-4 rounded-lg transition-all duration-300 hover:scale-[1.02] group"
+                >
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm md:text-base">
+                      {project.title}
+                    </h4>
+                    <p className="text-gray-600 text-xs md:text-sm">
+                      {project.description}
+                    </p>
+                  </div>
+                  <a
+                    href={project.link || project.github || "#"}
+                    className="text-teal-600 hover:text-teal-700 hover:scale-110 transition-all duration-300 flex-shrink-0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ArrowUpRight size={14} className="md:w-4 md:h-4" />
+                  </a>
+                </div>
               ))}
+            </div>
+          </div>
+
+          {/* GitHub CTA */}
+          <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-50 rounded-lg border border-teal-100 hover:bg-teal-100 hover:shadow-lg transition-all duration-300 group cursor-pointer">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-teal-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                <span className="text-teal-700">
+                  Explore more projects on{" "}
+                  <a
+                    href={personalInfo.social.github}
+                    className="font-medium underline hover:no-underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                  . Most of them are open-source.
+                </span>
+              </div>
+              <ArrowRight
+                size={16}
+                className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
+              />
             </div>
           </div>
         </section>
 
-        {/* Contact Section */}
-        <footer id="contact" className="py-20 px-8 bg-zinc-800/30 rounded-md">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4 md:space-y-6">
-                <h2 className="text-3xl md:text-4xl tracking-tighter">
-                  Let&apos;s create something
-                  <span className={`text-${themes[theme].primary}-500`}>
-                    {" "}
-                    extraordinary
-                  </span>
-                </h2>
-                <p className="text-zinc-400 max-w-md text-sm md:text-base">
-                  Always interested in hearing about new projects and
-                  opportunities.
-                </p>
-                <div className="flex items-center gap-4">
-                  <a
-                    href={data.personalInfo.social.github}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="GitHub Profile"
+        <section className="mb-12 animate-fade-in-up">
+          <h2 className="text-lg font-light text-gray-900 mb-6 font-serif hover:text-teal-700 transition-colors duration-300 cursor-default">
+            Technologies & Tools
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm">
+            <div className="group hover:transform hover:scale-105 transition-all duration-300 p-4 md:p-5 rounded-xl hover:bg-gradient-to-br hover:from-gray-50 hover:to-teal-50 border border-transparent hover:border-teal-100">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide group-hover:text-teal-600 transition-colors flex items-center gap-2">
+                <div className="w-2 h-2 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform"></div>
+                Frontend
+              </h3>
+              <div className="grid grid-cols-1 gap-2 text-gray-600">
+                {technologies.frontend.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="hover:text-gray-900 transition-all duration-300 cursor-default py-2 px-3 rounded-lg hover:bg-white hover:shadow-sm border border-transparent hover:border-gray-200 text-xs md:text-sm"
                   >
-                    <Github className="w-5 h-5" aria-hidden="true" />
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                  <a
-                    href={data.personalInfo.social.twitter}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="Twitter Profile"
-                  >
-                    <Twitter className="w-5 h-5" aria-hidden="true" />
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                  <a
-                    href={data.personalInfo.social.linkedin}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="LinkedIn Profile"
-                  >
-                    <Linkedin className="w-5 h-5" aria-hidden="true" />
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                  <a
-                    href={data.personalInfo.social.medium || ""}
-                    className={`text-zinc-400 hover:text-${themes[theme].primary}-400 transition-colors duration-300 relative group`}
-                    aria-label="Medium Profile"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-                    </svg>
-                    <span
-                      className={`absolute -inset-2 rounded-full bg-${themes[theme].primary}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </a>
-                </div>
-              </div>
-              <div className="space-y-4 text-right">
-                <div>
-                  <div className="text-xs md:text-sm text-zinc-400">Email</div>
-                  <div className="text-sm flex items-center gap-1 justify-end flex-wrap">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={copyEmail}
-                      className={`text-zinc-400 hover:text-${themes[theme].primary}-400 hover:bg-${themes[theme].primary}-500/15`}
-                    >
-                      {emailCopied ? (
-                        <Check className="h-4 w-4" />
-                      ) : (
-                        <Copy className="h-4 w-4" />
-                      )}
-                      <span className="sr-only">
-                        {emailCopied ? "Email copied" : "Copy email"}
-                      </span>
-                    </Button>
-                    {data.personalInfo.email}
+                    {tech}
                   </div>
-                </div>
-                <div>
-                  <div className="text-xs md:text-sm text-zinc-400">
-                    Location
-                  </div>
-                  <div className="text-xs md:text-sm">
-                    {data.personalInfo.location}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-            <Separator className="my-8 md:my-12 bg-zinc-700" />
-            <div className="text-center text-xs md:text-sm text-zinc-400">
-              © 2025 {data.personalInfo.name}. All rights reserved.
+
+            <div className="group hover:transform hover:scale-105 transition-all duration-300 p-4 md:p-5 rounded-xl hover:bg-gradient-to-br hover:from-gray-50 hover:to-teal-50 border border-transparent hover:border-teal-100">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide group-hover:text-teal-600 transition-colors flex items-center gap-2">
+                <div className="w-2 h-2 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform"></div>
+                Backend
+              </h3>
+              <div className="grid grid-cols-1 gap-2 text-gray-600">
+                {technologies.backend.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="hover:text-gray-900 transition-all duration-300 cursor-default py-2 px-3 rounded-lg hover:bg-white hover:shadow-sm border border-transparent hover:border-gray-200 text-xs md:text-sm"
+                  >
+                    {tech}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="group hover:transform hover:scale-105 transition-all duration-300 p-4 md:p-5 rounded-xl hover:bg-gradient-to-br hover:from-gray-50 hover:to-teal-50 border border-transparent hover:border-teal-100 sm:col-span-2 lg:col-span-1">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide group-hover:text-teal-600 transition-colors flex items-center gap-2">
+                <div className="w-2 h-2 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform"></div>
+                Tools & Cloud
+              </h3>
+              <div className="grid grid-cols-1 gap-2 text-gray-600">
+                {technologies.tools.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="hover:text-gray-900 transition-all duration-300 cursor-default py-2 px-3 rounded-lg hover:bg-white hover:shadow-sm border border-transparent hover:border-gray-200 text-xs md:text-sm"
+                  >
+                    {tech}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </footer>
+        </section>
+
+        {/* Featured Blog */}
+        <section className="mb-8 animate-fade-in-up">
+          <div className="p-6 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-lg border border-teal-100 hover:shadow-lg transition-all duration-300 group">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
+                  <span className="text-xs text-teal-600 font-medium uppercase tracking-wide">
+                    Featured Article
+                  </span>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-teal-700 transition-colors">
+                  <a
+                    href={featuredBlog.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {featuredBlog.title}
+                  </a>
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                  {featuredBlog.description}
+                </p>
+                <div className="flex items-center gap-4 text-xs text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <Calendar size={12} />
+                    {featuredBlog.date}
+                  </span>
+                  <a
+                    href={featuredBlog.link}
+                    className="flex items-center gap-1 text-teal-600 hover:text-teal-700 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read on Medium
+                    <ArrowUpRight size={12} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Articles */}
+        <section className="mb-12 animate-fade-in-up" id="articles">
+          <h2 className="text-2xl font-light text-gray-900 mb-8 font-serif hover:text-teal-700 transition-colors duration-300 cursor-default">
+            Recent Articles
+          </h2>
+
+          <div className="space-y-8">
+            {articles.map((article, index) => (
+              <article
+                key={index}
+                className="group hover:bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 text-xs text-gray-500 w-20">
+                    <Calendar size={12} className="inline mr-1" />
+                    {article.date}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
+                      <a href={article.link}>{article.title}</a>
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {article.description}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8">
+            <a
+              href={personalInfo.social.medium}
+              className="text-teal-600 hover:text-teal-700 text-sm flex items-center gap-1 hover:scale-105 transition-all duration-300 group"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View all articles
+              <ArrowRight
+                size={14}
+                className="group-hover:translate-x-1 transition-transform duration-300"
+              />
+            </a>
+          </div>
+        </section>
       </main>
-      <Button
-        size="icon"
-        className={`fixed bottom-4 right-4 rounded-full border-[1px] border-gray-500/30 `}
-        onClick={cycleTheme}
-      >
-        <Sun
-          className={`h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-${themes[theme].primary}-500`}
-        />
-        <span className="sr-only">Toggle theme</span>
-      </Button>
+
+      {/* Enhanced Footer */}
+      <footer className="border-t border-gray-200 relative">
+        <div className="max-w-2xl mx-auto px-8 py-6">
+          <div className="flex items-center justify-between text-xs">
+            <div>
+              <div className=" text-gray-500">Lets connect</div>
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="flex  items-center gap-3 text-gray-700 hover:text-teal-600"
+              >
+                <span>{personalInfo.email}</span>
+              </a>
+            </div>
+
+            <div className="text-right text-gray-500">
+              <div>Last updated on Jan 8, 2025</div>
+              <div className=" mt-1">
+                <span>{personalInfo.location}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-}
+};
