@@ -99,7 +99,6 @@ export default function ThoughtsPage() {
         {/* Thoughts Feed */}
         <div className="space-y-6">
           {thoughts.slice(0, visibleThoughts).map((thought) => {
-            const Icon = thought.icon
             return (
               <article key={thought.id} className="group">
                 <div className="grid grid-cols-[120px_1fr] gap-4 items-start">
@@ -130,7 +129,7 @@ export default function ThoughtsPage() {
         {/* Personal Note */}
         <div className="mt-16 p-6 bg-white/60 border border-gray-200 rounded-lg">
           <p className="text-sm text-gray-600 italic">
-            These are unfiltered thoughts from my daily life and work. They're personal reflections, not polished
+            These are unfiltered thoughts from my daily life and work. They&lsquo;re personal reflections, not polished
             insights. The failures are just as important as the successes.
           </p>
         </div>
