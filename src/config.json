@@ -3,10 +3,11 @@
     "name": "Prateek Jain",
     "title": "Senior Web Engineer",
     "tagline": "Designs. Code. Performance. Art.",
-    "bio": "Hi there, I'm Prateek, a full-stack developer who loves to design and build digital experiences. I specialize in creating scalable web applications with modern technologies and intuitive user interfaces.",
+    "bio": "Hi there, I'm Prateek **Senior Web Engineer**, designer, and (apparently) the entire engineering department behind **Hookflo.com**. I build scalable, high-performance web apps with modern tech and interfaces that actually make sense.",
     "location": "Indore, India",
     "email": "prateek32177@gmail.com",
     "availability": true,
+    "highlightKeywords": ["Senior Web Engineer", "Hookflo.com"],
     "social": {
       "github": "https://github.com/Prateek32177",
       "twitter": "https://x.com/impratj",
@@ -17,22 +18,41 @@
   },
   "featuredProjects": [
     {
-      "title": "Brokersify",
-      "description": "Comprehensive real estate platform connecting users with top-rated local agents and providing brokers a CRM tool to manage leads effectively.",
-      "tech": ["Next.js", "ShadcnUI", "Supabase Auth", "Supabase Postgres DB", "Google Analytics", "Resend", "PWA"],
-      "link": "https://brokersify.in/",
-      "github": null,
-      "image": "brokersify",
-      "period": "Oct 2024"
-    },
-    {
-      "title": "HookFlo",
-      "description": "Modern workflow automation platform that streamlines business processes with intelligent task management and real-time collaboration features.",
-      "tech": ["React", "Node.js", "PostgreSQL", "WebSocket", "Redis"],
+      "title": "Hookflo.com",
+      "description": "Universal alerting and logging platform for webhook events — capture, monitor, and deliver critical notifications in real time from any source.",
+      "tech": [
+        "Next.js",
+        "Node.js",
+        "PostgreSQL",
+        "WebSocket",
+        "Redis",
+        "Vercel"
+      ],
       "link": "https://hookflo.com",
       "github": "https://github.com/Hookflo",
       "image": "hookflo",
-      "period": "Sep 2024"
+      "period": "Feb 2025",
+      "cta": {
+        "text": "Get Started for Free",
+        "link": "https://hookflo.com/sign-up"
+      }
+    },
+    {
+      "title": "Brokersify.in",
+      "description": "Comprehensive real estate platform connecting users with top-rated local agents and providing brokers a CRM tool to manage leads effectively.",
+      "tech": [
+        "Next.js",
+        "ShadcnUI",
+        "Supabase Auth",
+        "Supabase Postgres DB",
+        "Google Analytics",
+        "Resend",
+        "PWA"
+      ],
+      "link": "https://brokersify.in/",
+      "github": "https://github.com/Hookflo",
+      "image": "brokersify",
+      "period": "Oct 2024"
     }
   ],
   "otherProjects": [
@@ -53,18 +73,41 @@
       "description": "Creative digital art platform showcasing interactive designs and visual experiments with modern web technologies.",
       "link": "https://nimbleink.vercel.app",
       "github": null
+    }
+  ],
+  "openSourceProjects": [
+    {
+      "title": "Tern",
+      "description": "Universal, algorithm-agnostic webhook verification library for secure signature validation across multiple platforms and providers.",
+      "github": "https://github.com/Hookflo/tern"
     },
     {
-      "title": "Portfolio v2",
-      "description": "Previous iteration of personal portfolio built with React and featuring advanced animations and micro-interactions.",
-      "link": null,
-      "github": "https://github.com/Prateek32177/portfolio-v2"
+      "title": "Hookflo Notify Action",
+      "description": "GitHub Action for sending JSON payload alerts to any endpoint with secure token-based authentication.",
+      "github": "https://github.com/Hookflo/notify-action"
+    },
+    {
+      "title": "Noise Gradient Background",
+      "description": "Animated gradient background with subtle noise overlay for a refined visual aesthetic.",
+      "github": "https://github.com/prateek32177/noise-gradient-bg"
     }
   ],
   "technologies": {
-    "frontend": ["React, Next.js, TypeScript", "Tailwind CSS, ShadcnUI", "Framer Motion, Three.js"],
-    "backend": ["Node.js, Core Java", "PostgreSQL, Supabase", "REST APIs, WebSocket"],
-    "tools": ["Git, GitHub Actions", "Vercel, Firebase", "Jest, Lighthouse, PWA"]
+    "frontend": [
+      "React, Next.js, TypeScript",
+      "Tailwind CSS, ShadcnUI",
+      "Framer Motion, Three.js"
+    ],
+    "backend": [
+      "Node.js, Core Java",
+      "PostgreSQL, Supabase",
+      "REST APIs, WebSocket"
+    ],
+    "tools": [
+      "Git, GitHub Actions",
+      "Vercel, Firebase",
+      "Jest, Lighthouse, PWA"
+    ]
   },
   "featuredBlog": {
     "title": "#55 to 95: Performance Journey of Brokersify",

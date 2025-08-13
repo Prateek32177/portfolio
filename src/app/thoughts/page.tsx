@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { ArrowLeft, Coffee, Lightbulb, Heart, Sparkles } from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
+import { ArrowLeft, Coffee, Lightbulb, Heart, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 const thoughts = [
   {
@@ -27,7 +27,7 @@ const thoughts = [
   },
   {
     id: 3,
-    date: "July 7, 2025",
+    date: "Aug 7, 2025",
     type: "failure",
     badge: "Failure",
     content:
@@ -37,7 +37,7 @@ const thoughts = [
   },
   {
     id: 4,
-    date: "July 6, 2025",
+    date: "Aug 6, 2025",
     type: "reflection",
     badge: "Reflection",
     content:
@@ -47,7 +47,7 @@ const thoughts = [
   },
   {
     id: 5,
-    date: "July 4, 2025",
+    date: "Aug 4, 2025",
     type: "note",
     badge: "Note",
     content:
@@ -57,7 +57,7 @@ const thoughts = [
   },
   {
     id: 6,
-    date: "July 2, 2025",
+    date: "Aug 2, 2025",
     type: "reflection",
     badge: "Reflection",
     content:
@@ -65,20 +65,23 @@ const thoughts = [
     icon: Coffee,
     color: "purple",
   },
-]
+];
 
 export default function ThoughtsPage() {
-  const [visibleThoughts, setVisibleThoughts] = useState(4)
+  const [visibleThoughts, setVisibleThoughts] = useState(4);
 
   const loadMore = () => {
-    setVisibleThoughts((prev) => Math.min(prev + 4, thoughts.length))
-  }
+    setVisibleThoughts((prev) => Math.min(prev + 4, thoughts.length));
+  };
 
   return (
     <div className="min-h-screen relative">
       {/* Navigation */}
       <nav className="flex justify-between items-center px-8 py-6 max-w-2xl mx-auto">
-        <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+        >
           <ArrowLeft size={16} />
           <span className="text-sm">back</span>
         </Link>
@@ -92,8 +95,12 @@ export default function ThoughtsPage() {
       <main className="max-w-2xl mx-auto px-8 py-8">
         {/* Simple Header */}
         <div className="mb-12">
-          <h1 className="text-2xl font-serif text-gray-900 mb-2">Quick Thoughts</h1>
-          <p className="text-gray-600 text-sm">Personal reflections and daily learnings</p>
+          <h1 className="text-2xl font-serif text-gray-900 mb-2">
+            Quick Thoughts
+          </h1>
+          <p className="text-gray-600 text-sm">
+            Personal reflections and daily learnings
+          </p>
         </div>
 
         {/* Thoughts Feed */}
@@ -101,16 +108,20 @@ export default function ThoughtsPage() {
           {thoughts.slice(0, visibleThoughts).map((thought) => {
             return (
               <article key={thought.id} className="group">
-                <div className="grid grid-cols-[120px_1fr] gap-4 items-start">
-                  <div >
-                    <time className="text-xs text-gray-500 text-center">{thought.date}</time>
+                <div className="grid grid-cols-[100px_1fr] gap-2 items-start">
+                  <div>
+                    <time className="text-xs text-gray-500 text-center">
+                      {thought.date}
+                    </time>
                   </div>
-                  <div >
-                    <p className="text-gray-800 leading-relaxed text-[15px]">{thought.content}</p>
+                  <div>
+                    <p className="text-gray-800 leading-relaxed text-[15px]">
+                      {thought.content}
+                    </p>
                   </div>
                 </div>
               </article>
-            )
+            );
           })}
         </div>
 
@@ -129,11 +140,12 @@ export default function ThoughtsPage() {
         {/* Personal Note */}
         <div className="mt-16 p-6 bg-white/60 border border-gray-200 rounded-lg">
           <p className="text-sm text-gray-600 italic">
-            These are unfiltered thoughts from my daily life and work. They&lsquo;re personal reflections, not polished
-            insights. The failures are just as important as the successes.
+            These are unfiltered thoughts from my daily life and work.
+            They&lsquo;re personal reflections, not polished insights. The
+            failures are just as important as the successes.
           </p>
         </div>
       </main>
     </div>
-  )
+  );
 }
