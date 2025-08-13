@@ -25,7 +25,7 @@ export const HomeComponent = () => {
   } = config;
   const orbRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [, setMousePosition] = useState({ x: 0, y: 0 });
   const [orbOffset, setOrbOffset] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
