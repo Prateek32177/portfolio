@@ -3,7 +3,7 @@
     "name": "Prateek Jain",
     "title": "Senior Web Engineer",
     "tagline": "Designs. Code. Performance. Art.",
-    "bio": "Hi there, I'm Prateek **Senior Web Engineer**, designer, and (apparently) the entire engineering department behind **Hookflo.com**. I build scalable, high-performance web apps with modern tech and interfaces that actually make sense.",
+    "bio": "Hi there, I'm Prateek a **Senior Web Engineer**, designer, and (apparently) the entire engineering department behind **Hookflo.com**. I build scalable, high-performance web apps with modern tech and interfaces that actually make sense.",
     "location": "Indore, India",
     "email": "prateek32177@gmail.com",
     "availability": true,
@@ -77,7 +77,7 @@
   ],
   "openSourceProjects": [
     {
-      "title": "Tern",
+      "title": "Tern OSS",
       "description": "Universal, algorithm-agnostic webhook verification library for secure signature validation across multiple platforms and providers.",
       "github": "https://github.com/Hookflo/tern"
     },
@@ -94,19 +94,30 @@
   ],
   "technologies": {
     "frontend": [
-      "React, Next.js, TypeScript",
-      "Tailwind CSS, ShadcnUI",
-      "Framer Motion, Three.js"
+      "React.js, Next.js, TypeScript",
+      "Jest, React Testing Library",
+      "Redux/Zustand",
+      "Tailwind CSS, ShadcnUI, SCSS/LESS",
+      "Framer Motion",
+      "PWA, Core Web Vitals"
     ],
     "backend": [
       "Node.js, Core Java",
       "PostgreSQL, Supabase",
       "REST APIs, WebSocket"
     ],
+    "AI": [
+      "RAG Models, Context engineering",
+      "Semantic Search, Vector DB",
+      "text embeddings",
+      "LLM API integration"
+    ],
     "tools": [
+      "Nx/Lerna Monorepo",
       "Git, GitHub Actions",
       "Vercel, Firebase",
-      "Jest, Lighthouse, PWA"
+      "Lighthouse, Speedcurve",
+      "Cursor, Figma, Postman"
     ]
   },
   "featuredBlog": {

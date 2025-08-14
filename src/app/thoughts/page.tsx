@@ -7,7 +7,7 @@ import { useState } from "react";
 const thoughts = [
   {
     id: 1,
-    date: "July 9, 2025",
+    date: "Aug 9, 2025",
     type: "failure",
     badge: "Failure",
     content:
@@ -17,7 +17,7 @@ const thoughts = [
   },
   {
     id: 2,
-    date: "July 8, 2025",
+    date: "Aug 8, 2025",
     type: "idea",
     badge: "Idea",
     content:

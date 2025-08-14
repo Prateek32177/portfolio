@@ -133,7 +133,7 @@ export const HomeComponent = () => {
           >
             <Orb
               {...emeraldPreset}
-              animationSpeedBase={0.1 + attractionIntensity * 0.3}
+              animationSpeedBase={0.2 + attractionIntensity * 0.3}
               size={0.35}
               palette={{
                 ...emeraldPreset.palette,
@@ -191,10 +191,10 @@ export const HomeComponent = () => {
             {personalInfo.name}
           </h1>
           <p
-            className="text-base font-semibold text-gray-600 mb-4 max-w-2xl animate-fade-in-up"
+            className="text-sm font-semibold text-gray-600 mb-4 max-w-2xl animate-fade-in-up"
             style={{ animationDelay: "0.1s" }}
           >
-            <span className="text-sm font-normal">Obsessed with</span>{" "}
+            <span className=" font-normal">Obsessed with</span>{" "}
             {personalInfo.tagline}
           </p>
           <p
@@ -319,15 +319,12 @@ export const HomeComponent = () => {
                       size={16}
                       className="text-teal-600 group-hover:text-teal-700 transition-colors"
                     />
-                    {project.github && (
-                      <Github size={16} className="text-black/60" />
-                    )}
                   </div>
                 </div>
                 <div className="text-gray-700 mb-1">{project.description}</div>
-                <div className="text-xs text-gray-500 mb-2">
+                {/* <div className="text-xs text-gray-500 mb-2">
                   {project.tech.join(" • ")}
-                </div>
+                </div> */}
                 {/* CTA for HookFlo - using button instead of nested anchor */}
                 {project.cta && (
                   <div className="mt-2">
@@ -346,39 +343,7 @@ export const HomeComponent = () => {
               </a>
             ))}
           </div>
-
-          <div className="mt-12 md:mt-16">
-            <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
-              Other Projects
-            </h3>
-            <div>
-              {otherProjects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.link || project.github || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-between items-start hover:bg-gray-50 p-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
-                >
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm">
-                      {project.title}
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      {project.description}
-                    </p>
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="text-teal-600 hover:text-teal-700 hover:scale-110 transition-all duration-300 flex-shrink-0 md:w-4 md:h-4"
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-10">
+        <section className="mt-12 md:mt-16">
           <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
             Open Source Contribution
           </h2>
@@ -429,6 +394,38 @@ export const HomeComponent = () => {
             </div>
           </div>
         </section>
+          <div className="mt-12 md:mt-16">
+            <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
+              Other Projects
+            </h3>
+            <div>
+              {otherProjects.map((project, index) => (
+                <a
+                  key={index}
+                  href={project.link || project.github || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-between items-start hover:bg-gray-50 p-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                >
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm">
+                      {project.title}
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      {project.description}
+                    </p>
+                  </div>
+                  <ArrowUpRight
+                    size={16}
+                    className="text-teal-600 hover:text-teal-700 hover:scale-110 transition-all duration-300 flex-shrink-0 md:w-4 md:h-4"
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
 
         <section className="mb-10">
           <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
@@ -557,7 +554,7 @@ export const HomeComponent = () => {
       {/* Enhanced Footer */}
       <footer className="border-t border-gray-200 relative">
         <div className="max-w-2xl mx-auto px-8 py-6">
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center justify-between text-xs sm:text-sm">
             <div>
               <div className="text-gray-500">Lets connect</div>
               <a
