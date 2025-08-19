@@ -269,7 +269,7 @@ export const HomeComponent = () => {
             Work
           </h2>
           <div className="space-y-3 text-sm">
-            <div className="pl-3">
+            <div className=">
               <div className="flex justify-between items-start mb-1">
                 <span className="font-medium text-teal-600">
                   Senior Full Stack Developer
@@ -282,7 +282,7 @@ export const HomeComponent = () => {
               </div>
             </div>
 
-            <div className="pl-3">
+            <div className=">
               <div className="flex justify-between items-start mb-1">
                 <span className="font-medium text-teal-600">
                   Frontend Developer
@@ -298,7 +298,7 @@ export const HomeComponent = () => {
         </section> */}
 
         <section className="mb-10">
-          <h2 className="text-lg font-light text-teal-600 mb-3 font-serif">
+          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
             Products with Active Users
           </h2>
           <div className="space-y-4 text-sm">
@@ -308,7 +308,7 @@ export const HomeComponent = () => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block pl-3 py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
+                className="block py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
               >
                 <div className="flex justify-between items-start mb-1">
                   <span className="font-medium text-teal-600 group-hover:text-teal-700 transition-colors">
@@ -343,57 +343,57 @@ export const HomeComponent = () => {
               </a>
             ))}
           </div>
-        <section className="mt-12 md:mt-16">
-          <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
-            Open Source Contribution
-          </h2>
-          <div className="space-y-1 text-sm pl-3">
-            {openSourceProjects.map((project, index) => (
-              <a
-                key={index}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-between items-center py-1 hover:bg-gray-50 rounded-lg px-2 transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
-              >
-                <div>
-                  <span className="text-teal-600 group-hover:text-teal-700 transition-colors">
-                    {project.title}
-                  </span>
-                  <br />
-                  <span className="text-gray-600 text-sm">
-                    {project.description}
+          <section className="mt-12 md:mt-16">
+            <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
+              Open Source Contribution
+            </h2>
+            <div className="space-y-1 text-sm">
+              {openSourceProjects.map((project, index) => (
+                <a
+                  key={index}
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-between items-center py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                >
+                  <div>
+                    <span className="text-teal-600 group-hover:text-teal-700 transition-colors">
+                      {project.title}
+                    </span>
+                    <br />
+                    <span className="text-gray-600 text-sm">
+                      {project.description}
+                    </span>
+                  </div>
+                  <Github size={16} className="text-black/60 flex-shrink-0" />
+                </a>
+              ))}
+            </div>
+            {/* GitHub CTA */}
+            <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-50 rounded-lg border border-teal-100 hover:bg-teal-100 hover:shadow-lg transition-all duration-300 group cursor-pointer">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-teal-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                  <span className="text-teal-700">
+                    Explore more projects on{" "}
+                    <a
+                      href={personalInfo.social.github}
+                      className="font-medium underline hover:no-underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub
+                    </a>
+                    . Most of them are open-source.
                   </span>
                 </div>
-                <Github size={16} className="text-black/60 flex-shrink-0" />
-              </a>
-            ))}
-          </div>
-          {/* GitHub CTA */}
-          <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-50 rounded-lg border border-teal-100 hover:bg-teal-100 hover:shadow-lg transition-all duration-300 group cursor-pointer">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-teal-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
-                <span className="text-teal-700">
-                  Explore more projects on{" "}
-                  <a
-                    href={personalInfo.social.github}
-                    className="font-medium underline hover:no-underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                  . Most of them are open-source.
-                </span>
+                <ArrowRight
+                  size={16}
+                  className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
+                />
               </div>
-              <ArrowRight
-                size={16}
-                className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
-              />
             </div>
-          </div>
-        </section>
+          </section>
           <div className="mt-12 md:mt-16">
             <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
               Other Projects
@@ -405,7 +405,7 @@ export const HomeComponent = () => {
                   href={project.link || project.github || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-between items-start hover:bg-gray-50 p-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                  className="flex justify-between items-start hover:bg-gray-50 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
                 >
                   <div>
                     <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm">
@@ -425,13 +425,11 @@ export const HomeComponent = () => {
           </div>
         </section>
 
-
-
         <section className="mb-10">
           <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
             Tech Stack
           </h2>
-          <div className="text-sm text-gray-700 leading-relaxed pl-3">
+          <div className="text-sm text-gray-700 leading-relaxed">
             <div className="mb-2">
               <span className="text-teal-600 font-medium text-sm">
                 Frontend:
@@ -514,7 +512,7 @@ export const HomeComponent = () => {
             {articles.map((article, index) => (
               <article
                 key={index}
-                className="group hover:bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
+                className="group hover:bg-gray-50 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
               >
                 <div className="flex items-baseline gap-4">
                   <div className="flex-shrink-0 text-xs flex items-center text-gray-500 w-20">
@@ -553,7 +551,7 @@ export const HomeComponent = () => {
 
       {/* Enhanced Footer */}
       <footer className="border-t border-gray-200 relative">
-        <div className="max-w-2xl mx-auto px-8 py-6">
+        <div className="max-w-2xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between text-xs sm:text-sm">
             <div>
               <div className="text-gray-500">Lets connect</div>
