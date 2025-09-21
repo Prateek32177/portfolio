@@ -119,7 +119,7 @@ export const HomeComponent = () => {
   return (
     <div ref={containerRef} className="min-h-screen relative">
       {/* Main Content */}
-      <main className="max-w-2xl mx-auto px-6 py-8 relative z-10">
+      <main className="max-w-2xl mx-auto px-10 py-8 relative z-10">
         <nav className="flex justify-between items-center pb-8">
           <div
             ref={orbRef}
