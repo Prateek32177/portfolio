@@ -12,6 +12,7 @@ import {
 import { Orb, emeraldPreset } from "react-ai-orb";
 import { useEffect, useRef, useState } from "react";
 import config from "../../config.json";
+import { GitHubContributions } from "./GitHubContributions";
 
 export const HomeComponent = () => {
   const {
@@ -392,6 +393,11 @@ export const HomeComponent = () => {
                   className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
                 />
               </div>
+            </div>
+
+            {/* GitHub Contributions Graph */}
+            <div className="mt-8 md:mt-12 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <GitHubContributions username="Prateek32177" />
             </div>
           </section>
           <div className="mt-12 md:mt-16">
