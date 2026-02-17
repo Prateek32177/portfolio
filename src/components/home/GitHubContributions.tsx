@@ -1,110 +1,105 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Github } from "lucide-react";
+'use client';
 
-interface ContributionDay {
+import { useEffect, useState } from 'react';
+import { Github } from 'lucide-react';
+
+interface ContributionData {
   date: string;
   count: number;
+  level: number;
 }
 
-interface ContributionStats {
-  total: number;
-  maxStreak: number;
+interface GitHubStats {
+  totalContributions: number;
+  longestStreak: number;
   currentStreak: number;
-  mostActiveMonth: string;
+  mostActiveDay: string;
 }
 
-const parseContributionData = (html: string): ContributionDay[] => {
-  const contributions: ContributionDay[] = [];
-  
-  // Match data-date and data-count attributes
-  const regex = /data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-count="(\d+)"/g;
-  let match;
-  
-  while ((match = regex.exec(html)) !== null) {
-    contributions.push({
-      date: match[1],
-      count: parseInt(match[2], 10),
-    });
-  }
-  
-  return contributions;
-};
-
-const calculateStats = (contributions: ContributionDay[]): ContributionStats => {
-  let total = 0;
-  let maxStreak = 0;
-  let currentStreak = 0;
-  let streak = 0;
-  const monthCounts: { [key: string]: number } = {};
-
-  contributions.forEach((day) => {
-    total += day.count;
-    
-    if (day.count > 0) {
-      streak++;
-      currentStreak = streak;
-    } else {
-      if (streak > maxStreak) maxStreak = streak;
-      streak = 0;
-    }
-    
-    const [year, month] = day.date.split("-");
-    const monthKey = `${year}-${month}`;
-    monthCounts[monthKey] = (monthCounts[monthKey] || 0) + day.count;
-  });
-
-  if (streak > maxStreak) maxStreak = streak;
-
-  const mostActiveMonth = Object.entries(monthCounts).reduce(
-    (a, b) => (a[1] > b[1] ? a : b),
-    ["", 0]
-  )[0];
-
-  return {
-    total,
-    maxStreak: maxStreak || 0,
-    currentStreak: currentStreak || 0,
-    mostActiveMonth: mostActiveMonth || "N/A",
-  };
-};
-
-const getIntensityColor = (count: number, maxCount: number) => {
-  if (count === 0) return "bg-gray-100";
-  const intensity = count / maxCount;
-  
-  if (intensity >= 0.75) return "bg-teal-600";
-  if (intensity >= 0.5) return "bg-teal-400";
-  if (intensity >= 0.25) return "bg-teal-200";
-  return "bg-teal-100";
-};
-
-export const GitHubContributions = ({ username = "Prateek32177" }) => {
-  const [contributions, setContributions] = useState<ContributionDay[]>([]);
-  const [stats, setStats] = useState<ContributionStats | null>(null);
+export function GitHubContributions({ username }: { username: string }) {
+  const [contributions, setContributions] = useState<ContributionData[]>([]);
+  const [stats, setStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchContributions = async () => {
       try {
+        // Fetch GitHub user profile page and parse contributions
         const response = await fetch(`https://github.com/${username}`);
+        if (!response.ok) throw new Error('Failed to fetch GitHub profile');
+        
         const html = await response.text();
         
-        // Parse contribution data from SVG
-        const contributionData = parseContributionData(html);
+        // Parse the SVG data from the contribution graph
+        const svgMatch = html.match(/<svg[^>]*data-view-component="true"[^>]*>[\s\S]*?<\/svg>/);
+        if (!svgMatch) throw new Error('Could not find contribution data');
         
-        if (contributionData.length === 0) {
-          setError(true);
-          return;
+        const svg = svgMatch[0];
+        
+        // Extract all rect elements (each represents a day)
+        const rects = svg.match(/<rect[^>]*>/g) || [];
+        
+        const parsedData: ContributionData[] = [];
+        let totalCount = 0;
+        let maxCount = 0;
+        const dayCounts: Map<string, number> = new Map();
+        
+        rects.forEach((rect) => {
+          const dataDateMatch = rect.match(/data-date="([^"]+)"/);
+          const dataCountMatch = rect.match(/data-count="(\d+)"/);
+          const dataLevelMatch = rect.match(/data-level="(\d+)"/);
+          
+          if (dataDateMatch && dataCountMatch !== null) {
+            const date = dataDateMatch[1];
+            const count = parseInt(dataCountMatch[1]);
+            const level = dataLevelMatch ? parseInt(dataLevelMatch[1]) : 0;
+            
+            parsedData.push({ date, count, level });
+            totalCount += count;
+            maxCount = Math.max(maxCount, count);
+            
+            const day = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
+            dayCounts.set(day, (dayCounts.get(day) || 0) + count);
+          }
+        });
+        
+        // Calculate stats
+        let longestStreak = 0;
+        let currentStreak = 0;
+        let tempStreak = 0;
+        
+        for (let i = 0; i < parsedData.length; i++) {
+          if (parsedData[i].count > 0) {
+            tempStreak++;
+            longestStreak = Math.max(longestStreak, tempStreak);
+          } else {
+            tempStreak = 0;
+          }
         }
-
-        setContributions(contributionData);
-        setStats(calculateStats(contributionData));
+        
+        // Current streak (from the end)
+        for (let i = parsedData.length - 1; i >= 0; i--) {
+          if (parsedData[i].count > 0) {
+            currentStreak++;
+          } else {
+            break;
+          }
+        }
+        
+        const mostActiveDay = Array.from(dayCounts.entries()).sort((a, b) => b[1] - a[1])[0]?.[0] || 'N/A';
+        
+        setContributions(parsedData);
+        setStats({
+          totalContributions: totalCount,
+          longestStreak,
+          currentStreak,
+          mostActiveDay,
+        });
+        setLoading(false);
       } catch (err) {
-        console.log("[v0] Error fetching contributions:", err);
-        setError(true);
-      } finally {
+        console.error('[v0] Error fetching GitHub contributions:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load contributions');
         setLoading(false);
       }
     };
@@ -114,136 +109,114 @@ export const GitHubContributions = ({ username = "Prateek32177" }) => {
 
   if (loading) {
     return (
-      <div className="animate-pulse">
-        <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
-        <div className="space-y-2">
-          <div className="h-20 bg-gray-100 rounded"></div>
+      <div className="space-y-4 animate-pulse">
+        <div className="flex items-center gap-2 mb-4">
+          <Github size={20} className="text-teal-600" />
+          <h3 className="text-lg font-semibold">GitHub Contributions</h3>
         </div>
+        <div className="h-32 bg-gray-200 rounded-lg"></div>
       </div>
     );
   }
 
-  if (error || !contributions.length) {
+  if (error) {
     return (
-      <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 text-center">
-        <Github size={20} className="mx-auto mb-2 text-gray-400" />
-        <p className="text-sm text-gray-600">
-          Unable to load contribution graph. Visit{" "}
-          <a
-            href={`https://github.com/${username}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-teal-600 hover:text-teal-700 underline"
-          >
-            GitHub profile
-          </a>
-        </p>
+      <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+        <p className="text-sm text-red-700">Unable to load contributions: {error}</p>
       </div>
     );
   }
 
-  // Get last 52 weeks (364 days)
-  const recentContributions = contributions.slice(-364);
-  const maxCount = Math.max(...recentContributions.map((d) => d.count), 1);
-  
-  // Group by weeks
-  const weeks: ContributionDay[][] = [];
-  for (let i = 0; i < recentContributions.length; i += 7) {
-    weeks.push(recentContributions.slice(i, i + 7));
+  // Group contributions by week
+  const weeks: ContributionData[][] = [];
+  for (let i = 0; i < contributions.length; i += 7) {
+    weeks.push(contributions.slice(i, i + 7));
   }
+
+  const getColor = (level: number) => {
+    const colors = [
+      'bg-gray-100',
+      'bg-teal-200',
+      'bg-teal-400',
+      'bg-teal-600',
+      'bg-teal-800',
+    ];
+    return colors[Math.min(level, 4)];
+  };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <h3 className="text-sm font-medium text-gray-900 mb-3 flex items-center gap-2">
-          <Github size={16} className="text-teal-600" />
-          Contribution Graph
-        </h3>
+    <div className="space-y-6">
+      <div className="flex items-center gap-2">
+        <Github size={20} className="text-teal-600" />
+        <h3 className="text-lg font-semibold">GitHub Contributions</h3>
       </div>
 
-      {/* Stats */}
       {stats && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <div className="text-gray-600 mb-1">Total Contributions</div>
-            <div className="text-lg font-semibold text-teal-600">{stats.total}</div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="p-3 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg border border-teal-200">
+            <p className="text-xs text-teal-600 font-medium">Total Contributions</p>
+            <p className="text-2xl font-bold text-teal-900">{stats.totalContributions.toLocaleString()}</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <div className="text-gray-600 mb-1">Max Streak</div>
-            <div className="text-lg font-semibold text-teal-600">{stats.maxStreak} days</div>
+          <div className="p-3 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg border border-teal-200">
+            <p className="text-xs text-teal-600 font-medium">Current Streak</p>
+            <p className="text-2xl font-bold text-teal-900">{stats.currentStreak} days</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <div className="text-gray-600 mb-1">Current Streak</div>
-            <div className="text-lg font-semibold text-teal-600">{stats.currentStreak} days</div>
+          <div className="p-3 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg border border-teal-200">
+            <p className="text-xs text-teal-600 font-medium">Longest Streak</p>
+            <p className="text-2xl font-bold text-teal-900">{stats.longestStreak} days</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <div className="text-gray-600 mb-1">Most Active</div>
-            <div className="text-lg font-semibold text-teal-600">{stats.mostActiveMonth}</div>
+          <div className="p-3 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg border border-teal-200">
+            <p className="text-xs text-teal-600 font-medium">Most Active</p>
+            <p className="text-lg font-bold text-teal-900">{stats.mostActiveDay}</p>
           </div>
         </div>
       )}
 
-      {/* Contribution Graph */}
-      <div className="overflow-x-auto pb-4">
-        <div className="flex gap-1 min-w-max">
-          {weeks.map((week, weekIdx) => (
-            <div key={weekIdx} className="flex flex-col gap-1">
-              {week.map((day, dayIdx) => (
+      <div className="overflow-x-auto pb-2">
+        <div className="flex gap-1 min-w-min">
+          {weeks.map((week, weekIndex) => (
+            <div key={weekIndex} className="flex flex-col gap-1">
+              {week.map((day, dayIndex) => (
                 <div
-                  key={`${weekIdx}-${dayIdx}`}
-                  className={`w-3 h-3 rounded-sm ${getIntensityColor(
-                    day.count,
-                    maxCount
-                  )} cursor-pointer transition-all duration-200 hover:ring-2 hover:ring-teal-400 hover:scale-110 group relative`}
-                  title={`${day.count} contributions on ${day.date}`}
-                >
-                  <div className="invisible group-hover:visible absolute -top-8 -left-4 bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap z-10 pointer-events-none">
-                    {day.count} on {day.date}
-                  </div>
-                </div>
+                  key={`${weekIndex}-${dayIndex}`}
+                  className={`w-3 h-3 rounded-sm ${getColor(day.level)} border border-gray-300 cursor-pointer transition-all hover:ring-1 hover:ring-teal-400`}
+                  title={`${day.date}: ${day.count} contributions`}
+                />
               ))}
+              {/* Fill empty spaces for weeks with less than 7 days */}
+              {week.length < 7 &&
+                Array(7 - week.length)
+                  .fill(0)
+                  .map((_, i) => (
+                    <div key={`empty-${i}`} className="w-3 h-3" />
+                  ))}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Legend */}
-      <div className="flex items-center justify-between text-xs text-gray-600">
-        <span>Less</span>
-        <div className="flex gap-1">
-          <div className="w-3 h-3 bg-gray-100 rounded-sm"></div>
-          <div className="w-3 h-3 bg-teal-100 rounded-sm"></div>
-          <div className="w-3 h-3 bg-teal-200 rounded-sm"></div>
-          <div className="w-3 h-3 bg-teal-400 rounded-sm"></div>
-          <div className="w-3 h-3 bg-teal-600 rounded-sm"></div>
+      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-600">Less</span>
+          <div className="flex gap-1">
+            {[0, 1, 2, 3, 4].map((level) => (
+              <div
+                key={level}
+                className={`w-3 h-3 rounded-sm ${getColor(level)} border border-gray-300`}
+              />
+            ))}
+          </div>
+          <span className="text-xs text-gray-600">More</span>
         </div>
-        <span>More</span>
-      </div>
-
-      {/* Link to GitHub */}
-      <div className="pt-2 border-t border-gray-200">
         <a
           href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-teal-600 hover:text-teal-700 hover:underline flex items-center gap-1 transition-colors"
+          className="text-xs font-medium text-teal-600 hover:text-teal-700 transition-colors"
         >
-          View full profile
-          <svg
-            className="w-3 h-3"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
+          View Profile →
         </a>
       </div>
     </div>
   );
-};
+}
