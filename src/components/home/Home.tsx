@@ -12,7 +12,8 @@ import {
 import { Orb, emeraldPreset } from "react-ai-orb";
 import { useEffect, useRef, useState } from "react";
 import config from "../../config.json";
-
+import { ProductShowcase } from "./ProductShowcase";
+import { GitHubContributions } from "./GithubContribution";
 export const HomeComponent = () => {
   const {
     personalInfo,
@@ -134,7 +135,7 @@ export const HomeComponent = () => {
             <Orb
               {...emeraldPreset}
               animationSpeedBase={0.2 + attractionIntensity * 0.3}
-              size={0.35}
+              size={0.5}
               palette={{
                 ...emeraldPreset.palette,
                 shapeBStart: "",
@@ -263,6 +264,15 @@ export const HomeComponent = () => {
             </a>
           </div>
         </div>
+
+            {/* <ProductShowcase
+          videoSrc="https://youtu.be/Gbs1diXw2sQ?si=I9CR1i33kuyRHjGB"
+          title="Hookflo"
+          description="Streamline your workflow with intelligent automation and seamless integrations"
+          link="https://hookflo.com"
+          linkLabel="Explore Hookflo"
+          isYoutube={true}
+        /> */}
         {/* 
         <section className="mb-10">
           <h2 className="text-lg text-teal-600 mb-3 font-light font-serif">
@@ -392,6 +402,9 @@ export const HomeComponent = () => {
                   className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
                 />
               </div>
+            </div>
+              <div className="mt-8 md:mt-12 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <GitHubContributions username="Prateek32177" />
             </div>
           </section>
           <div className="mt-12 md:mt-16">
