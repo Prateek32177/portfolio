@@ -12,7 +12,6 @@ import {
 import { Orb, emeraldPreset } from "react-ai-orb";
 import { useEffect, useRef, useState } from "react";
 import config from "../../config.json";
-import { ProductShowcase } from "./ProductShowcase";
 import { GitHubContributions } from "./GithubContribution";
 export const HomeComponent = () => {
   const {
