@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@flags-sdk/vercel": "^1.0.1",
-    "@hookflo/tern": "^2.2.4",
+    "@hookflo/tern": "^2.2.5",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
