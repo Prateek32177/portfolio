@@ -22,6 +22,15 @@ export const POST = async (request: Request) => {
       return { received: true };
     },
   });
-  console.log("erros", errorMessage);
-  return await handler(request);
+
+  try {
+    const response = await handler(request);
+    return response;
+  } catch (error) {
+    console.error("Webhook handler error:", errorMessage || error);
+    return new Response(
+      JSON.stringify({ error: errorMessage || String(error) }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
 };
