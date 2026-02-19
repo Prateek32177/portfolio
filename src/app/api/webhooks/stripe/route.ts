@@ -1,14 +1,20 @@
 import { createWebhookHandler } from "@hookflo/tern/nextjs";
-import { platform , webhooksecret} from "../flags";
+import { platform, webhooksecret } from "../flags";
 
 export const POST = async (request: Request) => {
   const platformValue = await platform();
   const webhookSecretValue = await webhooksecret();
-
+  let errorMessage;
   const handler = createWebhookHandler({
-    platform: platformValue as "stripe" | "polar" | "clerk" | "razorpay" | "github",
+    platform: platformValue as
+      | "stripe"
+      | "polar"
+      | "clerk"
+      | "razorpay"
+      | "github",
     secret: typeof webhookSecretValue === "string" ? webhookSecretValue : "",
     onError: (error) => {
+      errorMessage = JSON.stringify(error);
       console.log("error", JSON.stringify(error));
     },
     handler: async (payload) => {
@@ -16,6 +22,6 @@ export const POST = async (request: Request) => {
       return { received: true };
     },
   });
-
+  console.log("erros", errorMessage);
   return await handler(request);
 };
