@@ -12,7 +12,7 @@ import {
 import { Orb, emeraldPreset } from "react-ai-orb";
 import { useEffect, useRef, useState } from "react";
 import config from "../../config.json";
-import { GitHubContributions } from "./GithubContribution";
+// import { GitHubContributions } from "./GithubContribution";
 export const HomeComponent = () => {
   const {
     personalInfo,
@@ -402,9 +402,9 @@ export const HomeComponent = () => {
                 />
               </div>
             </div>
-              <div className="mt-8 md:mt-12 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300">
+              {/* <div className="mt-8 md:mt-12 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300">
               <GitHubContributions username="Prateek32177" />
-            </div>
+            </div> */}
           </section>
           <div className="mt-12 md:mt-16">
             <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
