@@ -46,7 +46,10 @@ export const POST = async (request: Request) => {
       // ── TEST CASE 3: Simulate failure → triggers QStash retries ──
       // throw new Error("Simulated failure — check QStash console for retries")
 
-      console.log("✅ Handler executed — payload:", JSON.stringify(payload, null, 2));
+      console.log(
+        "✅ Handler executed — payload:",
+        JSON.stringify(payload, null, 2),
+      );
       return { received: true };
     },
   });
@@ -58,12 +61,12 @@ export const POST = async (request: Request) => {
     console.error("Webhook handler error:", errorMessage || error);
     return new Response(
       JSON.stringify({ error: errorMessage || String(error) }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 };
 
-// ─── GET — inspect DLQ (test Case 4) ─────────────────────────────
+// ─── GET — inspect DLQ ───────────────────────────────────────────
 // curl http://localhost:3000/api/webhooks
 export const GET = async () => {
   try {
@@ -71,35 +74,34 @@ export const GET = async () => {
     console.log("📋 DLQ events:", JSON.stringify(failed, null, 2));
     return Response.json({ count: failed.length, events: failed });
   } catch (error) {
-    return Response.json(
-      { error: String(error) },
-      { status: 500 }
-    );
+    return Response.json({ error: String(error) }, { status: 500 });
   }
 };
 
-// ─── PATCH — replay a failed event from DLQ (test Case 4) ────────
+// ─── PATCH — replay a failed event from DLQ ──────────────────────
+// Step 1 — get dlqId from GET /api/webhooks (look for "dlqId" field)
+// Step 2 — replay:
 // curl -X PATCH http://localhost:3000/api/webhooks \
 //   -H "Content-Type: application/json" \
-//   -d '{"messageId": "msg_xxx"}'
+//   -d '{"dlqId": "your-dlq-id-here"}'
 export const PATCH = async (request: Request) => {
   try {
-    const { messageId } = await request.json();
+    const { dlqId } = await request.json(); // ← changed from messageId
 
-    if (!messageId) {
+    if (!dlqId) {
       return Response.json(
-        { error: "messageId is required" },
-        { status: 400 }
+        {
+          error:
+            "dlqId is required. Get it from GET /api/webhooks (dlqId field, not id field)",
+        },
+        { status: 400 },
       );
     }
 
-    const result = await controls.replay(messageId);
+    const result = await controls.replay(dlqId); // ← changed from messageId
     console.log("🔁 Replayed event:", JSON.stringify(result, null, 2));
     return Response.json(result);
   } catch (error) {
-    return Response.json(
-      { error: String(error) },
-      { status: 500 }
-    );
+    return Response.json({ error: String(error) }, { status: 500 });
   }
 };
