@@ -25,7 +25,7 @@ export const POST = async (request: Request) => {
     // ── Queue config ──────────────────────────────────────────────
     // Option A — reads QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY,
     //            QSTASH_NEXT_SIGNING_KEY from env automatically
-    queue: true,
+
 
     // Option B — explicit (comment out queue: true above to test this)
     // queue: {
