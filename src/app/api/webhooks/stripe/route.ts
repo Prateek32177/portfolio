@@ -34,7 +34,7 @@ export const POST = async (request: Request) => {
     //   nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
     //   retries: 3, // optional — remove to use QStash plan default
     // },
-
+queue:true,
     onError: (error) => {
       errorMessage = JSON.stringify(error);
       console.log("❌ Webhook error:", JSON.stringify(error));
