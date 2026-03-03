@@ -46,7 +46,7 @@ export const POST = async (request: Request) => {
     // To test Case 3 (retries): uncomment the throw below
     handler: async (payload) => {
       // ── TEST CASE 3: Simulate failure → triggers QStash retries ──
-      // throw new Error("Simulated failure — check QStash console for retries")
+      throw new Error("Simulated failure — check QStash console for retries")
       await controls.alert();
       console.log(
         "✅ Handler executed — payload:",
