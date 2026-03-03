@@ -5,6 +5,9 @@ import { platform, webhooksecret } from "../flags";
 // ─── Controls (for DLQ + replay testing) ─────────────────────────
 const controls = createTernControls({
   token: process.env.QSTASH_TOKEN!,
+  notifications: {
+    slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
+  },
 });
 
 // ─── POST — webhook receiver + processor (same route) ────────────
@@ -26,7 +29,6 @@ export const POST = async (request: Request) => {
     // Option A — reads QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY,
     //            QSTASH_NEXT_SIGNING_KEY from env automatically
 
-
     // Option B — explicit (comment out queue: true above to test this)
     // queue: {
     //   token: process.env.QSTASH_TOKEN!,
@@ -34,7 +36,7 @@ export const POST = async (request: Request) => {
     //   nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
     //   retries: 3, // optional — remove to use QStash plan default
     // },
-queue:true,
+    queue: true,
     onError: (error) => {
       errorMessage = JSON.stringify(error);
       console.log("❌ Webhook error:", JSON.stringify(error));
@@ -45,7 +47,7 @@ queue:true,
     handler: async (payload) => {
       // ── TEST CASE 3: Simulate failure → triggers QStash retries ──
       // throw new Error("Simulated failure — check QStash console for retries")
-
+      await controls.alert();
       console.log(
         "✅ Handler executed — payload:",
         JSON.stringify(payload, null, 2),
@@ -87,7 +89,7 @@ export const GET = async () => {
 export const PATCH = async (request: Request) => {
   try {
     const { dlqId } = await request.json(); // ← changed from messageId
-
+    await controls.alert({ dlq: true, dlqId });
     if (!dlqId) {
       return Response.json(
         {
