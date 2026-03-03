@@ -6,7 +6,7 @@ const controls = createTernControls({
   token: process.env.QSTASH_TOKEN!,
   notifications: {
     slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
-    discordWebhookUrl:process.env.DISCORD_WEBHOOK_URL
+    discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL
   },
 });
 
