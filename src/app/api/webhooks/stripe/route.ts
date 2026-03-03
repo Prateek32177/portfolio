@@ -6,7 +6,7 @@ const controls = createTernControls({
   token: process.env.QSTASH_TOKEN!,
   notifications: {
     slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
-    discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL
+    discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL,
   },
 });
 
@@ -31,7 +31,17 @@ export const POST = async (request: Request) => {
     },
 
     handler: async (payload) => {
-      await controls.alert();
+      await controls.alert({
+        eventId: payload.id,
+        message: "Alert received in handler",
+        source: platformValue as
+          | "stripe"
+          | "polar"
+          | "clerk"
+          | "razorpay"
+          | "github",
+        title: "Alert Recieved",
+      });
       console.log(
         "✅ Handler executed — payload:",
         JSON.stringify(payload, null, 2),
