@@ -2,7 +2,6 @@ import { createWebhookHandler } from "@hookflo/tern/nextjs";
 import { createTernControls } from "@hookflo/tern/upstash";
 import { platform, webhooksecret } from "../flags";
 
-// ─── Controls (for DLQ + replay testing) ─────────────────────────
 const controls = createTernControls({
   token: process.env.QSTASH_TOKEN!,
   notifications: {
@@ -10,7 +9,6 @@ const controls = createTernControls({
   },
 });
 
-// ─── POST — webhook receiver + processor (same route) ────────────
 export const POST = async (request: Request) => {
   const platformValue = await platform();
   const webhookSecretValue = await webhooksecret();
@@ -25,28 +23,13 @@ export const POST = async (request: Request) => {
       | "github",
     secret: typeof webhookSecretValue === "string" ? webhookSecretValue : "",
 
-    // ── Queue config ──────────────────────────────────────────────
-    // Option A — reads QSTASH_TOKEN, QSTASH_CURRENT_SIGNING_KEY,
-    //            QSTASH_NEXT_SIGNING_KEY from env automatically
-
-    // Option B — explicit (comment out queue: true above to test this)
-    // queue: {
-    //   token: process.env.QSTASH_TOKEN!,
-    //   signingKey: process.env.QSTASH_CURRENT_SIGNING_KEY!,
-    //   nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
-    //   retries: 3, // optional — remove to use QStash plan default
-    // },
     queue: true,
     onError: (error) => {
       errorMessage = JSON.stringify(error);
       console.log("❌ Webhook error:", JSON.stringify(error));
     },
 
-    // ── Handler — runs when QStash delivers back to this route ────
-    // To test Case 3 (retries): uncomment the throw below
     handler: async (payload) => {
-      // ── TEST CASE 3: Simulate failure → triggers QStash retries ──
-      throw new Error("Simulated failure — check QStash console for retries")
       await controls.alert();
       console.log(
         "✅ Handler executed — payload:",
