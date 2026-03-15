@@ -23,7 +23,7 @@ export const POST = async (request: Request) => {
       | "razorpay"
       | "github",
     secret: typeof webhookSecretValue === "string" ? webhookSecretValue : "",
-
+    twilioBaseUrl: "https://prateekjn.me/api/webhooks/stripe",
     queue: true,
     onError: (error) => {
       errorMessage = JSON.stringify(error);
