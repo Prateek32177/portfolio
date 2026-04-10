@@ -7,65 +7,82 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: [
-    // Theme backgrounds
-    {
-      pattern:
-        /(bg|from|via|to)-(emerald|yellow|rose|pink|blue|orange|green)-(100|200|300|400|500|600)/,
-      variants: ["hover"],
-    },
-    // Theme opacities
-    {
-      pattern:
-        /(bg|from|via|to)-(emerald|yellow|rose|pink|blue|orange|green)-(100|200|300|400|500|600)\/[0-9]+/,
-    },
-    // Text colors
-    {
-      pattern:
-        /text-(emerald|yellow|rose|pink|blue|orange|green)-(100|200|300|400|500|600|900|950)/,
-		variants:["hover"]
-    },
-    // Base gradients
-    "bg-gradient-to-br",
-
-    // From colors with opacity
-    {
-      pattern:
-        /from-(emerald|yellow|rose|pink|blue|orange|green|blue)-[0-9]{3}\/[0-9]{2}/,
-    },
-
-    // To colors with opacity
-    {
-      pattern:
-        /to-(emerald|yellow|rose|pink|blue|orange|green|blue)-[0-9]{3}\/[0-9]{2}/,
-    },
-
-    // Border patterns with variants
-    {
-      pattern: /border-(emerald|sky|yellow|rose|pink|blue)-[0-9]{3}\/[0-9]{2}/,
-      variants: ["hover"],
-    },
-
-    // If you're also using base borders without opacity
-    {
-      pattern: /border-(emerald|sky|yellow|rose|pink|blue)-[0-9]{3}/,
-      variants: ["hover"],
-    },
-  ],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ["var(--font-serif)", "serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "monospace"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "dark-bg": "#0f0f0f",
+        "dark-secondary": "#1a1a1a",
+        "dark-tertiary": "#2a2a2a",
+        "text-primary": "#f5f5f5",
+        "text-secondary": "#a0a0a0",
+        "text-tertiary": "#707070",
+        "accent-primary": "#2db69d",
+        "accent-secondary": "#10b981",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        "fade-in-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(20px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "fade-in": {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
+        "slide-in": {
+          "0%": {
+            opacity: "0",
+            transform: "translateX(-20px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateX(0)",
+          },
+        },
+        "scale-in": {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.95)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+        },
+      },
+      animation: {
+        "fade-in-up": "fade-in-up 0.6s ease-out",
+        "fade-in": "fade-in 0.4s ease-out",
+        "slide-in": "slide-in 0.5s ease-out",
+        "scale-in": "scale-in 0.3s ease-out",
+      },
+      spacing: {
+        "section": "4rem",
+        "section-lg": "6rem",
+      },
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 };
 export default config;
