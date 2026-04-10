@@ -142,15 +142,28 @@
   }
 
   .btn-secondary {
-    @apply border border-[var(--border-color)] text-[var(--text-primary)] hover:bg-[#2a2a2a] hover:border-[var(--accent-primary)]/50;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .btn-secondary:hover {
+    background-color: #2a2a2a;
+    border-color: rgba(45, 182, 157, 0.5);
     transform: translateY(-1px);
   }
 
   .btn-ghost {
-    @apply text-[var(--accent-primary)] hover:text-[var(--accent-secondary)] px-0;
+    color: var(--accent-primary);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .btn-ghost:hover {
+    color: var(--accent-secondary);
   }
 
   /* Badge Styles */
@@ -159,11 +172,15 @@
   }
 
   .badge-primary {
-    @apply bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border-[var(--accent-primary)]/30;
+    background-color: rgba(45, 182, 157, 0.1);
+    color: var(--accent-primary);
+    border-color: rgba(45, 182, 157, 0.3);
   }
 
   .badge-secondary {
-    @apply bg-[var(--accent-secondary)]/10 text-[var(--accent-secondary)] border-[var(--accent-secondary)]/30;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--accent-secondary);
+    border-color: rgba(16, 185, 129, 0.3);
   }
 
   .badge-neutral {
@@ -307,7 +324,12 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-[var(--accent-primary)]/40 rounded hover:bg-[var(--accent-primary)]/60;
+    background-color: rgba(45, 182, 157, 0.4);
+    border-radius: 0.25rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(45, 182, 157, 0.6);
   }
 
   /* Selection */
