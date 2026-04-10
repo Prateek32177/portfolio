@@ -95,18 +95,22 @@
 
   .card::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/0 to-[var(--accent-primary)]/0 pointer-events-none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, rgba(45, 182, 157, 0), rgba(45, 182, 157, 0));
+    pointer-events: none;
     transition: all 0.3s ease;
   }
 
   .card:hover {
-    @apply border-[var(--accent-primary)]/50 bg-[#2a2a2a];
+    border-color: rgba(45, 182, 157, 0.5);
+    background-color: #2a2a2a;
     transform: translateY(-2px);
     box-shadow: 0 20px 40px rgba(45, 182, 157, 0.1);
   }
 
   .card:hover::before {
-    @apply from-[var(--accent-primary)]/5 to-transparent;
+    background: linear-gradient(to bottom right, rgba(45, 182, 157, 0.05), transparent);
   }
 
   /* Button Styles */
