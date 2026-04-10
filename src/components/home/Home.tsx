@@ -1,18 +1,35 @@
 "use client";
+
 import {
-  Github,
-  Mail,
-  Linkedin,
-  Twitter,
-  Palette,
-  Calendar,
   ArrowRight,
   ArrowUpRight,
+  Calendar,
+  Github,
+  Linkedin,
+  Mail,
+  Palette,
+  Sparkles,
+  Twitter,
 } from "lucide-react";
 import { Orb, emeraldPreset } from "react-ai-orb";
-import { useEffect, useRef, useState } from "react";
+import { useMemo } from "react";
 import config from "../../config.json";
-// import { GitHubContributions } from "./GithubContribution";
+
+type Project = {
+  title: string;
+  description: string;
+  link: string;
+  github?: string;
+  tech?: string[];
+  cta?: { text: string; link: string };
+};
+
+const metricChips = [
+  "4.5+ yrs building on web",
+  "95+ Lighthouse shipping quality",
+  "Performance + Product + Design",
+];
+
 export const HomeComponent = () => {
   const {
     personalInfo,
@@ -23,567 +40,181 @@ export const HomeComponent = () => {
     featuredBlog,
     articles,
   } = config;
-  const orbRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [, setMousePosition] = useState({ x: 0, y: 0 });
-  const [orbOffset, setOrbOffset] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (orbRef.current) {
-        const orbRect = orbRef.current.getBoundingClientRect();
+  const impactProjects = useMemo(() => featuredProjects.slice(0, 2), [featuredProjects]);
 
-        // Get cursor position relative to viewport
-        const cursorX = e.clientX;
-        const cursorY = e.clientY;
-
-        // Get orb's current position on screen
-        const orbCenterX = orbRect.left + orbRect.width / 2;
-        const orbCenterY = orbRect.top + orbRect.height / 2;
-
-        setMousePosition({ x: cursorX, y: cursorY });
-
-        // Calculate attraction force (opposite charges attract)
-        const deltaX = cursorX - orbCenterX;
-        const deltaY = cursorY - orbCenterY;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-        // Physics: Coulomb's law for attraction (F = k * q1 * q2 / r²)
-        const maxDistance = 600; // Increased for better page-wide response
-        const attractionStrength = 0.4; // Slightly stronger for better responsiveness
-
-        if (distance < maxDistance && distance > 0) {
-          // Normalize direction and apply inverse square law
-          const force = Math.min(
-            (attractionStrength * (maxDistance - distance)) / maxDistance,
-            1
-          );
-          const directionX = deltaX / distance;
-          const directionY = deltaY / distance;
-
-          // Apply attraction with smooth easing
-          const maxOffset = 80; // Increased maximum movement for better visibility
-          const offsetX = directionX * force * maxOffset;
-          const offsetY = directionY * force * maxOffset;
-
-          setOrbOffset({ x: offsetX, y: offsetY });
-        } else {
-          // Return to original position when cursor is far
-          setOrbOffset({ x: 0, y: 0 });
-        }
-      }
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    return () => document.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const getAttractionIntensity = () => {
-    if (!orbRef.current) return 0;
-
-    const distance = Math.sqrt(
-      orbOffset.x * orbOffset.x + orbOffset.y * orbOffset.y
-    );
-    return Math.min(distance / 80, 1); // Normalize to 0-1
-  };
-
-  const attractionIntensity = getAttractionIntensity();
-
-  // Function to highlight keywords in bio
   const highlightBio = (text: string) => {
     let highlightedText = text;
+
     personalInfo.highlightKeywords?.forEach((keyword) => {
       const regex = new RegExp(`\\*\\*${keyword}\\*\\*`, "gi");
       if (keyword.toLowerCase() === "hookflo.com") {
         highlightedText = highlightedText.replace(
           regex,
-          `<a href="https://hookflo.com" target="_blank" rel="noopener noreferrer" class="font-bold text-teal-600 underline hover:text-teal-700 transition-colors">${keyword}</a>`
+          `<a href=\"https://hookflo.com\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200\">${keyword}</a>`
         );
       } else {
-        highlightedText = highlightedText.replace(
-          regex,
-          `<strong>${keyword}</strong>`
-        );
+        highlightedText = highlightedText.replace(regex, `<strong class=\"text-white\">${keyword}</strong>`);
       }
     });
+
     return highlightedText;
   };
 
-  // Handle CTA click to prevent parent link navigation
   const handleCtaClick = (e: React.MouseEvent, ctaLink: string) => {
     e.preventDefault();
     e.stopPropagation();
     window.open(ctaLink, "_blank", "noopener,noreferrer");
   };
 
-  return (
-    <div ref={containerRef} className="min-h-screen relative">
-      {/* Main Content */}
-      <main className="max-w-2xl mx-auto px-10 py-8 relative z-10">
-        <nav className="flex justify-between items-center pb-8">
-          <div
-            ref={orbRef}
-            className="relative transition-transform duration-200 ease-out"
-            style={{
-              transform: `translate(${orbOffset.x}px, ${orbOffset.y}px)`,
-              filter: `drop-shadow(0 0 ${
-                10 + attractionIntensity * 15
-              }px rgba(45, 182, 157, ${0.3 + attractionIntensity * 0.4}))`,
-            }}
-          >
-            <Orb
-              {...emeraldPreset}
-              animationSpeedBase={0.2 + attractionIntensity * 0.3}
-              size={0.5}
-              palette={{
-                ...emeraldPreset.palette,
-                shapeBStart: "",
-                shapeBMiddle: "",
-                shapeBEnd: "",
-                shapeCStart: "",
-                shapeCMiddle: "",
-                shapeCEnd: "",
-                shapeDStart: "",
-                shapeDMiddle: "",
-                shapeDEnd: "",
-                shadowColor3: "",
-                shadowColor4: "",
-                ...emeraldPreset.palette,
-                mainBgStart: `hsl(${165 + attractionIntensity * 20}, ${
-                  60 + attractionIntensity * 25
-                }%, ${60 + attractionIntensity * 20}%)`,
-                mainBgEnd: `hsl(${175 + attractionIntensity * 20}, ${
-                  70 + attractionIntensity * 25
-                }%, ${65 + attractionIntensity * 20}%)`,
-                shadowColor1: "#699a90",
-                shadowColor2: "#1f6f5f",
-                shapeAStart: `hsl(${165 + attractionIntensity * 25}, ${
-                  65 + attractionIntensity * 20
-                }%, ${65 + attractionIntensity * 15}%)`,
-                shapeAEnd: `hsl(${175 + attractionIntensity * 25}, ${
-                  75 + attractionIntensity * 20
-                }%, ${70 + attractionIntensity * 15}%)`,
-              }}
-            />
-          </div>
+  const allTools = [...technologies.frontend, ...technologies.backend, ...technologies.tools];
 
-          <div className="flex gap-8 text-sm text-gray-500">
-            <a
-              href="/thoughts"
-              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
-            >
-              thoughts
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
-            >
-              prateek://contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
+  return (
+    <div className="min-h-screen bg-[#050b14] text-white">
+      <main className="mx-auto w-full max-w-6xl px-6 py-8 md:px-10 md:py-12">
+        <nav className="mb-12 flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-3 backdrop-blur md:px-6">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 overflow-hidden rounded-xl border border-emerald-300/30 bg-emerald-500/10 p-1.5">
+              <Orb {...emeraldPreset} size={0.8} animationSpeedBase={0.2} />
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-emerald-300/70">Design Engineer</p>
+              <p className="text-sm font-medium text-white">{personalInfo.name}</p>
+            </div>
+          </div>
+          <div className="flex gap-5 text-sm text-white/70">
+            <a href="#work" className="hover:text-white transition-colors">Work</a>
+            <a href="#oss" className="hover:text-white transition-colors">Open Source</a>
+            <a href="#articles" className="hover:text-white transition-colors">Writing</a>
           </div>
         </nav>
 
-        {/* Hero */}
-        <div className="mb-12">
-          <h1 className="text-4xl text-[#2db69d] mb-2 font-serif transition-colors duration-500 cursor-default tracking-tighter">
-            {personalInfo.name}
-          </h1>
-          <p
-            className="text-sm font-semibold text-gray-600 mb-4 max-w-2xl animate-fade-in-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            <span className=" font-normal">Obsessed with</span>{" "}
-            {personalInfo.tagline}
-          </p>
-          <p
-            className="text-gray-700 text-sm leading-relaxed mb-4"
-            dangerouslySetInnerHTML={{ __html: highlightBio(personalInfo.bio) }}
-          />
-
-          <div className="flex gap-4 text-sm">
-            <a
-              href={personalInfo.social.twitter}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Twitter
-                size={16}
-                className="group-hover:rotate-12 transition-transform duration-300"
-              />
-              <span className="hidden sm:inline">twitter</span>
-            </a>
-            <a
-              href={personalInfo.social.github}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github
-                size={16}
-                className="group-hover:rotate-12 transition-transform duration-300"
-              />
-              <span className="hidden sm:inline">github</span>
-            </a>
-            <a
-              href={personalInfo.social.linkedin}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Linkedin
-                size={16}
-                className="group-hover:rotate-12 transition-transform duration-300"
-              />
-              <span className="hidden sm:inline">linkedin</span>
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
-            >
-              <Mail
-                size={16}
-                className="group-hover:rotate-12 transition-transform duration-300"
-              />
-              <span className="hidden sm:inline">email</span>
-            </a>
-            <a
-              href={personalInfo.social.art}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Palette
-                size={16}
-                className="group-hover:rotate-12 transition-transform duration-300"
-              />
-              <span className="hidden sm:inline">art</span>
-            </a>
-          </div>
-        </div>
-
-            {/* <ProductShowcase
-          videoSrc="https://youtu.be/Gbs1diXw2sQ?si=I9CR1i33kuyRHjGB"
-          title="Hookflo"
-          description="Streamline your workflow with intelligent automation and seamless integrations"
-          link="https://hookflo.com"
-          linkLabel="Explore Hookflo"
-          isYoutube={true}
-        /> */}
-        {/* 
-        <section className="mb-10">
-          <h2 className="text-lg text-teal-600 mb-3 font-light font-serif">
-            Work
-          </h2>
-          <div className="space-y-3 text-sm">
-            <div className=">
-              <div className="flex justify-between items-start mb-1">
-                <span className="font-medium text-teal-600">
-                  Senior Full Stack Developer
+        <section className="grid gap-8 lg:grid-cols-[1.25fr_1fr]">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-emerald-500/15 via-sky-400/10 to-transparent p-8">
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-200">
+              <Sparkles size={14} /> Available for impactful products
+            </p>
+            <h1 className="mb-4 text-4xl font-semibold tracking-tight md:text-6xl">{personalInfo.name}</h1>
+            <p className="mb-6 text-xl text-white/80">{personalInfo.tagline}</p>
+            <p
+              className="max-w-2xl text-sm leading-7 text-white/75"
+              dangerouslySetInnerHTML={{ __html: highlightBio(personalInfo.bio) }}
+            />
+            <div className="mt-6 flex flex-wrap gap-3">
+              {metricChips.map((chip) => (
+                <span key={chip} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80">
+                  {chip}
                 </span>
-                <span className="text-sm text-gray-500">2024-Present</span>
-              </div>
-              <div className="text-gray-600 text-sm mb-1">Tech Startup</div>
-              <div className="text-gray-700">
-                Leading development of scalable web applications
-              </div>
+              ))}
             </div>
-
-            <div className=">
-              <div className="flex justify-between items-start mb-1">
-                <span className="font-medium text-teal-600">
-                  Frontend Developer
-                </span>
-                <span className="text-sm text-gray-500">2021-2024</span>
-              </div>
-              <div className="text-gray-600 text-sm mb-1">Digital Agency</div>
-              <div className="text-gray-700">
-                Crafted responsive user interfaces for diverse clients
-              </div>
+            <div className="mt-8 flex flex-wrap gap-4 text-sm">
+              <a href={personalInfo.social.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-white/70 hover:text-white"><Github size={16} /> GitHub</a>
+              <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-white/70 hover:text-white"><Linkedin size={16} /> LinkedIn</a>
+              <a href={personalInfo.social.twitter} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-white/70 hover:text-white"><Twitter size={16} /> X / Twitter</a>
+              <a href={personalInfo.social.art} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-white/70 hover:text-white"><Palette size={16} /> Art</a>
+              <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 text-white/70 hover:text-white"><Mail size={16} /> Contact</a>
             </div>
           </div>
-        </section> */}
 
-        <section className="mb-10">
-          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
-            Products with Active Users
-          </h2>
-          <div className="space-y-4 text-sm">
-            {featuredProjects.map((project, index) => (
+          <div className="space-y-4" id="work">
+            <h2 className="text-sm uppercase tracking-[0.2em] text-white/60">Top Impact Projects</h2>
+            {impactProjects.map((project: Project) => (
               <a
-                key={index}
+                key={project.title}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
+                className="group block rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition hover:-translate-y-0.5 hover:border-emerald-300/30 hover:bg-white/[0.04]"
               >
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-medium text-teal-600 group-hover:text-teal-700 transition-colors">
-                    {project.title}
-                  </span>
-                  <div className="flex gap-2 relative z-10">
-                    <ArrowUpRight
-                      size={16}
-                      className="text-teal-600 group-hover:text-teal-700 transition-colors"
-                    />
-                  </div>
+                <div className="mb-2 flex items-start justify-between gap-4">
+                  <h3 className="text-lg font-medium text-white group-hover:text-emerald-200">{project.title}</h3>
+                  <ArrowUpRight size={16} className="text-emerald-200" />
                 </div>
-                <div className="text-gray-700 mb-1">{project.description}</div>
-                {/* <div className="text-xs text-gray-500 mb-2">
-                  {project.tech.join(" • ")}
-                </div> */}
-                {/* CTA for HookFlo - using button instead of nested anchor */}
+                <p className="mb-3 text-sm leading-6 text-white/70">{project.description}</p>
+                {project.tech && <p className="text-xs text-white/50">{project.tech.slice(0, 4).join(" • ")}</p>}
                 {project.cta && (
-                  <div className="mt-2">
+                  <div className="mt-4">
                     <button
-                      onClick={(e) => handleCtaClick(e, project.cta.link)}
-                      className="inline-flex items-center gap-1 text-xs bg-teal-600 text-white px-3 py-1.5 rounded-md hover:bg-teal-700 transition-all duration-300 hover:scale-105 group-hover:bg-teal-700"
+                      onClick={(e) => handleCtaClick(e, project.cta!.link)}
+                      className="inline-flex items-center gap-2 rounded-full border border-emerald-300/40 bg-emerald-500/20 px-3 py-1.5 text-xs text-emerald-100"
                     >
-                      {project.cta.text}
-                      <ArrowRight
-                        size={12}
-                        className="group-hover:translate-x-0.5 transition-transform duration-300"
-                      />
+                      {project.cta.text} <ArrowRight size={12} />
                     </button>
                   </div>
                 )}
               </a>
             ))}
           </div>
-          <section className="mt-12 md:mt-16">
-            <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
-              Open Source Contribution
-            </h2>
-            <div className="space-y-1 text-sm">
-              {openSourceProjects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-between items-center py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
-                >
+        </section>
+
+        <section className="mt-14 grid gap-10 lg:grid-cols-2">
+          <div id="oss">
+            <h2 className="mb-4 text-xl font-medium">Open Source that ships</h2>
+            <div className="space-y-3">
+              {openSourceProjects.map((project: Project) => (
+                <a key={project.title} href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-start justify-between rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 hover:border-emerald-300/40">
                   <div>
-                    <span className="text-teal-600 group-hover:text-teal-700 transition-colors">
-                      {project.title}
-                    </span>
-                    <br />
-                    <span className="text-gray-600 text-sm">
-                      {project.description}
-                    </span>
+                    <p className="text-sm font-medium text-white">{project.title}</p>
+                    <p className="text-xs text-white/60">{project.description}</p>
                   </div>
-                  <Github size={16} className="text-black/60 flex-shrink-0" />
-                </a>
-              ))}
-            </div>
-            {/* GitHub CTA */}
-            <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-50 rounded-lg border border-teal-100 hover:bg-teal-100 hover:shadow-lg transition-all duration-300 group cursor-pointer">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-teal-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
-                  <span className="text-teal-700">
-                    Explore more projects on{" "}
-                    <a
-                      href={personalInfo.social.github}
-                      className="font-medium underline hover:no-underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      GitHub
-                    </a>
-                    . Most of them are open-source.
-                  </span>
-                </div>
-                <ArrowRight
-                  size={16}
-                  className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
-                />
-              </div>
-            </div>
-              {/* <div className="mt-8 md:mt-12 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300">
-              <GitHubContributions username="Prateek32177" />
-            </div> */}
-          </section>
-          <div className="mt-12 md:mt-16">
-            <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
-              Other Projects
-            </h3>
-            <div>
-              {otherProjects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.link || project.github || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-between items-start hover:bg-gray-50 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
-                >
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm">
-                      {project.title}
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      {project.description}
-                    </p>
-                  </div>
-                  <ArrowUpRight
-                    size={16}
-                    className="text-teal-600 hover:text-teal-700 hover:scale-110 transition-all duration-300 flex-shrink-0 md:w-4 md:h-4"
-                  />
+                  <Github size={16} className="mt-0.5 text-white/60" />
                 </a>
               ))}
             </div>
           </div>
-        </section>
 
-        <section className="mb-10">
-          <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
-            Tech Stack
-          </h2>
-          <div className="text-sm text-gray-700 leading-relaxed">
-            <div className="mb-2">
-              <span className="text-teal-600 font-medium text-sm">
-                Frontend:
-              </span>
-              <br />
-              <span className="text-sm text-gray-700">
-                {technologies.frontend.join(", ")}
-              </span>
-            </div>
-
-            <div className="mb-2">
-              <span className="text-teal-600 font-medium text-sm">
-                Backend:
-              </span>
-              <br />
-              <span className="text-sm text-gray-700">
-                {technologies.backend.join(", ")}
-              </span>
-            </div>
-
-            <div className="mb-2">
-              <span className="text-teal-600 font-medium text-sm">Tools:</span>
-              <br />
-              <span className="text-sm text-gray-700">
-                {technologies.tools.join(", ")}
-              </span>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-8 animate-fade-in-up">
-          <div className="p-6 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-lg border border-teal-100 hover:shadow-lg transition-all duration-300 group">
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-                  <span className="text-xs text-teal-600 font-medium uppercase tracking-wide">
-                    Featured Article
+          <div>
+            <h2 className="mb-4 text-xl font-medium">Core stack</h2>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+              <p className="mb-3 text-xs uppercase tracking-[0.2em] text-white/50">Tools I use to ship</p>
+              <div className="flex flex-wrap gap-2">
+                {allTools.map((tool) => (
+                  <span key={tool} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/80">
+                    {tool}
                   </span>
-                </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
-                  <a
-                    href={featuredBlog.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {featuredBlog.title}
-                  </a>
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                  {featuredBlog.description}
-                </p>
-                <div className="flex items-center gap-4 text-xs text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <Calendar size={16} />
-                    {featuredBlog.date}
-                  </span>
-                  <a
-                    href={featuredBlog.link}
-                    className="flex items-center gap-1 text-teal-600 hover:text-teal-700 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Read on Medium
-                    <ArrowUpRight size={16} />
-                  </a>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Articles */}
-        <section className="mb-12 animate-fade-in-up" id="articles">
-          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
-            Recent Articles
-          </h2>
-
-          <div className="space-y-4">
-            {articles.map((article, index) => (
-              <article
-                key={index}
-                className="group hover:bg-gray-50 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="flex items-baseline gap-4">
-                  <div className="flex-shrink-0 text-xs flex items-center text-gray-500 w-20">
-                    <Calendar size={14} className="inline mr-1" />
-                    {article.date}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
-                      <a href={article.link}>{article.title}</a>
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {article.description}
-                    </p>
-                  </div>
-                </div>
-              </article>
+        <section className="mt-14">
+          <h2 className="mb-4 text-xl font-medium">More projects</h2>
+          <div className="grid gap-3 md:grid-cols-3">
+            {otherProjects.map((project: Project) => (
+              <a key={project.title} href={project.link || project.github} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/10 bg-white/[0.02] p-4 hover:border-white/30">
+                <p className="mb-1 text-sm font-semibold">{project.title}</p>
+                <p className="text-xs text-white/60">{project.description}</p>
+              </a>
             ))}
           </div>
+        </section>
 
-          <div className="mt-8">
-            <a
-              href={personalInfo.social.medium}
-              className="text-teal-600 hover:text-teal-700 text-sm flex items-center gap-1 hover:scale-105 transition-all duration-300 group"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View all articles
-              <ArrowRight
-                size={16}
-                className="group-hover:translate-x-1 transition-transform duration-300"
-              />
-            </a>
+        <section className="mt-14 rounded-2xl border border-emerald-300/20 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 p-6">
+          <p className="mb-2 text-xs uppercase tracking-[0.2em] text-emerald-200">Featured write-up</p>
+          <h3 className="text-lg font-medium">{featuredBlog.title}</h3>
+          <p className="mt-2 text-sm text-white/75">{featuredBlog.description}</p>
+          <div className="mt-4 flex items-center gap-4 text-xs text-white/70">
+            <span className="inline-flex items-center gap-1"><Calendar size={14} /> {featuredBlog.date}</span>
+            <a href={featuredBlog.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-200">Read article <ArrowUpRight size={14} /></a>
+          </div>
+        </section>
+
+        <section className="mt-14 pb-8" id="articles">
+          <h2 className="mb-4 text-xl font-medium">Recent articles</h2>
+          <div className="space-y-2">
+            {articles.map((article) => (
+              <a key={article.title} href={article.link} target="_blank" rel="noopener noreferrer" className="flex items-start justify-between rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 hover:border-emerald-300/40">
+                <div>
+                  <p className="text-sm text-white">{article.title}</p>
+                  <p className="text-xs text-white/60">{article.description}</p>
+                </div>
+                <span className="whitespace-nowrap pl-4 text-xs text-white/50">{article.date}</span>
+              </a>
+            ))}
           </div>
         </section>
       </main>
-
-      {/* Enhanced Footer */}
-      <footer className="border-t border-gray-200 relative">
-        <div className="max-w-2xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <div>
-              <div className="text-gray-500">Lets connect</div>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-3 text-gray-700 hover:text-teal-600"
-              >
-                <span>{personalInfo.email}</span>
-              </a>
-            </div>
-
-            <div className="text-right text-gray-500">
-              <div>Last updated on Aug 13, 2025</div>
-              <div>
-                <span>{personalInfo.location}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
