@@ -4,10 +4,46 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #10161d 0%, #070b11 55%, #05080d 100%);
+  color: #d9e1ea;
 }
 
 @layer base {
   :root {
     --radius: 0.5rem;
+  }
+}
+
+@layer components {
+  .sleek-shell {
+    position: relative;
+    border: 1px solid rgba(159, 179, 204, 0.22);
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(10, 14, 20, 0.9), rgba(7, 11, 17, 0.96));
+    backdrop-filter: blur(2px);
+    box-shadow: 0 24px 60px rgba(1, 7, 16, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    overflow: hidden;
+  }
+
+  .sleek-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to right, rgba(128, 150, 176, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(128, 150, 176, 0.12) 1px, transparent 1px);
+    background-size: 100% 64px, 100% 64px;
+    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+  }
+
+  .sleek-section {
+    border-top: 1px dashed rgba(128, 150, 176, 0.3);
+    padding-top: 1.25rem;
+  }
+
+  .sleek-card {
+    border: 1px dashed rgba(128, 150, 176, 0.35);
+    border-radius: 14px;
+    background: rgba(10, 14, 20, 0.55);
   }
 }

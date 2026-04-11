@@ -117,10 +117,10 @@ export const HomeComponent = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen relative">
+    <div ref={containerRef} className="min-h-screen relative py-8 px-4 md:px-6">
       {/* Main Content */}
-      <main className="max-w-2xl mx-auto px-10 py-8 relative z-10">
-        <nav className="flex justify-between items-center pb-8">
+      <main className="max-w-3xl mx-auto px-6 md:px-10 py-8 relative z-10 sleek-shell">
+        <nav className="flex justify-between items-center pb-8 border-b border-dashed border-slate-600/40">
           <div
             ref={orbRef}
             className="relative transition-transform duration-200 ease-out"
@@ -167,17 +167,17 @@ export const HomeComponent = () => {
             />
           </div>
 
-          <div className="flex gap-8 text-sm text-gray-500">
+          <div className="flex gap-8 text-sm text-slate-400">
             <a
               href="/thoughts"
-              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
+              className="hover:text-slate-100 transition-all duration-300 hover:scale-105 relative group"
             >
               thoughts
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
+              className="hover:text-slate-100 transition-all duration-300 hover:scale-105 relative group"
             >
               prateek://contact
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -186,26 +186,26 @@ export const HomeComponent = () => {
         </nav>
 
         {/* Hero */}
-        <div className="mb-12">
-          <h1 className="text-4xl text-[#2db69d] mb-2 font-serif transition-colors duration-500 cursor-default tracking-tighter">
+        <div className="mb-12 pt-8">
+          <h1 className="text-4xl text-teal-300 mb-2 font-serif transition-colors duration-500 cursor-default tracking-tighter">
             {personalInfo.name}
           </h1>
           <p
-            className="text-sm font-semibold text-gray-600 mb-4 max-w-2xl animate-fade-in-up"
+            className="text-sm font-semibold text-slate-400 mb-4 max-w-2xl animate-fade-in-up"
             style={{ animationDelay: "0.1s" }}
           >
             <span className=" font-normal">Obsessed with</span>{" "}
             {personalInfo.tagline}
           </p>
           <p
-            className="text-gray-700 text-sm leading-relaxed mb-4"
+            className="text-slate-300 text-sm leading-relaxed mb-4"
             dangerouslySetInnerHTML={{ __html: highlightBio(personalInfo.bio) }}
           />
 
           <div className="flex gap-4 text-sm">
             <a
               href={personalInfo.social.twitter}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-slate-400 hover:text-slate-100 transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -217,7 +217,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={personalInfo.social.github}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-slate-400 hover:text-slate-100 transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -229,7 +229,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={personalInfo.social.linkedin}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-slate-400 hover:text-slate-100 transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -241,7 +241,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-slate-400 hover:text-slate-100 transition-all duration-300 hover:scale-110 group"
             >
               <Mail
                 size={16}
@@ -251,7 +251,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={personalInfo.social.art}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-slate-400 hover:text-slate-100 transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -306,8 +306,8 @@ export const HomeComponent = () => {
           </div>
         </section> */}
 
-        <section className="mb-10">
-          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
+        <section className="mb-10 sleek-section">
+          <h2 className="text-lg font-light text-slate-100 mb-3 font-serif">
             Products with Active Users
           </h2>
           <div className="space-y-4 text-sm">
@@ -317,7 +317,7 @@ export const HomeComponent = () => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
+                className="block py-3 px-3 sleek-card hover:bg-slate-900/80 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
               >
                 <div className="flex justify-between items-start mb-1">
                   <span className="font-medium text-teal-600 group-hover:text-teal-700 transition-colors">
@@ -330,7 +330,7 @@ export const HomeComponent = () => {
                     />
                   </div>
                 </div>
-                <div className="text-gray-700 mb-1">{project.description}</div>
+                <div className="text-slate-300 mb-1">{project.description}</div>
                 {/* <div className="text-xs text-gray-500 mb-2">
                   {project.tech.join(" • ")}
                 </div> */}
@@ -353,7 +353,7 @@ export const HomeComponent = () => {
             ))}
           </div>
           <section className="mt-12 md:mt-16">
-            <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
+            <h2 className="text-lg font-light text-slate-100 mb-2 font-serif">
               Open Source Contribution
             </h2>
             <div className="space-y-1 text-sm">
@@ -363,27 +363,27 @@ export const HomeComponent = () => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-between items-center py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                  className="flex justify-between items-center py-3 px-3 sleek-card hover:bg-slate-900/80 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
                 >
                   <div>
                     <span className="text-teal-600 group-hover:text-teal-700 transition-colors">
                       {project.title}
                     </span>
                     <br />
-                    <span className="text-gray-600 text-sm">
+                    <span className="text-slate-400 text-sm">
                       {project.description}
                     </span>
                   </div>
-                  <Github size={16} className="text-black/60 flex-shrink-0" />
+                  <Github size={16} className="text-slate-300/80 flex-shrink-0" />
                 </a>
               ))}
             </div>
             {/* GitHub CTA */}
-            <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-50 rounded-lg border border-teal-100 hover:bg-teal-100 hover:shadow-lg transition-all duration-300 group cursor-pointer">
+            <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-400/10 rounded-lg border border-dashed border-teal-300/50 hover:bg-teal-300/10 hover:shadow-lg transition-all duration-300 group cursor-pointer">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-teal-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
-                  <span className="text-teal-700">
+                  <span className="text-teal-100">
                     Explore more projects on{" "}
                     <a
                       href={personalInfo.social.github}
@@ -407,7 +407,7 @@ export const HomeComponent = () => {
             </div> */}
           </section>
           <div className="mt-12 md:mt-16">
-            <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
+            <h3 className="text-lg font-light text-slate-100 mb-2 font-serif">
               Other Projects
             </h3>
             <div>
@@ -417,13 +417,13 @@ export const HomeComponent = () => {
                   href={project.link || project.github || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-between items-start hover:bg-gray-50 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                  className="flex justify-between items-start hover:bg-slate-900/80 py-3 px-3 sleek-card rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
                 >
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm">
+                    <h4 className="font-medium text-slate-200 mb-1 group-hover:text-teal-300 transition-colors text-sm">
                       {project.title}
                     </h4>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-slate-400 text-sm">
                       {project.description}
                     </p>
                   </div>
@@ -437,17 +437,17 @@ export const HomeComponent = () => {
           </div>
         </section>
 
-        <section className="mb-10">
-          <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
+        <section className="mb-10 sleek-section">
+          <h2 className="text-lg font-light text-slate-100 mb-2 font-serif">
             Tech Stack
           </h2>
-          <div className="text-sm text-gray-700 leading-relaxed">
+          <div className="text-sm text-slate-300 leading-relaxed">
             <div className="mb-2">
               <span className="text-teal-600 font-medium text-sm">
                 Frontend:
               </span>
               <br />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-slate-300">
                 {technologies.frontend.join(", ")}
               </span>
             </div>
@@ -457,7 +457,7 @@ export const HomeComponent = () => {
                 Backend:
               </span>
               <br />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-slate-300">
                 {technologies.backend.join(", ")}
               </span>
             </div>
@@ -465,15 +465,15 @@ export const HomeComponent = () => {
             <div className="mb-2">
               <span className="text-teal-600 font-medium text-sm">Tools:</span>
               <br />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-slate-300">
                 {technologies.tools.join(", ")}
               </span>
             </div>
           </div>
         </section>
 
-        <section className="mb-8 animate-fade-in-up">
-          <div className="p-6 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-lg border border-teal-100 hover:shadow-lg transition-all duration-300 group">
+        <section className="mb-8 animate-fade-in-up sleek-section">
+          <div className="p-6 bg-gradient-to-r from-teal-500/10 to-emerald-500/10 rounded-lg border border-dashed border-teal-300/40 hover:shadow-lg transition-all duration-300 group">
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
@@ -482,7 +482,7 @@ export const HomeComponent = () => {
                     Featured Article
                   </span>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
+                <h3 className="text-lg font-medium text-slate-100 mb-2 group-hover:text-teal-300 transition-colors">
                   <a
                     href={featuredBlog.link}
                     target="_blank"
@@ -491,10 +491,10 @@ export const HomeComponent = () => {
                     {featuredBlog.title}
                   </a>
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                <p className="text-slate-300 text-sm leading-relaxed mb-3">
                   {featuredBlog.description}
                 </p>
-                <div className="flex items-center gap-4 text-xs text-gray-500">
+                <div className="flex items-center gap-4 text-xs text-slate-400">
                   <span className="flex items-center gap-1">
                     <Calendar size={16} />
                     {featuredBlog.date}
@@ -515,8 +515,8 @@ export const HomeComponent = () => {
         </section>
 
         {/* Articles */}
-        <section className="mb-12 animate-fade-in-up" id="articles">
-          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
+        <section className="mb-12 animate-fade-in-up sleek-section" id="articles">
+          <h2 className="text-lg font-light text-slate-100 mb-3 font-serif">
             Recent Articles
           </h2>
 
@@ -524,18 +524,18 @@ export const HomeComponent = () => {
             {articles.map((article, index) => (
               <article
                 key={index}
-                className="group hover:bg-gray-50 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
+                className="group hover:bg-slate-900/80 py-4 px-3 sleek-card rounded-lg transition-all duration-300 hover:scale-[1.02]"
               >
                 <div className="flex items-baseline gap-4">
-                  <div className="flex-shrink-0 text-xs flex items-center text-gray-500 w-20">
+                  <div className="flex-shrink-0 text-xs flex items-center text-slate-400 w-24">
                     <Calendar size={14} className="inline mr-1" />
                     {article.date}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
+                    <h3 className="font-medium text-slate-100 mb-2 group-hover:text-teal-300 transition-colors">
                       <a href={article.link}>{article.title}</a>
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-slate-400 text-sm leading-relaxed">
                       {article.description}
                     </p>
                   </div>
@@ -562,20 +562,20 @@ export const HomeComponent = () => {
       </main>
 
       {/* Enhanced Footer */}
-      <footer className="border-t border-gray-200 relative">
+      <footer className="border-t border-dashed border-slate-600/40 relative">
         <div className="max-w-2xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between text-xs sm:text-sm">
             <div>
-              <div className="text-gray-500">Lets connect</div>
+              <div className="text-slate-400">Lets connect</div>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-3 text-gray-700 hover:text-teal-600"
+                className="flex items-center gap-3 text-slate-200 hover:text-teal-300"
               >
                 <span>{personalInfo.email}</span>
               </a>
             </div>
 
-            <div className="text-right text-gray-500">
+            <div className="text-right text-slate-400">
               <div>Last updated on Aug 13, 2025</div>
               <div>
                 <span>{personalInfo.location}</span>
