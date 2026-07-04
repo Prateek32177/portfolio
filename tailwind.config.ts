@@ -57,6 +57,16 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        accent: "var(--accent)",
+        "accent-dark": "var(--accent-dark)",
+        muted: "var(--muted)",
+        "muted-light": "var(--muted-light)",
+        border: "var(--border)",
+      },
+      fontFamily: {
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        mono: ["var(--font-geist-mono)", "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",

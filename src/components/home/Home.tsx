@@ -90,14 +90,14 @@ export const HomeComponent = () => {
   const attractionIntensity = getAttractionIntensity();
 
   // Function to highlight keywords in bio
-  const highlightBio = (text: string) => {
+      const highlightBio = (text: string) => {
     let highlightedText = text;
     personalInfo.highlightKeywords?.forEach((keyword) => {
       const regex = new RegExp(`\\*\\*${keyword}\\*\\*`, "gi");
       if (keyword.toLowerCase() === "hookflo.com") {
         highlightedText = highlightedText.replace(
           regex,
-          `<a href="https://hookflo.com" target="_blank" rel="noopener noreferrer" class="font-bold text-teal-600 underline hover:text-teal-700 transition-colors">${keyword}</a>`
+          `<a href="https://hookflo.com" target="_blank" rel="noopener noreferrer" class="font-bold text-accent underline hover:text-accent-dark transition-colors">${keyword}</a>`
         );
       } else {
         highlightedText = highlightedText.replace(
@@ -128,7 +128,7 @@ export const HomeComponent = () => {
               transform: `translate(${orbOffset.x}px, ${orbOffset.y}px)`,
               filter: `drop-shadow(0 0 ${
                 10 + attractionIntensity * 15
-              }px rgba(45, 182, 157, ${0.3 + attractionIntensity * 0.4}))`,
+              }px rgba(201, 169, 97, ${0.25 + attractionIntensity * 0.35}))`,
             }}
           >
             <Orb
@@ -149,63 +149,63 @@ export const HomeComponent = () => {
                 shadowColor3: "",
                 shadowColor4: "",
                 ...emeraldPreset.palette,
-                mainBgStart: `hsl(${165 + attractionIntensity * 20}, ${
-                  60 + attractionIntensity * 25
-                }%, ${60 + attractionIntensity * 20}%)`,
-                mainBgEnd: `hsl(${175 + attractionIntensity * 20}, ${
-                  70 + attractionIntensity * 25
-                }%, ${65 + attractionIntensity * 20}%)`,
-                shadowColor1: "#699a90",
-                shadowColor2: "#1f6f5f",
-                shapeAStart: `hsl(${165 + attractionIntensity * 25}, ${
-                  65 + attractionIntensity * 20
-                }%, ${65 + attractionIntensity * 15}%)`,
-                shapeAEnd: `hsl(${175 + attractionIntensity * 25}, ${
-                  75 + attractionIntensity * 20
-                }%, ${70 + attractionIntensity * 15}%)`,
+                mainBgStart: `hsl(${40 + attractionIntensity * 5}, ${
+                  75 + attractionIntensity * 10
+                }%, ${55 + attractionIntensity * 15}%)`,
+                mainBgEnd: `hsl(${45 + attractionIntensity * 5}, ${
+                  70 + attractionIntensity * 10
+                }%, ${60 + attractionIntensity * 15}%)`,
+                shadowColor1: "#a68548",
+                shadowColor2: "#6b5839",
+                shapeAStart: `hsl(${42 + attractionIntensity * 5}, ${
+                  78 + attractionIntensity * 8
+                }%, ${58 + attractionIntensity * 12}%)`,
+                shapeAEnd: `hsl(${48 + attractionIntensity * 5}, ${
+                  72 + attractionIntensity * 8
+                }%, ${63 + attractionIntensity * 12}%)`,
               }}
             />
           </div>
 
-          <div className="flex gap-8 text-sm text-gray-500">
+          <div className="flex gap-8 text-sm text-muted">
             <a
               href="/thoughts"
-              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
+              className="hover:text-foreground transition-all duration-300 hover:scale-105 relative group"
             >
               thoughts
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="hover:text-gray-900 transition-all duration-300 hover:scale-105 relative group"
+              className="hover:text-foreground transition-all duration-300 hover:scale-105 relative group"
             >
               prateek://contact
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
             </a>
           </div>
         </nav>
 
         {/* Hero */}
         <div className="mb-12">
-          <h1 className="text-4xl text-[#2db69d] mb-2 font-serif transition-colors duration-500 cursor-default tracking-tighter">
+          <h1 className="text-4xl text-accent mb-2 font-serif transition-colors duration-500 cursor-default tracking-tight">
             {personalInfo.name}
           </h1>
           <p
-            className="text-sm font-semibold text-gray-600 mb-4 max-w-2xl animate-fade-in-up"
+            className="text-sm font-medium text-muted-light mb-4 max-w-2xl animate-fade-in-up"
             style={{ animationDelay: "0.1s" }}
           >
-            <span className=" font-normal">Obsessed with</span>{" "}
+            <span className="font-normal">Obsessed with</span>{" "}
             {personalInfo.tagline}
           </p>
           <p
-            className="text-gray-700 text-sm leading-relaxed mb-4"
+            className="text-foreground/85 text-sm leading-relaxed mb-4"
             dangerouslySetInnerHTML={{ __html: highlightBio(personalInfo.bio) }}
           />
 
           <div className="flex gap-4 text-sm">
             <a
               href={personalInfo.social.twitter}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-muted hover:text-accent transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -217,7 +217,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={personalInfo.social.github}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-muted hover:text-accent transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -229,7 +229,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={personalInfo.social.linkedin}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-muted hover:text-accent transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -241,7 +241,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-muted hover:text-accent transition-all duration-300 hover:scale-110 group"
             >
               <Mail
                 size={16}
@@ -251,7 +251,7 @@ export const HomeComponent = () => {
             </a>
             <a
               href={personalInfo.social.art}
-              className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-110 group"
+              className="flex items-center gap-1 text-muted hover:text-accent transition-all duration-300 hover:scale-110 group"
               target="_blank"
               rel="noreferrer"
             >
@@ -307,7 +307,7 @@ export const HomeComponent = () => {
         </section> */}
 
         <section className="mb-10">
-          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
+          <h2 className="text-lg font-light text-foreground mb-3 font-serif">
             Products with Active Users
           </h2>
           <div className="space-y-4 text-sm">
@@ -317,20 +317,20 @@ export const HomeComponent = () => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
+                className="block py-1 hover:bg-border/30 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer relative overflow-hidden"
               >
                 <div className="flex justify-between items-start mb-1">
-                  <span className="font-medium text-teal-600 group-hover:text-teal-700 transition-colors">
+                  <span className="font-medium text-accent group-hover:text-accent-dark transition-colors">
                     {project.title}
                   </span>
                   <div className="flex gap-2 relative z-10">
                     <ArrowUpRight
                       size={16}
-                      className="text-teal-600 group-hover:text-teal-700 transition-colors"
+                      className="text-accent group-hover:text-accent-dark transition-colors"
                     />
                   </div>
                 </div>
-                <div className="text-gray-700 mb-1">{project.description}</div>
+                <div className="text-foreground/75 mb-1">{project.description}</div>
                 {/* <div className="text-xs text-gray-500 mb-2">
                   {project.tech.join(" • ")}
                 </div> */}
@@ -339,7 +339,7 @@ export const HomeComponent = () => {
                   <div className="mt-2">
                     <button
                       onClick={(e) => handleCtaClick(e, project.cta.link)}
-                      className="inline-flex items-center gap-1 text-xs bg-teal-600 text-white px-3 py-1.5 rounded-md hover:bg-teal-700 transition-all duration-300 hover:scale-105 group-hover:bg-teal-700"
+                      className="inline-flex items-center gap-1 text-xs bg-accent text-background px-3 py-1.5 rounded-md hover:bg-accent-dark transition-all duration-300 hover:scale-105 group-hover:bg-accent-dark"
                     >
                       {project.cta.text}
                       <ArrowRight
@@ -353,7 +353,7 @@ export const HomeComponent = () => {
             ))}
           </div>
           <section className="mt-12 md:mt-16">
-            <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
+            <h2 className="text-lg font-light text-foreground mb-2 font-serif">
               Open Source Contribution
             </h2>
             <div className="space-y-1 text-sm">
@@ -363,31 +363,31 @@ export const HomeComponent = () => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-between items-center py-1 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                  className="flex justify-between items-center py-1 hover:bg-border/30 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
                 >
                   <div>
-                    <span className="text-teal-600 group-hover:text-teal-700 transition-colors">
+                    <span className="text-accent group-hover:text-accent-dark transition-colors">
                       {project.title}
                     </span>
                     <br />
-                    <span className="text-gray-600 text-sm">
+                    <span className="text-muted text-sm">
                       {project.description}
                     </span>
                   </div>
-                  <Github size={16} className="text-black/60 flex-shrink-0" />
+                  <Github size={16} className="text-muted flex-shrink-0" />
                 </a>
               ))}
             </div>
             {/* GitHub CTA */}
-            <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-teal-50 rounded-lg border border-teal-100 hover:bg-teal-100 hover:shadow-lg transition-all duration-300 group cursor-pointer">
+            <div className="mt-8 md:mt-12 p-2 px-3 text-xs bg-border/40 rounded-lg border border-border hover:bg-border/60 hover:shadow-lg transition-all duration-300 group cursor-pointer">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-teal-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
-                  <span className="text-teal-700">
+                  <div className="w-2 h-2 bg-accent rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                  <span className="text-foreground/80">
                     Explore more projects on{" "}
                     <a
                       href={personalInfo.social.github}
-                      className="font-medium underline hover:no-underline"
+                      className="font-medium text-accent underline hover:text-accent-dark hover:no-underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -398,7 +398,7 @@ export const HomeComponent = () => {
                 </div>
                 <ArrowRight
                   size={16}
-                  className="text-teal-500 group-hover:translate-x-1 transition-transform duration-300"
+                  className="text-accent group-hover:translate-x-1 transition-transform duration-300"
                 />
               </div>
             </div>
@@ -407,7 +407,7 @@ export const HomeComponent = () => {
             </div> */}
           </section>
           <div className="mt-12 md:mt-16">
-            <h3 className="text-lg font-light text-gray-900 mb-2 font-serif">
+            <h3 className="text-lg font-light text-foreground mb-2 font-serif">
               Other Projects
             </h3>
             <div>
@@ -417,19 +417,19 @@ export const HomeComponent = () => {
                   href={project.link || project.github || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-between items-start hover:bg-gray-50 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
+                  className="flex justify-between items-start hover:bg-border/30 py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer"
                 >
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-1 group-hover:text-teal-700 transition-colors text-sm">
+                    <h4 className="font-medium text-foreground mb-1 group-hover:text-accent transition-colors text-sm">
                       {project.title}
                     </h4>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-muted text-sm">
                       {project.description}
                     </p>
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="text-teal-600 hover:text-teal-700 hover:scale-110 transition-all duration-300 flex-shrink-0 md:w-4 md:h-4"
+                    className="text-accent hover:text-accent-dark hover:scale-110 transition-all duration-300 flex-shrink-0 md:w-4 md:h-4"
                   />
                 </a>
               ))}
@@ -438,34 +438,34 @@ export const HomeComponent = () => {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-lg font-light text-gray-900 mb-2 font-serif">
+          <h2 className="text-lg font-light text-foreground mb-2 font-serif">
             Tech Stack
           </h2>
-          <div className="text-sm text-gray-700 leading-relaxed">
+          <div className="text-sm text-foreground/75 leading-relaxed">
             <div className="mb-2">
-              <span className="text-teal-600 font-medium text-sm">
+              <span className="text-accent font-medium text-sm">
                 Frontend:
               </span>
               <br />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-foreground/70">
                 {technologies.frontend.join(", ")}
               </span>
             </div>
 
             <div className="mb-2">
-              <span className="text-teal-600 font-medium text-sm">
+              <span className="text-accent font-medium text-sm">
                 Backend:
               </span>
               <br />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-foreground/70">
                 {technologies.backend.join(", ")}
               </span>
             </div>
 
             <div className="mb-2">
-              <span className="text-teal-600 font-medium text-sm">Tools:</span>
+              <span className="text-accent font-medium text-sm">Tools:</span>
               <br />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-foreground/70">
                 {technologies.tools.join(", ")}
               </span>
             </div>
@@ -473,16 +473,16 @@ export const HomeComponent = () => {
         </section>
 
         <section className="mb-8 animate-fade-in-up">
-          <div className="p-6 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-lg border border-teal-100 hover:shadow-lg transition-all duration-300 group">
+          <div className="p-6 bg-border/40 rounded-lg border border-border hover:bg-border/60 hover:shadow-lg transition-all duration-300 group">
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-                  <span className="text-xs text-teal-600 font-medium uppercase tracking-wide">
+                  <div className="w-2 h-2 bg-accent rounded-full"></div>
+                  <span className="text-xs text-accent font-medium uppercase tracking-wide">
                     Featured Article
                   </span>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
+                <h3 className="text-lg font-medium text-foreground mb-2 group-hover:text-accent transition-colors">
                   <a
                     href={featuredBlog.link}
                     target="_blank"
@@ -491,17 +491,17 @@ export const HomeComponent = () => {
                     {featuredBlog.title}
                   </a>
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                <p className="text-foreground/70 text-sm leading-relaxed mb-3">
                   {featuredBlog.description}
                 </p>
-                <div className="flex items-center gap-4 text-xs text-gray-500">
+                <div className="flex items-center gap-4 text-xs text-muted">
                   <span className="flex items-center gap-1">
                     <Calendar size={16} />
                     {featuredBlog.date}
                   </span>
                   <a
                     href={featuredBlog.link}
-                    className="flex items-center gap-1 text-teal-600 hover:text-teal-700 transition-colors"
+                    className="flex items-center gap-1 text-accent hover:text-accent-dark transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -516,7 +516,7 @@ export const HomeComponent = () => {
 
         {/* Articles */}
         <section className="mb-12 animate-fade-in-up" id="articles">
-          <h2 className="text-lg font-light text-gray-900 mb-3 font-serif">
+          <h2 className="text-lg font-light text-foreground mb-3 font-serif">
             Recent Articles
           </h2>
 
@@ -524,18 +524,18 @@ export const HomeComponent = () => {
             {articles.map((article, index) => (
               <article
                 key={index}
-                className="group hover:bg-gray-50 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
+                className="group hover:bg-border/30 py-4 rounded-lg transition-all duration-300 hover:scale-[1.02]"
               >
                 <div className="flex items-baseline gap-4">
-                  <div className="flex-shrink-0 text-xs flex items-center text-gray-500 w-20">
+                  <div className="flex-shrink-0 text-xs flex items-center text-muted w-20">
                     <Calendar size={14} className="inline mr-1" />
                     {article.date}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">
+                    <h3 className="font-medium text-foreground mb-2 group-hover:text-accent transition-colors">
                       <a href={article.link}>{article.title}</a>
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-foreground/70 text-sm leading-relaxed">
                       {article.description}
                     </p>
                   </div>
@@ -547,7 +547,7 @@ export const HomeComponent = () => {
           <div className="mt-8">
             <a
               href={personalInfo.social.medium}
-              className="text-teal-600 hover:text-teal-700 text-sm flex items-center gap-1 hover:scale-105 transition-all duration-300 group"
+              className="text-accent hover:text-accent-dark text-sm flex items-center gap-1 hover:scale-105 transition-all duration-300 group"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -562,20 +562,20 @@ export const HomeComponent = () => {
       </main>
 
       {/* Enhanced Footer */}
-      <footer className="border-t border-gray-200 relative">
+      <footer className="border-t border-border relative">
         <div className="max-w-2xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between text-xs sm:text-sm">
             <div>
-              <div className="text-gray-500">Lets connect</div>
+              <div className="text-muted">Lets connect</div>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-3 text-gray-700 hover:text-teal-600"
+                className="flex items-center gap-3 text-foreground/80 hover:text-accent"
               >
                 <span>{personalInfo.email}</span>
               </a>
             </div>
 
-            <div className="text-right text-gray-500">
+            <div className="text-right text-muted">
               <div>Last updated on Aug 13, 2025</div>
               <div>
                 <span>{personalInfo.location}</span>

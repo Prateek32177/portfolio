@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Ubuntu } from "next/font/google";
+import { Ubuntu, Crimson_Text } from "next/font/google";
 
 const manrope = Ubuntu({
   subsets: ["latin"],
-  variable: "--font-",
-  weight: ["400", "700"],
+  variable: "--font-body",
+  weight: ["400", "500", "700"],
 });
+
+const crimsonText = Crimson_Text({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400", "600", "700"],
+});
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -25,9 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-background">
       <body
-        className={`${manrope.className} ${geistMono.variable} antialiased bg-[#fdfff4]`}
+        className={`${manrope.variable} ${crimsonText.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <div className="fixed inset-0 z-0 h-full pointer-events-none">
           <svg id="noice" className="fixed inset-0 w-full h-full">
@@ -43,7 +50,7 @@ export default function RootLayout({
                 <feFuncR type="linear" slope="1.51"></feFuncR>
                 <feFuncG type="linear" slope="1.51"></feFuncG>
                 <feFuncB type="linear" slope="1.51"></feFuncB>
-                <feFuncA type="linear" slope="0.61"></feFuncA>
+                <feFuncA type="linear" slope="0.3"></feFuncA>
               </feComponentTransfer>
               <feComponentTransfer>
                 <feFuncR type="linear" slope="2.55" intercept="-0.77" />
