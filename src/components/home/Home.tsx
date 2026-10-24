@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Github, Linkedin, Mail, Rss } from "lucide-react";
+
 import { Orb, emeraldPreset } from "react-ai-orb";
 import config from "../../config.json";
 
 export const HomeComponent = () => {
-  const { personalInfo, featuredProjects, openSourceProjects, featuredBlog } = config;
+  const { personalInfo } = config;
   const orbRef = useRef<HTMLDivElement>(null);
   const [orbOffset, setOrbOffset] = useState({ x: 0, y: 0 });
 
@@ -29,7 +29,6 @@ export const HomeComponent = () => {
       <div className="portfolio-frame">
 <header className="topline">
  <span className="topline-mark">{personalInfo.name}</span>
- <span className="topline-note">{personalInfo.location}</span>
  <div className="topline-links">
   <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer">in</a>
   <a href={personalInfo.social.github} target="_blank" rel="noreferrer">gh</a>
@@ -41,29 +40,19 @@ export const HomeComponent = () => {
   </div>
   
   <article className="story" aria-label="About me">
-          <p className="eyebrow">Hello, I&apos;m {personalInfo.name}.</p>
-          <p className="opening">I keep making things because I can&apos;t quite help it.</p>
-          <p>{personalInfo.title}. These days that means building <a href="https://hookflo.com" target="_blank" rel="noreferrer">Hookflo</a>, and maintaining <a href="https://github.com/tern-tools/tern" target="_blank" rel="noreferrer">Tern</a>. It also means following a question until it becomes a product, even when the question seems a little odd.</p>
-          <p>Before the things people know me for, there was <a href="#work">Textly AI</a>, a wrapper around the OpenAI API before wrappers were a category; <a href="#work">DeazyQR</a>, a dynamic QR system; <a href="#work">Dineeazy</a>, for restaurants; and a long trail of experiments, including Brokersify, Zipoit, and a few that quietly taught me more than the successful ones did.</p>
-          <p>That trail is probably the honest version of my work. Some ideas found their people. Some didn&apos;t. I&apos;ve learned to enjoy both outcomes: the rush of shipping, the humility of being wrong, and the next blank page waiting after each of them.</p>
-          <p>I like working close to the surface of an idea — where product, engineering, and taste are still in the same room. If you&apos;re building something with a little conviction behind it, <a href={`mailto:${personalInfo.email}`}>write to me</a>.</p>
-          <nav className="social-row" aria-label="Social links">
-            <a href={personalInfo.social.github} target="_blank" rel="noreferrer"><Github size={13} /> GitHub</a>
-            <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer"><Linkedin size={13} /> LinkedIn</a>
-            <a href={personalInfo.social.medium} target="_blank" rel="noreferrer"><Rss size={13} /> Notes</a>
-            <a href={`mailto:${personalInfo.email}`}><Mail size={13} /> Email</a>
-          </nav>
+          <p className="eyebrow">A note from the workbench</p>
+          <p className="opening">I build things for the moment when an idea stops being an idea.</p>
+          <p>I&apos;m <strong>Prateek Jain</strong>, a product and frontend-focused engineer. I care about the part people feel: the journey through a product, the pause before a button responds, the layout that makes a complicated thing feel obvious.</p>
+          <p>At the moment, I&apos;m the solo founder of <a href="https://hookflo.com" target="_blank" rel="noreferrer"><mark>Hookflo</mark></a> — a unified API for webhooks, an <em>OpenRouter for events</em>. One connection instead of a different integration for every provider.</p>
+          <p>I&apos;m also the core maintainer of <a href="https://github.com/tern-tools/tern" target="_blank" rel="noreferrer"><mark>Tern</mark></a> and Tern CLI: zero-dependency, strictly typed webhook verification for teams who want the security without the machinery.</p>
+          <p>That is only the current page. Earlier chapters include <a href="#work">Textly AI</a>, an early OpenAI API wrapper; <a href="#work">DeazyQR</a>, dynamic QR codes for dine-in restaurants; <a href="#work">Dineeazy</a>, restaurant ordering; and <a href="#work">Brokersify</a> and <a href="#work">Zipoit</a>. A few shipped. A few folded. All of them left something useful behind.</p>
+          <p>Alongside the independent work, I&apos;ve improved high-traffic ecommerce experiences at <a href="#work"><mark>BestBuy.com</mark></a> — the squeezed carousel card, the product grid, the search flow that finally feels lighter. I&apos;ve worked on Core Web Vitals, reduced CLS by 50% and LCP by 30% on key pages, and built an A/B/n testing system with feature flags and Optimizely that saved roughly $40K a year in engineering effort.</p>
+          <p>I like the whole loop: a rough thought, a real interface, somebody using it, and the uncomfortable question of how to make it better. When I&apos;m away from a screen, I&apos;m usually making art, listening to music, playing Valorant, or looking for a longer road to cycle. If you&apos;re nearby, <a href={`mailto:${personalInfo.email}`}>say hello</a>.</p>
         </article>
 
-        <div id="work" className="work-note" aria-label="Selected work">
-          <p>Some of the things I&apos;ve made along the way: {featuredProjects.map((project, index) => <span key={project.title}><a href={project.link} target="_blank" rel="noreferrer">{project.title}</a>{index < featuredProjects.length - 1 ? ", " : ""}</span>)}{openSourceProjects.slice(0, 1).map((project) => <span key={project.title}>; <a href={project.github} target="_blank" rel="noreferrer">{project.title}</a></span>)}. This is only the visible part — the tip of the iceberg, really. There is more coming.</p>
-        </div>
-
-        <p className="postscript">When I&apos;m not at a screen, I&apos;m probably making art, listening to music, playing Valorant, or riding my bicycle. If you&apos;re around, I&apos;d love to hop on with you too.</p>
-
         <footer className="footer-line">
-          <span>© {new Date().getFullYear()} {personalInfo.name}</span>
-          <a href={featuredBlog.link} target="_blank" rel="noreferrer">a note from the workshop <ArrowUpRight size={11} /></a>
+          <span>{personalInfo.location} · IST</span>
+          <span className="footer-links"><a href={personalInfo.social.github} target="_blank" rel="noreferrer">GitHub</a><a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a href={`mailto:${personalInfo.email}`}>Email</a></span>
         </footer>
       </div>
     </main>
