@@ -27,15 +27,20 @@ export const HomeComponent = () => {
   return (
     <main className="portfolio-shell">
       <div className="portfolio-frame">
-        <header className="topline">
-          <div ref={orbRef} className="orb" style={{ transform: `translate(${orbOffset.x}px, ${orbOffset.y}px)` }} aria-label="Animated orb">
-            <Orb {...emeraldPreset} size={0.3} animationSpeedBase={0.14} />
-          </div>
-          <span className="topline-note">{personalInfo.location}</span>
-          <a className="topline-contact" href={`mailto:${personalInfo.email}`}>get in touch <ArrowUpRight size={12} /></a>
-        </header>
-
-        <article className="story" aria-label="About me">
+<header className="topline">
+ <span className="topline-mark">{personalInfo.name}</span>
+ <span className="topline-note">{personalInfo.location}</span>
+ <div className="topline-links">
+  <a href={personalInfo.social.linkedin} target="_blank" rel="noreferrer">in</a>
+  <a href={personalInfo.social.github} target="_blank" rel="noreferrer">gh</a>
+  <a href={`mailto:${personalInfo.email}`}>email</a>
+ </div>
+  </header>
+  <div ref={orbRef} className="orb" style={{ transform: `translate(${orbOffset.x}px, ${orbOffset.y}px)` }} aria-label="Animated orb">
+   <Orb {...emeraldPreset} size={0.3} animationSpeedBase={0.14} />
+  </div>
+  
+  <article className="story" aria-label="About me">
           <p className="eyebrow">Hello, I&apos;m {personalInfo.name}.</p>
           <p className="opening">I keep making things because I can&apos;t quite help it.</p>
           <p>{personalInfo.title}. These days that means building <a href="https://hookflo.com" target="_blank" rel="noreferrer">Hookflo</a>, and maintaining <a href="https://github.com/tern-tools/tern" target="_blank" rel="noreferrer">Tern</a>. It also means following a question until it becomes a product, even when the question seems a little odd.</p>
