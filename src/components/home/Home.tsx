@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
 import config from "../../config.json";
 
 export const HomeComponent = () => {
@@ -11,7 +7,7 @@ export const HomeComponent = () => {
     <main className="portfolio-shell">
       <div className="portfolio-frame">
         <header className="topline">
-          <span className="topline-mark">{personalInfo.name}</span>
+          <span className="topline-mark" aria-label="Prateek">Prateek</span>
           <div className="topline-links">
             <a
               href={personalInfo.social.linkedin}
@@ -27,68 +23,49 @@ export const HomeComponent = () => {
             >
               gh
             </a>
+            <a
+              href={personalInfo.social.twitter}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter"
+            >
+              x
+            </a>
             <a href={`mailto:${personalInfo.email}`}>email</a>
           </div>
         </header>
 
         <article className="story" aria-label="About me">
-          <p className="eyebrow">A note from the workbench</p>
-          <p className="opening">
-            I build things for the moment when an idea stops being an idea.
+          <p className="eyebrow">A story in progress</p>
+          <p>
+            I&apos;m Prateek Jain, a <strong>Senior Product Engineer</strong>, frontend-focused by craft. I care about the small details people notice when they go wrong.
+          </p>
+          <blockquote className="story-quote">
+            “I keep making things because I can&apos;t quite help it.”
+          </blockquote>
+          <p>
+            <span className="story-turn">The present:</span> I&apos;m the solo founder of{" "}
+            <a href="https://hookflo.com/" target="_blank" rel="noreferrer"><mark>Hookflo</mark></a>, which brings webhooks from 20+ platforms behind a single API. Think <em>OpenRouter, but for webhooks.</em> I&apos;m also the core maintainer of{" "}
+            <a href="https://github.com/tern-tools/tern" target="_blank" rel="noreferrer"><mark>Tern</mark></a>{" "}
+            and <a href="https://tern.hookflo.com/cli/" target="_blank" rel="noreferrer">Tern CLI</a> — open-source tools that make webhook verification and local development less of a headache.
           </p>
           <p>
-            I&apos;m <strong>Prateek Jain</strong>, a product and
-            frontend-focused engineer. I care about the part people feel: the
-            journey through a product, the pause before a button responds, the
-            layout that makes a complicated thing feel obvious.
+            But Hookflo isn&apos;t the beginning of this story. For the past five years, almost every weekend has been another attempt to turn an idea into something real. <a href="https://flowaii.web.app/" target="_blank" rel="noreferrer">Textly AI</a> came first, when building on the OpenAI API was still new. Then <a href="https://deazyqr.vercel.app/" target="_blank" rel="noreferrer">DeazyQR</a>, with time-expiring dynamic QR codes and URL shortening. <a href="https://deazy-52098.web.app/" target="_blank" rel="noreferrer">Dineeazy</a> for restaurants. <a href="https://brokersify.in/" target="_blank" rel="noreferrer">Brokersify.in</a> in proptech. <a href="https://zipout.in/" target="_blank" rel="noreferrer">Zipout.in</a>, a consumer social product.
           </p>
           <p>
-            At the moment, I&apos;m the solo founder of{" "}
-            <a href="https://hookflo.com" target="_blank" rel="noreferrer">
-              <mark>Hookflo</mark>
-            </a>{" "}
-            — a unified API for webhooks, an <em>OpenRouter for events</em>. One
-            connection instead of a different integration for every provider.
+            Different ideas, different industries, and a few things that never quite found their place in the world. But every attempt left something behind: the experience, the mistakes, the instinct for what to build next. In ways I couldn&apos;t have seen then, they all led me here.
           </p>
           <p>
-            I&apos;m also the core maintainer of{" "}
-            <a
-              href="https://github.com/tern-tools/tern"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <mark>Tern</mark>
-            </a>{" "}
-            and Tern CLI: zero-dependency, strictly typed webhook verification
-            for teams who want the security without the machinery.
+            <span className="story-turn">Meanwhile, by day:</span> my work has another kind of puzzle — the experience people have when they use a product. Ever noticed an ecommerce carousel that no longer feels cramped, or a page that stays put instead of jumping around as it loads? While at TCS, I worked on exactly these kinds of details for <mark className="interest-mark">Best Buy</mark>. I love making the journey through a product feel seamless, from the first interaction to the last.
           </p>
           <p>
-            That is only the current page. Earlier chapters include{" "}
-            <a href="#work">Textly AI</a>, an early OpenAI API wrapper;{" "}
-            <a href="#work">DeazyQR</a>, dynamic QR codes for dine-in
-            restaurants; <a href="#work">Dineeazy</a>, restaurant ordering; and{" "}
-            <a href="#work">Brokersify</a> and <a href="#work">Zipoit</a>. A few
-            shipped. A few folded. All of them left something useful behind.
+            That work reached beyond the screen: Core Web Vitals improvements reduced CLS by 50% and LCP by 30% on key pages. I also engineered an A/B/n testing framework with feature flags and Optimizely, cutting development effort by 60% and saving an estimated $40K a year.
           </p>
           <p>
-            Alongside the independent work, I&apos;ve improved high-traffic
-            ecommerce experiences at{" "}
-            <a href="#work">
-              <mark>BestBuy.com</mark>
-            </a>{" "}
-            — the squeezed carousel card, the product grid, the search flow that
-            finally feels lighter. I&apos;ve worked on Core Web Vitals, reduced
-            CLS by 50% and LCP by 30% on key pages, and built an A/B/n testing
-            system with feature flags and Optimizely that saved roughly $40K a
-            year in engineering effort.
+            I like working at both ends of the problem: the tiny interaction that makes a product feel right, and the bigger system that makes it work at scale. The code matters, but so does the reason for writing it.
           </p>
           <p>
-            I like the whole loop: a rough thought, a real interface, somebody
-            using it, and the uncomfortable question of how to make it better.
-            When I&apos;m away from a screen, I&apos;m usually making art,
-            listening to music, playing Valorant, or looking for a longer road
-            to cycle. If you&apos;re nearby,{" "}
-            <a href={`mailto:${personalInfo.email}`}>say hello</a>.
+            When I&apos;m away from a screen, I&apos;m usually making <mark className="interest-mark">art</mark>, listening to <mark className="interest-mark">music</mark>, playing <mark className="interest-mark">Valorant</mark>, or taking the longer route on a <mark className="interest-mark">cycling ride</mark>. There&apos;s always another idea somewhere. I&apos;ve learned by now that I&apos;ll probably end up trying to build it. If that sounds like your kind of story, <a href={`mailto:${personalInfo.email}`}>write to me</a>.
           </p>
         </article>
 
@@ -108,6 +85,13 @@ export const HomeComponent = () => {
               rel="noreferrer"
             >
               LinkedIn
+            </a>
+            <a
+              href={personalInfo.social.twitter}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Twitter
             </a>
             <a href={`mailto:${personalInfo.email}`}>Email</a>
           </span>
